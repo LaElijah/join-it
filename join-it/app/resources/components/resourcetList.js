@@ -1,4 +1,4 @@
-import styles from '../styles/ResourceList.module.css'
+import styles from './list.module.scss'
 
 async function getData(){
   const response = await fetch('http://localhost:3000/api/requests', {

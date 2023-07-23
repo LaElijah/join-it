@@ -12,9 +12,11 @@ export default async function RootLayout({
   
   return (
     <html lang="en">
+      <body>
       <Provider>
-          <body>{children}</body>
+          {children}
       </Provider>
+      </body>
 
     </html>
   )

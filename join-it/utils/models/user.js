@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 
 const { Schema } = mongoose
 
 const userSchema = new Schema({
-    Username: String,
-    Password: Date,
+    username: String,
+    password: String,
     UUID: {
         type: String,
-        default: "uuid()"
+        default: crypto.randomUUID(),
     },
 
 })

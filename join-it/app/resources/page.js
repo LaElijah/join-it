@@ -1,7 +1,18 @@
+
 import ResourceList from "./components/resourcetList";
 import Link from "next/link"
+import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
 
-export default function Resources() {
+export default async function Resources() {
+    const session = await getServerSession()
+
+    if (!session) {
+        return redirect("/api/auth/signin?callbackUrl=/resources")
+    }
+
+    else {
+
 
     return (
         
@@ -17,4 +28,5 @@ export default function Resources() {
         </div>
         
     )
+    }
 }
