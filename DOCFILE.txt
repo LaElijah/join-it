@@ -1,0 +1,18 @@
+Goals
+- Create a login page 
+- show a list from the database 
+- add to the database with resources 
+
+
+
+Request object
+- name
+- resource
+- date of creation
+- length 
+
+
+resources
+- name
+- resources offered
+- category 
