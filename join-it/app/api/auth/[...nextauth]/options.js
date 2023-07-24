@@ -10,12 +10,9 @@ async function isAuthorized(credentials) {
     
     await dbConnection();
 
-    const response = await User.findOne({ username: username }, async (err, user) => {
-        if (err) {
-            console.log(err);
-        }
+    const user = await User.findOne({ username: username })
         if (user) {
-            const match = await bcrypt.compare(password, user.Password);
+            const match = await bcrypt.compare(password, user.password);
             if (match) {
                 return { auth: true, user: { 
                     username: user.username,
@@ -26,11 +23,9 @@ async function isAuthorized(credentials) {
         } else {
             return { auth: false, user: null }
         }
-    })
+    
 
-    return response;
 }
-
 
 
 

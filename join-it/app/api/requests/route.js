@@ -11,7 +11,7 @@ export async function GET() {
   console.log("GET")
   await dbConnection()
     try {
-        const requests = await Request.find({})
+        const requests = Request.find({})
         return NextResponse.json({ status: "success", data: requests})
       } catch (error) {
         return NextResponse.json({ status: "failure" })

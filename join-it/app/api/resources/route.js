@@ -8,6 +8,7 @@ import Resource from '../../../utils/models/request'
 
 
 export async function GET() {
+  console.log("GET")
   await dbConnection()
     try {
         const requests = await Request.find({})
@@ -20,6 +21,7 @@ export async function GET() {
 
 
 export async function POST(req) {
+
   await dbConnection()
     try {
         const data = await req.json()

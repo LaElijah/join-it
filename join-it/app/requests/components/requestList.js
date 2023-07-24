@@ -8,6 +8,7 @@ async function getData() {
             revalidate: 1,
         }
     })
+    console.log(await response.json())
     const data = await response.json();
     console.log(data);
     return data;

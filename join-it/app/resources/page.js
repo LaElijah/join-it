@@ -23,7 +23,7 @@ export default async function Resources() {
             
 
 
-            <Link href={"resources/create"} >Request a resource</Link>
+            <Link href={"/resources/create"} >Request a resource</Link>
 
         </div>
         
