@@ -14,7 +14,7 @@ export default async function CreateRequests() {
     return (
         <div>
             <h2>Request a Resource</h2>
-            <InputBoxes />
+            <InputBoxes session={session} />
             
         </div>
     )

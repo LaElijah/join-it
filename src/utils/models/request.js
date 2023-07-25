@@ -3,9 +3,16 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose
 
 const requestSchema = new Schema({
-    name: String,
+    username: String,
     date: Date,
-    request: String,
+    resources: String,
+    details: String,
+    progress: String,
+    goal: String,
+    age: String,
+    category: String,
+
+
 
 })
 
