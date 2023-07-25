@@ -1,0 +1,203 @@
+/******************************************/
+/**Includes**/
+
+/******************************************/
+/*Text Colors*/
+
+$PrimaryGreen: #38982F;
+
+
+$PrimaryYellow: #FFC626;
+
+
+$PrimaryRed: #FF4E50;
+
+
+$PrimaryBody: #7A7979;
+
+
+$SecondaryBody: #525252;
+
+
+
+/******************************************/
+/*Background Colors*/
+
+$PrimaryBackground: #F6E6FD;
+
+
+$SecondaryBackground: #EDEDED;
+
+
+/******************************************/
+/*Button Colors*/
+
+$ButtonPrimary: #00b664;
+
+$ButtonPrimaryHover: #03d677;
+$ButtonPrimaryActive: #009451;
+
+
+
+$ButtonOutline: #FDFDE6;
+
+
+
+
+
+/******************************************/
+/******************************************/
+/**Mixins**/
+
+
+/******************************************/
+/*Typography*/
+
+
+@mixin H4Regular {
+    /* Heading/H4/Regular */
+    font-family: Roboto, sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H2SemiBold {
+    /* Heading/H2/Semi Bold */
+    font-family: Roboto, sans-serif;
+    font-size: 37px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H4Light {
+    /* Heading/H4/Light */
+    font-family: Roboto, sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H3SemiBold {
+    /* Heading/H3/Semi Bold */
+    font-family: Roboto, sans-serif;
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H4ExtraBold {
+    /* Heading/H4/Extra Bold */
+    font-family: Roboto, sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H4SemiBold {
+    /* Heading/H4/Extra Bold */
+    font-family: Roboto, sans-serif;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin S1Light {
+    /* Subheading/S1/Light */
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin: 0;
+}
+
+
+/******************************************/
+/*Buttons*/
+
+@mixin defaultButton {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    border: 1px solid $ButtonPrimary;
+    box-shadow: 1px 2px 2px 1px rgba(46, 146, 98, 0.317);
+
+
+    
+}
+
+@mixin defaultButtonActions {
+
+    :hover {
+        box-shadow: none;
+        background-color: $ButtonPrimaryHover;
+
+
+    }
+
+    :active {
+        background-color: $ButtonPrimaryActive;
+
+        
+    }
+}
+
+@mixin outlineButton {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    border: 1px solid $ButtonOutline;
+    
+
+    :hover {
+        box-shadow: none;
+        border: 1px solid $ButtonPrimaryHover;
+
+    }
+
+    :active {
+        border: 1px solid $ButtonPrimaryActive;
+
+    }
+}
+
+@mixin outlineButtonActions {
+
+    :hover {
+        box-shadow: none;
+        border: 1px solid $ButtonPrimaryHover;
+
+
+    }
+
+    :active {
+        border: 1px solid $ButtonPrimaryActive;
+
+        
+    }
+}
+
+
+
+
+
+/******************************************/
