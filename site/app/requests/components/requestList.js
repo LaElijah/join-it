@@ -16,9 +16,10 @@ async function getData(){
 export default async function ResourceList() {
  
     const requests = await getData();
+    
     const data = requests.data || [{
-        name: "No Resources",
-        request: "No Resources"
+        name: "No Requests",
+        request: "No Requests"
 
 
     }];

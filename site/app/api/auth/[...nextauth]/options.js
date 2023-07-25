@@ -14,14 +14,12 @@ async function isAuthorized(credentials) {
         if (user) {
             const match = await bcrypt.compare(password, user.password);
             if (match) {
-                return { auth: true, user: { 
-                    username: user.username,
-                    id: user.UUID } }
+                return user
             } else {
-                return { auth: false, user: null }
+                return null
             }
         } else {
-            return { auth: false, user: null }
+            return null
         }
     
 
@@ -31,24 +29,44 @@ async function isAuthorized(credentials) {
 
 
 const authOptions = {
+
+    
         providers: [
+
             CredentialsProvider({
                 name: 'Credentials',
                 credentials: {
                     username: { label: "Username", type: "text", placeholder: "Your username..." },
                     password: { label: "Password", type: "password" }
                 },
+
                 async authorize(credentials) {
+                 
                     const response = await isAuthorized(credentials);
-    
+                  
                     if (response.auth) {
+                        console.log("auth")
+                        console.log(response)
                         return response.user
                     } else {
                         return null
                     }
+                    
+
+
                 }
-            }),
-        ]
+                
+                
+
+                
+            }
+            ),
+            
+            
+        ],
+
+
+
 
     }
 

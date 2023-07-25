@@ -4,22 +4,8 @@ import { Button, Stack, TextField} from "@mui/material";
 
 import { useState } from "react";
 
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation';
 
-
-
-
-export default function CreateRequests() {
-
-    const { data: session } = useSession({
-        required: true,
-        onUnauthenticated() {
-            redirect("/signin")
-        }
-    }
-    )
-
+export default function InputBoxes() {
 
     const [name, setName] = useState("")
     const [request, setRequest] = useState("")
@@ -30,7 +16,7 @@ export default function CreateRequests() {
             body: JSON.stringify({
                 name: name,
                 date: new Date(),
-                request: request
+                resource: request
             })
         })
     }
@@ -47,13 +33,11 @@ export default function CreateRequests() {
     }
 
     return (
-        <div>
-            <h2>Make a request</h2>
-            <Stack>
+        <Stack>
                 <TextField onChange={handleChange} id="name" label="Name" variant="outlined" value={name} />
                 <TextField onChange={handleChange} label="Request details" id="request" variant="outlined" multiline minRows={4} value={request} />
                 <Button variant="filled" onClick={handleSubmit} color="primary">Submit Resource</Button>
             </Stack>
-        </div>
     )
+
 }

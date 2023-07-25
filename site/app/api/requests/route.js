@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import dbConnection from '../../../utils/db/dbConnection'
-import Resource from '../../../utils/models/request'
+import Request from '../../../utils/models/request'
 
 
 
@@ -21,17 +21,18 @@ export async function GET() {
 
 
 export async function POST(req) {
-
+  console.log("POST")
   await dbConnection()
     try {
         const data = await req.json()
-        const document = new Resource(
+        const document = new Request(
           {
             name: data.name,
             date: new Date(),
             request: data.request
           }
         )
+        console.log(document)
         await document.save()
         return NextResponse.json({ status: "success"})
 

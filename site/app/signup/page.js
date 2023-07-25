@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { redirect } from "next/navigation"
 
 
 
@@ -14,8 +14,6 @@ export default function Register() {
 
     const [status, setStatus] = useState("")
 
-    const router = useRouter()
-
     async function register() {
         const response = await fetch("/api/auth/register", {
             method: "POST",
@@ -24,7 +22,7 @@ export default function Register() {
         const data = await response.json()
         setStatus(data.status)
         if (data.status === "success") {
-            router.push("/")
+            redirect("/api/auth/signin")
         }
     }
 
