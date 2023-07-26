@@ -1,55 +1,59 @@
+"use client"
+
 import styles from './list.module.scss'
-
-async function getData() {
-    const response = await fetch('http://localhost:3000/api/requests', {
-        method: 'GET',
-        next: {
-            revalidate: 1,
-        }
-    })
-    const data = await response.json();
-    console.log(data);
-    return data;
-}
+import Request from './request.js'
 
 
-export default async function ResourceList() {
 
-    const requests = await getData();
+export default function RequestList(props) {
 
-    const data = requests.data || [{
+   
+ 
+    const requests = props.data
+
+    const data = requests.data || [{ 
+        username: "Lael",
         name: "Lael",
-        request: "Food",
+        resource: "Food",
         details: "I need food",
         progress: 100,
         goal: 100,
         age: "1 day ago",
-        category: "Food"
+        category: "Food",
+        date: new Date()
+
     },
     {
+        username: "Lael",
         name: "Lael",
-        request: "Food",
+        resource: "Food",
         details: "I need food",
         progress: 100,
         goal: 100,
         age: "1 day ago",
-        category: "Food"
+        category: "Food",
+        date: new Date()
     },
 ]
+
+
+
+
 
     return (
         <div className={styles.list}>
 
             {data.map((data, index) => {
+                let age = new Date - data.date
                 return (
                     <Request
                         key={index}
-                        username={data.name}
-                        resource={data.request}
+                        username={data.username}
+                        resource={data.resource}
                         details={data.details}
                         progress={data.progress}
                         goal={data.goal}
-                        age={data.age}
+                        age={age}
                         category={data.category}
                     />
                 )

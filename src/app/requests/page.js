@@ -1,32 +1,35 @@
-
-import ResourceList from "./components/requestList";
+import { Stack } from "@mui/material";
 import Link from "next/link"
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
+import RequestComponent from "./components/requestComponent";
 
 export default async function Requests() {
-    const session = await getServerSession()
-
-    if (!session) {
-        return redirect("/api/auth/signin?callbackUrl=/requests")
+    const getRequests = async () => {
+        const response = await fetch('http://localhost:3000/api/requests', {
+            method: 'GET',
+        })
+        const data = await response.json();
+        return data;
     }
 
-    else {
+    const data = await getRequests()
 
 
     return (
+
+        <Stack gap="md">
+
+            <section>
+                <h2>Current Requests</h2>
+                <Link href={"/requests/create"} >Request a resource</Link>
+            </section>
+
+
         
-           <div>
-            <h2>Requests</h2>
-            
-           <ResourceList />
-            
+           <section>
+                <RequestComponent data={data} />
+        </section>
 
-
-            <Link href={"/requests/create"} >Request a resource</Link>
-
-        </div>
+        </Stack>
         
     )
     }
-}

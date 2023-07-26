@@ -5,11 +5,20 @@ const { Schema } = mongoose
 const requestSchema = new Schema({
     username: String,
     date: Date,
-    resources: String,
+    resource: String,
     details: String,
-    progress: String,
-    goal: String,
-    age: String,
+    progress: {
+        type: Number,
+        default: 0
+    },
+    goal: {
+        type: Number,
+        default: 0
+    },
+    age: {
+        type: String,
+        default: "0 days ago"
+    },
     category: String,
 
 

@@ -8,10 +8,11 @@ import Request from '../../../utils/models/request'
 
 
 export async function GET() {
-  console.log("GET")
+  console.log("GET Requsts")
   await dbConnection()
     try {
         const requests = await Request.find({})
+        console.log(requests)
         return NextResponse.json({ status: "success", data: requests})
       } catch (error) {
         return NextResponse.json({ status: "failure" })
@@ -27,9 +28,7 @@ export async function POST(req) {
         const data = await req.json()
         const document = new Request(
           {
-            name: data.name,
-            date: new Date(),
-            request: data.request
+            ...data,
           }
         )
         console.log(document)
