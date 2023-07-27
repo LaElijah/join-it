@@ -33,6 +33,13 @@ export default function RequestComponent(props) {
         <Stack direction={"column"}className={styles.options} >
         
         <Stack direction={"column"} className={styles.filterBody}  >
+        
+        <div className={styles.linkBody}>
+            <h2>Current Requests</h2>
+        <Link href={"/requests/create"} >Request a resource</Link>
+        </div>
+
+
         <Stack direction={"row"}   className={styles.filters}  >
             <SegmentedControl
                 value={segment}
@@ -75,9 +82,7 @@ export default function RequestComponent(props) {
 
 
         </Stack>
-        <div className={styles.linkBody}>
-        <Link href={"/requests/create"} >Request a resource</Link>
-        </div>
+        
 </Stack>
 
         <RequestList data={props.data} />

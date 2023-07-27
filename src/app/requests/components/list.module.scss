@@ -23,10 +23,27 @@
 .linkBody  {
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0;
+    padding-bottom: 20px;
 }
 
-.linkBody :first-child {
+.linkBody h2 {
+    margin: 0px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #3b5a4b;
+    font-family: sans-serif;
+    padding: 8px 0px;
+    width: 60%;
+    text-align: left;
+    margin-bottom: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.linkBody :last-child {
     display: flex;
    justify-content: center;
    text-align: center;

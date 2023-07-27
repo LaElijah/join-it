@@ -16,20 +16,9 @@ export default async function Requests() {
 
     return (
 
-        <Stack gap="md">
-
-            <section>
-                <h2>Current Requests</h2>
-               
-            </section>
-
-
-        
            <section>
                 <RequestComponent data={data} />
         </section>
-
-        </Stack>
         
     )
     }
