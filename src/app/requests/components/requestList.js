@@ -55,6 +55,7 @@ export default function RequestList(props) {
                         goal={data.goal}
                         age={age}
                         category={data.category}
+                        url={`/requests/${data._id}`}
                     />
                 )
             })}

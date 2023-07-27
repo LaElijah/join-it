@@ -1,22 +1,46 @@
+
 .list {
-    height: 500px;
-    overflow-y: scroll;
-    padding: 0 10px;
-    margin: 0;
-    list-style: none;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    &__item {
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        &--active {
-            background-color: #ccc;
-        }
-    }
+    padding-top: 20px;
+    border-top: 1px solid #13aa5f
+}
+
+
+
+.options label {
+    margin: 0px 12px
+}
+
+.filters > :last-child {
+    padding-left: 8px
+}
+
+.filterBody {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+}
+
+.linkBody  {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.linkBody :first-child {
+    display: flex;
+   justify-content: center;
+   text-align: center;
+   width: 40%;
+   background-color: #13aa5f;
+    color: #fff;
+    padding: 8px 0px;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+
 }

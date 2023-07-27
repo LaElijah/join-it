@@ -4,6 +4,8 @@
 import { Autocomplete, SegmentedControl } from "@mantine/core"
 import { Stack } from "@mui/material"
 import RequestList from "./requestList"
+import styles from './list.module.scss'
+import Link from "next/link"
 
 
 
@@ -28,8 +30,10 @@ export default function RequestComponent(props) {
 
     return (
 
-        <Stack direction={"column"} >
-        <Stack direction={"row"}  >
+        <Stack direction={"column"}className={styles.options} >
+        
+        <Stack direction={"column"} className={styles.filterBody}  >
+        <Stack direction={"row"}   className={styles.filters}  >
             <SegmentedControl
                 value={segment}
                 onChange={handleSegmentChange}
@@ -66,10 +70,15 @@ export default function RequestComponent(props) {
                 ]}
             />
 
+
             
 
 
         </Stack>
+        <div className={styles.linkBody}>
+        <Link href={"/requests/create"} >Request a resource</Link>
+        </div>
+</Stack>
 
         <RequestList data={props.data} />
 

@@ -3,11 +3,19 @@ import styles from './request.module.scss'
 import Image from 'next/image'
 import Progress from './progress.js'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
 
 
 export default function Request(props) {
+
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(props.url)
+    }
+
     return (
-        <div className={styles.container} >
+        <div onClick={handleClick} className={styles.container} >
 
             
 
@@ -22,9 +30,9 @@ export default function Request(props) {
 
             <section className={styles.details}>
 
-                <Image height={64} width={64} alt="" />
+                <Image height={64} width={64} alt="" src="/vercel.svg"/>
                 <div className={styles.description}>
-                    <h2>{props.details}</h2>
+                    <h2 className={styles.body}>{props.details}</h2>
                     <Link href={"/link"} className={styles.link}>Show more</Link>
                 </div>
 
@@ -45,9 +53,9 @@ export default function Request(props) {
 
             </section>
 
-            <section>
-                <Link href="">Get connected</Link>
-            </section>
+            {/* <section >
+                <Link className={styles.link} href="">Get connected</Link>
+            </section> */}
 
 
 

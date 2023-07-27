@@ -20,7 +20,7 @@ export default async function Requests() {
 
             <section>
                 <h2>Current Requests</h2>
-                <Link href={"/requests/create"} >Request a resource</Link>
+               
             </section>
 
 
