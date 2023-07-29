@@ -15,10 +15,10 @@ export async function POST(req) {
   console.log(file)
  const formData = new FormData();
     formData.append('file', file);
-    formData.append('api_key', '544554759867596');
+    formData.append('api_key', `${process.env.CLOUDINARY_API_KEY}`);
     formData.append('upload_preset', 'uploadImage');
-    formData.append('cloud_name', 'dnh4epuad')
-    formData.append('api_secret', '"RrXAptgqIxmky49HDU8WDgjJR7A"');
+    formData.append('cloud_name', `${process.env.CLOUDINARY_NAME}`);
+    formData.append('api_secret', `${process.env.CLOUDINARY_SECRET}`);
     const response = await fetch('https://api.cloudinary.com/v1_1/dx3xbo8tm/image/upload', {
         method: 'POST',
         body: formData
