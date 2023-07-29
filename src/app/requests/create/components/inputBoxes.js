@@ -1,64 +1,142 @@
 "use client"
 
-import { Button, Stack, TextField} from "@mui/material";
+import { Button, Stack } from "@mui/material";
+import { Autocomplete } from "@mantine/core";
 
-import { useState } from "react";
-
+import { useReducer } from "react";
+import { TextInput, Textarea } from "@mantine/core";
+import { categoryData } from "../../../../utils/data/categoryData";
+import styles from './inputBoxes.module.scss'
 
 export default function InputBoxes(props) {
+    const reducer = (state, dispatch) => {
+        return {
+            ...state,
+            [dispatch.name]: dispatch.value
+        }
+        }
 
-    const [resource, setResource] = useState("")
-    const [goal, setGoal] = useState("")
-    const [category, setCategory] = useState("")
-    const [details, setDetails] = useState("")
+        
+    
+
 
 
     async function handleSubmit() {
-        await fetch('/api/requests', {
+        const form = new FormData()
+        form.append('file', './png.png')
+        await fetch('/api/images', {
             method: 'POST',
             body: JSON.stringify({
                 username: props.session.user.username,
                 date: new Date(),
-                resource: resource,
-                goal: goal,
-                category: category,
-                details: details
+                resource: state.resource,
+                goal: state.goal,
+                metric: state.metric,
+                description: state.description,
+                category: state.category,
+                details: state.details,
+                image: form
+
 
             })
         })
     }
     
+    const [state, dispatch] = useReducer(reducer, { 
+        resource: "",
+        goal: "",
+        category: "",
+        details: "",
+        description: "",
+        metric: ""
 
-    const handleChange = (event) => {
-            
-            if (event.target.id === "resource") {
-                setResource(event.target.value)
-            }
-            else if (event.target.id === "details") {
-                setDetails(event.target.value)
-            }
-            else if (event.target.id === "goal") {
-                setGoal(event.target.value)
-            }
-            else if (event.target.id === "category") {
-                setCategory(event.target.value)
-            }
-    }
+    })
+
 
     return (
-        <Stack>
+        <Stack className={styles.container}>
+
+<Stack className={styles.sharedInput} direction={"row"} spacing={2}>
+               
                 
-                <label>Resource</label>
-                <TextField onChange={handleChange} id="resource" label="Resource" variant="outlined" multiline minRows={4} value={resource} />
+                <Autocomplete // You can add grouping to this using the group property
+                label="Resource"
+                id="resource"
+                placeholder="Request any resource"
+                value={state.category}
+                onChange={(event) => dispatch({ 
+                    name: "category",
+                    value: event.target.value  })} 
+                data={categoryData}
+            />
+
+<Autocomplete 
+                label="Category"
+                id="category"
+                placeholder="Type of resource"
+                value={state.metric} 
+                onChange={(event) => dispatch({
+                    name: "Category",
+                    value: event.target.value  })}
+                    data={categoryData}
+                />
+
+                </Stack>
+           
+                <Textarea
+                onChange={(event) => dispatch({ 
+                    name: "details",
+                    value: event.target.value  })} 
+                    placeholder="details" 
+                    label="Details" 
+                    minRows={2}
+                    value={state.details} />
+
+                    <Stack className={styles.sharedInput} direction={"row"} spacing={2}>
+               
+                <TextInput
+                onChange={(event) => dispatch({ 
+                    name: "goal",
+                    value: event.target.value  })} 
+                id="goal" 
+                placeholder="Goal" 
+                label="Goal" 
+                 value={state.goal} />
+
+                <Autocomplete 
+                label="Metric"
+                id="metric"
+                placeholder="lbs, oz, $, etc"
+                value={state.metric} 
+                onChange={(event) => dispatch({
+                    name: "metric",
+                    value: event.target.value  })}
+                    data={[
+                        { label: 'Dollars', value: 'Dollars' },
+                        { label: 'Hours', value: 'Hours' },
+                        { label: 'Days', value: 'Days' },
+                        { label: 'Weeks', value: 'Weeks' },
+                    ]}
+                />
                 
-                <label>Details</label>
-                <TextField onChange={handleChange} id="details" label="details" variant="outlined" value={details} />
-                
-                <label>Goal</label>
-                <TextField onChange={handleChange} id="goal" label="Goal"  variant="outlined" multiline minRows={4} value={goal} />
-                
-                <label>Category</label>
-                <TextField onChange={handleChange} id="category" label="Category" variant="outlined" value={category} />
+                </Stack>
+
+               
+               
+                <Textarea
+                 onChange={(event) => dispatch({ 
+                    name: "description",
+                    value: event.target.value  })} 
+                 id="Description" 
+                 placeholder="Enter a description" 
+                 label="Description" 
+                 minRow={4}
+                 value={state.description} />
+
+                 <Stack className={styles.upload } direction={"row"} spacing={2}>
+                   
+                   
+                    </Stack>
                 
                 <Button variant="filled" onClick={handleSubmit} color="primary">Submit Resource</Button>
             </Stack>

@@ -1,5 +1,3 @@
-import { Stack } from "@mui/material";
-import Link from "next/link"
 import RequestComponent from "./components/requestComponent";
 
 export default async function Requests() {

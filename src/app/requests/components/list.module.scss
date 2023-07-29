@@ -1,14 +1,16 @@
 
 .list {
     padding-top: 20px;
-    border-top: 1px solid #13aa5f
+    margin-bottom: 400px;
+    border-top: 1px solid #13aa5f5d
+}
+
+.filters{
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 
-
-.options label {
-    margin: 0px 12px
-}
 
 .filters > :last-child {
     padding-left: 8px
@@ -17,13 +19,14 @@
 .filterBody {
     display: flex;
     justify-content: flex-end;
+    
     padding-bottom: 20px;
 }
 
 .linkBody  {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-start;
     margin: 0;
     padding-bottom: 20px;
@@ -33,10 +36,10 @@
     margin: 0px;
     font-size: 24px;
     font-weight: 600;
-    color: #3b5a4b;
+    color: #42b47d;
     font-family: sans-serif;
     padding: 8px 0px;
-    width: 60%;
+    width: 48%;
     text-align: left;
     margin-bottom: 8px;
     cursor: pointer;
