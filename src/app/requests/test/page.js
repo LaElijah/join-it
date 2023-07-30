@@ -47,15 +47,16 @@ export default function UploadFormPage(props) {
 
 
 
+const urlToFile = async (url, filename) => {
+    const blob = await (await fetch(url)).blob()
+    return new File([blob], filename, { type: "image/png" })
 
-
+}
 
     const uploadToServer = async (event) => {
         const body = new FormData();
-
-        console.log("file", image)
-        body.append("file", image);
-        console.log("body", body)
+        const file = await urlToFile(state.croppedImage, "croppedImage.png");
+        body.append("file", file);
         const response = await fetch("/api/images", {
             method: "POST",
             body
