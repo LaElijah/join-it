@@ -1,9 +1,6 @@
 import authOptions from "@/app/api/auth/[...nextauth]/options";
-import InputBoxes from "./components/inputBoxes";
+import InputBoxes from "./components/inputBoxes/inputBoxes";
 import { getServerSession } from "next-auth/next";
-import CropComponent from "./components/cropComponent";
-
-
 
 export default async function CreateRequests() {
     // YOU MUST USE AUTHOPTIONS TO GET SESSION

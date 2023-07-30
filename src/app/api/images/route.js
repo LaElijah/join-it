@@ -4,15 +4,22 @@ import { v2 as cloudinary } from 'cloudinary'
 
 import { NextResponse } from "next/server";
 import mv from 'mv'
+import { readFile } from '@/utils/images/imageUtils';
+
+
 
 
 export async function POST(req) {
+  
     try {
+
+        
        
        
         const formRequest = await req.formData();
   const file = formRequest.get('file');
   console.log(file)
+
  const formData = new FormData();
     formData.append('file', file);
     formData.append('api_key', `${process.env.CLOUDINARY_API_KEY}`);
@@ -26,6 +33,7 @@ export async function POST(req) {
 
     })
     const data = await response.json();
+    console.log(data)
     console.log(data.url)
 
             return NextResponse.json({ status: "success"})
