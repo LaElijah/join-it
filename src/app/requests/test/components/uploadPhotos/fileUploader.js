@@ -44,6 +44,7 @@ const urlToFile = async (url, filename) => {
 
     const uploadToServer = async () => {
         const body = new FormData();
+        console.log(state.croppedImage)
         const file =  await urlToFile(state.croppedImage, "croppedImage.png");
         body.append("file", file);
         console.log(body)

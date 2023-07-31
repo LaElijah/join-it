@@ -29,8 +29,8 @@ export default function CropModal(props) {
        
         dispatch({ name: "croppedImage", value: croppedImage })
         dispatch({ name: "opened", value: false })
-        const file = await props.urlToFile(state.croppedImage, "croppedImage.png");
-        props.formDispatch({ name: "image", value: file })
+        
+        props.formDispatch({ name: "croppedImage", value: croppedImage })
 
 
     }, [state.croppedAreaPixels, state.rotation])

@@ -24,6 +24,7 @@ export async function POST(req) {
     formData.append('file', file);
     formData.append('api_key', `${process.env.CLOUDINARY_API_KEY}`);
     formData.append('upload_preset', 'uploadImage');
+    formData.append('resource_type', 'image')
     formData.append('cloud_name', `${process.env.CLOUDINARY_NAME}`);
     formData.append('api_secret', `${process.env.CLOUDINARY_SECRET}`);
     const response = await fetch('https://api.cloudinary.com/v1_1/dx3xbo8tm/image/upload', {

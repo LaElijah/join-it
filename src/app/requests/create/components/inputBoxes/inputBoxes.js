@@ -29,6 +29,7 @@ export default function InputBoxes() {
     async function handleSubmit() {
         console.log(state.croppedImage)
         const form = new FormData()
+        console.log(state.croppedImage)
         const file = await urlToFile(state.croppedImage, "croppedImage.png");
 
         form.append('file', file)
@@ -48,7 +49,7 @@ export default function InputBoxes() {
         details: "",
         description: "",
         metric: "",
-        image: null,
+        croppedImage: null,
 
     })
 
