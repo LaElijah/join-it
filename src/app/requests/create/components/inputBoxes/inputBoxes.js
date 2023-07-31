@@ -1,15 +1,15 @@
 "use client"
 
 import { Button, Stack } from "@mui/material";
-import { Autocomplete, NumberInput } from "@mantine/core";
-
 import { useReducer } from "react";
-import { TextInput, Textarea } from "@mantine/core";
+import { TextInput, Textarea, Autocomplete, NumberInput } from "@mantine/core";
 import { categoryData } from "@/utils/data/categoryData";
 import styles from './inputBoxes.module.scss'
 import FileUploader from "../fileUploader/fileUploader";
+import { urlToFile } from "@/utils/images/imageUtils";
 
-export default function InputBoxes() {
+export default function InputBoxes(props) {
+
     const reducer = (state, dispatch) => {
         return {
             ...state,
@@ -17,30 +17,6 @@ export default function InputBoxes() {
         }
     }
 
-
-    const urlToFile = async (url, filename) => {
-        const blob = await (await fetch(url)).blob()
-        return new File([blob], filename, { type: "image/png" })
-
-    }
-
-
-
-    async function handleSubmit() {
-        console.log(state.croppedImage)
-        const form = new FormData()
-        console.log(state.croppedImage)
-        const file = await urlToFile(state.croppedImage, "croppedImage.png");
-
-        form.append('file', file)
-        form.append('form', JSON.stringify(state))
-        console.log(form.getAll )
-
-        await fetch('/api/images', {
-            method: 'POST',
-            body: form
-        })
-    }
 
     const [state, dispatch] = useReducer(reducer, {
         resource: "",
@@ -52,6 +28,31 @@ export default function InputBoxes() {
         croppedImage: null,
 
     })
+
+    async function handleSubmit() {
+        const form = new FormData()
+        const file = await urlToFile(state.croppedImage, "croppedImage.png");
+
+        const body = {
+            
+            resource: state.resource,
+            goal: state.goal,
+            category: state.category,
+            details: state.details,
+            description: state.description,
+            metric: state.metric,
+            username: props.session.user.username,
+            
+        }
+
+        form.append('file', file)
+        form.append('body', JSON.stringify(body))
+
+        await fetch('/api/requests', {
+            method: 'POST',
+            body: form
+        })
+    }
 
 
 

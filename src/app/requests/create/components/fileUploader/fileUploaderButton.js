@@ -1,6 +1,6 @@
 
 
-import styles from './fileUploader.module.scss'  
+import styles from './fileUploaderButton.module.scss'  
 
 export default function FileUploaderButton(props) {
 
@@ -8,7 +8,7 @@ export default function FileUploaderButton(props) {
     return (
         <div className={styles.container}>
         <div className={styles.buttonWrapper}>
-        <label class="button" for="upload">Upload File</label>
+        <label  for="upload">Upload File</label>
         <input id="upload" type="file" onChange={props.handleFileChange} />
       </div>
     </div>

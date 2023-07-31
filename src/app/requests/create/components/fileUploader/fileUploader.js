@@ -6,7 +6,7 @@ import Image from 'next/image'
 // import { getCroppedImg, getRotatedImage } from '../../../utils/images/imageUtils'
 import { readFile } from '../../../../../utils/images/imageUtils'
 import CropModal from './cropModal'
-import styles from './uploadFile.module.scss'
+import styles from './fileUploader.module.scss'
 import { Stack } from '@mui/material'
 import FileUploaderButton from './fileUploaderButton'
 
@@ -68,16 +68,23 @@ export default function FileUploader(props) {
 
 
     return (
-        <Stack className={styles.container} direction={"column"} spacing={2}>
+        <div className={styles.container} >
 
 
 
 
 
-
+<label className={styles.label}>Upload a photo</label>
 
             <Stack className={styles.sharedInput} direction={"row"} spacing={2}>
                
+            <Image
+                    className={styles.imagePreview}
+                    src={state.croppedImage || "/png.png"}
+                    alt="Cropped image preview"
+                    height={128}
+                    width={128}
+                />
             <FileUploaderButton handleFileChange={handleFileChange} />
 
                 <CropModal
@@ -86,14 +93,8 @@ export default function FileUploader(props) {
                     formDispatch={props.dispatch}
                     urlToFile={urlToFile}
                 />
-                <Stack className={styles.sharedInput} direction={"column"} spacing={2}>
-               <Image
-                    className={styles.imagePreview}
-                    src={state.croppedImage || "/png.png"}
-                    alt="Cropped image preview"
-                    height={128}
-                    width={128}
-                /> <label >Image will scale to 64 X 64</label>
+                <Stack className={styles.image} direction={"column"} spacing={2}>
+               
 
                 </Stack>
 
@@ -102,6 +103,6 @@ export default function FileUploader(props) {
 
             </Stack>
             {/* <button onClick={prepForForm}>Upload</button> */}
-        </Stack>
+        </div>
     )
 }

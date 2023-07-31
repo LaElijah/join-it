@@ -16,3 +16,11 @@ resources
 - name
 - resources offered
 - category 
+
+
+
+i need to organize requests in a categorical fashion
+i need to have requests by username so that people can visit their profile
+friends! and mutuals!!
+location based support to and later allocation to specific communities 
+requests should be by username 

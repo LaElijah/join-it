@@ -15,11 +15,30 @@ const requestSchema = new Schema({
         type: Number,
         default: 0
     },
-    age: {
-        type: String,
-        default: "0 days ago"
-    },
     category: String,
+    description: String,
+    metric: String,
+    image: String,
+
+
+
+
+
+    // comments: [{
+    //     username: String,
+    //     date: Date,
+    //     comment: String
+    // }],
+    // likes: [{
+    //     username: String,
+    //     date: Date
+    // }],
+    // dislikes: [{
+    //     username: String,
+    //     date: Date
+    // }]
+
+
 
 
 
