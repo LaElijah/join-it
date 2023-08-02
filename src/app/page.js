@@ -1,21 +1,35 @@
-import { Button, Stack, TextField } from "@mui/material";
+import {  Stack } from "@mui/material";
 import Link from "next/link"
+import styles from "./styles/page.module.scss"
 
 
 export default function Index() {
 
     return (
-        <div>
+        <div className={styles.container}>
 
-            <h2>Welcome to the Join-it Demo!</h2>
-            <h4>Choose the page you would like to visit</h4>
+            <div className={styles.hero} >
+                <h1>Join-It</h1>
+                <h5>alpha Demo</h5>
+                <h5>Version 0.1.0</h5>
+                
+            </div>
 
-            <Stack direction="column" spacing={2}>
-                <Link href="/requests">Requests</Link>
-                <Link href="/resources">Resources</Link>
-            </Stack>
+
+            
 
 
+        <div className={styles.onboarding} >
+            <h2>Thanks for trying the Join-It demo</h2>
+            <h4>Make an account and visit the site!</h4>
+
+
+                <Stack direction="row" spacing={2}>
+                    <Link href="/signup">Sign up</Link>
+                    <Link href="/api/auth/signin">Login</Link>
+                </Stack>
+
+            </div>
 
         </div>
     )

@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 
-import dbConnection from '../../../utils/db/dbConnection'
-import Request from '../../../utils/models/request'
+import dbConnection from '@/app/_utils/db/dbConnection'
+import Request from '@/app/_utils/models/request'
+
 
 
 
 
 
 export async function GET() {
+  console.log("GET")
   await dbConnection()
   try {
     const requests = await Request.find({})
@@ -21,6 +23,7 @@ export async function GET() {
 
 
 export async function POST(req) {
+  
 
   try {
     await dbConnection()
@@ -58,7 +61,7 @@ export async function POST(req) {
       },
     )
 
-      console.log("saving document")
+      console.log(document)
     await document.save()
 
 

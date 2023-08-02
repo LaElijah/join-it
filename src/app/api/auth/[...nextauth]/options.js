@@ -1,17 +1,17 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt'
-import dbConnection from '../../../../utils/db/dbConnection'
-import User from '../../../../utils/models/user'
+import dbConnection from '@/app/_utils/db/dbConnection'
+import User from '@/app/_utils/models/user'
 
 
 
 async function isAuthorized(credentials) {
     const { username, password } = credentials;
-
+    
     await dbConnection();
 
-    const user = await User.findOne({ username: username })
-
+    const user = await User.findOne({ username: username.toLowerCase() })
+ 
     if (user) {
 
         const match = await bcrypt.compare(password, user.password);
@@ -46,11 +46,16 @@ const authOptions = {
 
             session.user = token.user
             return session
-        }
+        },
 
 
 
     },
+
+    pages: {
+        signIn: '/signin',
+    },
+
 
 
     providers: [
@@ -63,9 +68,10 @@ const authOptions = {
             },
 
             async authorize(credentials) {
+                console.log("credentials", credentials)
 
                 const response = await isAuthorized(credentials);
-               
+               console.log(response)
                 if (response.auth) {
                     return response.user
                 } else {
@@ -84,7 +90,7 @@ const authOptions = {
 
 
 
-
+debug: true,
 }
 
 
