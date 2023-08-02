@@ -2,7 +2,7 @@
 
 import { Stack } from "@mui/material";
 import Link from "next/link"
-import { Button, TextInput } from "@mantine/core";
+import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { signIn } from "next-auth/react"
 
 import styles from "./credentialsInput.module.scss"
@@ -42,7 +42,7 @@ export default function CredentialsInput() {
         <div className={styles.container} >
                     <TextInput onChange={handleChange} name="username" label="Username" placeholder={"Enter your username..."} />
         
-                    <TextInput onChange={handleChange} name="password" label="Password" placeholder={"Enter your password..."}  />
+                    <PasswordaddInput onChange={handleChange} name="password" label="Password" placeholder={"Enter your password..."}  />
                
                 <Button className={styles.button} onClick={handleSubmit}> Sign in</Button>
 

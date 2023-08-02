@@ -1,5 +1,5 @@
 
-import { TextInput, Button, Autocomplete } from "@mantine/core"
+import { TextInput, Button, Autocomplete, PasswordInput } from "@mantine/core"
 import styles from "./credentialsInput.module.scss"
 
 
@@ -60,9 +60,10 @@ export default function CredentialsInput(props) {
         <div className={styles.container}>
             <Autocomplete value={email} placeholder={"your-email@provider.com"} onChange={(event) => { dispatch({ name: "email", value: event})}} id={"email"} data={emailCategories} label={"Email"} />
             <TextInput value={username} placeholder={"Enter your username..."} onChange={handleChange} id={"username"} label={"Username"} />
-            <TextInput value={password} placeholder={"Enter your password..."} onChange={handleChange} id={"password"} label={"Password"} />
-            <TextInput value={confirmPassword} placeholder={"Confirm your password"} onChange={handleChange} id={"confirmPassword"} label={"Confirm Password"} />
+            <PasswordInput value={password} description={"Password must contain atleast one uppercase letter, one lowercase letter, and one special character"} placeholder={"Enter your password..."} onChange={handleChange} id={"password"} label={"Password"} />
+            <PasswordInput value={confirmPassword} placeholder={"Confirm your password"} onChange={handleChange} id={"confirmPassword"} label={"Confirm Password"} />
             <Button className={styles.button} onClick={() => {
+                dispatch({ name: "submit", value: "Skip"})
                 dispatch({ name: "page", value: 1 })
             }} >Next</Button>
 
