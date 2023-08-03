@@ -15,6 +15,8 @@ export default function UsernameInput(props) {
     const { username } = state
 
     async function usernameExists() {
+        
+        dispatch({ name: "usernameExists", value: false })
         const response = await fetch(`http://localhost:3000/api/auth/confirmUser`, {
             method: "POST",
             headers: {
@@ -24,6 +26,7 @@ export default function UsernameInput(props) {
         })
         const data = await response.json()
         dispatch({ name: "usernameExists", value: data.exists })
+     
     };
 
 
@@ -31,7 +34,7 @@ export default function UsernameInput(props) {
 
     const executeVerify = debounce(() => {
         dispatch({ name: "verifyUsername", value: toggle() })
-    }, 500)
+    }, 300)
 
 
     const validateUsername = useCallback(executeVerify, [state.username])
@@ -56,7 +59,7 @@ export default function UsernameInput(props) {
                     value={username}
                     placeholder={"Enter your username..."}
                     onChange={(event) => {
-                        dispatch({ name: "usernameExists", value: false })
+                       
                         dispatch({ name: "username", value: event.target.value.replace(/[^a-zA-Z0-9]/g, '') })
                         validateUsername()
                     }}

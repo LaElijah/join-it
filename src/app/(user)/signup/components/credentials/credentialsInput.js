@@ -1,56 +1,42 @@
-import { TextInput, Button, Autocomplete, PasswordInput, Indicator } from "@mantine/core"
+import { Button, Autocomplete, PasswordInput } from "@mantine/core"
 import styles from "./credentialsInput.module.scss"
-import { useCallback, useEffect } from "react";
-import debounce from "@/app/_utils/tools/debounce"
 import UsernameInput from "../usernameInput/usernameInput";
-
+import * as Validator from "validatorjs";
+import { useEffect } from "react";
 
 export default function CredentialsInput(props) {
 
     const { state, dispatch } = props
 
 
-
-
-    async function usernameExists() {
-        const response = await fetch(`http://localhost:3000/api/auth/confirmUser`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username: state.username.toLowerCase() })
-        })
-        const data = await response.json()
-        dispatch({ name: "usernameExists", value: data.exists })
-    };
-
-
-    const toggle = () => (state.verifyUsername !== true)
-
-    const executeVerify = debounce(() => {
-        dispatch({ name: "verifyUsername", value: toggle() })
-    }, 300)
-
-
-    const validateUsername = useCallback(executeVerify, [state.username])
-
-    useEffect(() => {
-        usernameExists()
-    }, [state.verifyUsername])
-
-
-
-    const handleChange = async (event) => {
-        dispatch({ name: event.target.id, value: event.target.value })
+    const rules = {
+        password: 'required|min:8|max:20|confirmed',
+        password_confirmation: 'required|min:8|max:20',
+        email: 'required|email',
+        username: 'required|min:3|max:20'
+       
     }
 
-    const { email, username, password, confirmPassword } = state
+    const validation = new Validator(state, rules)
 
-
+    const { email, password, password_confirmation } = state
 
     const emailCategories = email.trim().length > 0 && !email.includes('@')
         ? ['gmail.com', 'outlook.com', 'yahoo.com'].map((provider) => `${email}@${provider}`)
         : [];
+
+    const handleChange = async (event) => {
+         dispatch({ name: event.target.id, value: event.target.value })
+    }
+
+    useEffect(() => {
+        dispatch({ name: "disableForm", value: validation.fails() })
+    }, [state.password, state.password_confirmation, state.email, state.username])
+
+
+    const isDisabled = () => {
+        return !!(state.disableForm || state.usernameExists);
+    }
 
 
     return (
@@ -60,10 +46,15 @@ export default function CredentialsInput(props) {
             <UsernameInput
                 state={state}
                 dispatch={dispatch}
-                />
+                validation={validation}
+            />
             <PasswordInput value={password} description={"Password must contain atleast one uppercase letter, one lowercase letter, and one special character"} placeholder={"Enter your password..."} onChange={handleChange} id={"password"} label={"Password"} />
-            <PasswordInput value={confirmPassword} placeholder={"Confirm your password"} onChange={handleChange} id={"confirmPassword"} label={"Confirm Password"} />
-            <Button className={styles.button} onClick={() => {
+            <PasswordInput value={password_confirmation} placeholder={"Confirm your password"} onChange={handleChange} id={"password_confirmation"} label={"Confirm Password"} />
+            <Button 
+            disabled={isDisabled()}
+            className={styles.button} 
+            onClick={() => {
+                
                 dispatch({ name: "submit", value: "Skip" })
                 dispatch({ name: "page", value: 1 })
             }} >Next</Button>

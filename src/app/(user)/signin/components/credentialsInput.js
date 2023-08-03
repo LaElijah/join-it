@@ -42,7 +42,7 @@ export default function CredentialsInput() {
         <div className={styles.container} >
                     <TextInput onChange={handleChange} name="username" label="Username" placeholder={"Enter your username..."} />
         
-                    <PasswordaddInput onChange={handleChange} name="password" label="Password" placeholder={"Enter your password..."}  />
+                    <PasswordInput onChange={handleChange} name="password" label="Password" placeholder={"Enter your password..."}  />
                
                 <Button className={styles.button} onClick={handleSubmit}> Sign in</Button>
 

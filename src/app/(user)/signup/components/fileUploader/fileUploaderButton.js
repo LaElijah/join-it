@@ -9,7 +9,7 @@ export default function FileUploaderButton(props) {
         <div className={styles.container}>
           
         <div className={styles.buttonWrapper}>
-        <label  for="upload">Upload File</label>
+        <label  htmlFor="upload">Upload File</label>
         <input id="upload" type="file" onChange={props.handleFileChange} />
       </div>
     </div>

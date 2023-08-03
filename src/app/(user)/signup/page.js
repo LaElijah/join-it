@@ -33,7 +33,7 @@ export default function Register() {
     const [state, dispatch] = useReducer(reducer, {
         username: "",
         password: "",
-        passwordConfirm: "",
+        password_confirmation: "",
         email: "",
         race: [],
         gender: [],
@@ -49,6 +49,8 @@ export default function Register() {
         submit: "Skip",
         croppedImage: null,
         verifyUsername: false,
+        disableForm: true,
+        usernameExists: false,
     })
 
     const handleSubmit = async (event) => {
