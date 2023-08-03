@@ -14,7 +14,7 @@ export default function FallbackError() {
                 <h2>Auth Error</h2>
 
                 <label>Error message</label>
-                <p>{message || error}</p>
+                <p>Error</p>
 
                 <Button onClick={() => {
                     router.push("/")

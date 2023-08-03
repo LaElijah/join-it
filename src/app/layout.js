@@ -35,7 +35,7 @@ export default async function RootLayout({
   } else {
     userLinks = [
       { label: 'Login', link: '/api/auth/signin' },
-      { label: 'Register', link: '/register' },
+      { label: 'Register', link: '/signup' },
     ]
   }
 

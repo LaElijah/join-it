@@ -6,11 +6,10 @@ export async function POST(req) {
     try {
         await dbConnection()
         const body = await req.json()
-        const username = body.username
-        console.log(username)
-        const databaseUser = await User.findOne({ username: "test" })
+        const databaseUser = await User.findOne({ username: body.username })
       
-        if (databaseUser) {
+        console.log(databaseUser)
+        if (databaseUser !== null) {
             return NextResponse.json({ exists: true })
         }
         else {

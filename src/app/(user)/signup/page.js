@@ -48,6 +48,7 @@ export default function Register() {
         page: 0,
         submit: "Skip",
         croppedImage: null,
+        verifyUsername: false,
     })
 
     const handleSubmit = async (event) => {
