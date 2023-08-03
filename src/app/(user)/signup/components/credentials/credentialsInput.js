@@ -2,6 +2,7 @@ import { TextInput, Button, Autocomplete, PasswordInput, Indicator } from "@mant
 import styles from "./credentialsInput.module.scss"
 import { useCallback, useEffect } from "react";
 import debounce from "@/app/_utils/tools/debounce"
+import UsernameInput from "../usernameInput/usernameInput";
 
 
 export default function CredentialsInput(props) {
@@ -56,18 +57,10 @@ export default function CredentialsInput(props) {
         <div className={styles.container}>
             <Autocomplete value={email} placeholder={"your-email@provider.com"} onChange={(event) => { dispatch({ name: "email", value: event }) }} id={"email"} data={emailCategories} label={"Email"} />
 
-            <div className={styles.username} >
-                <Indicator position={"bottom-end"} color={(state.usernameExists ? "red" : "green")} >
-                    <TextInput description={(state.usernameExists) ? "Username already exists!" : ""} error={state.usernameExists} value={username} placeholder={"Enter your username..."}
-                        onChange={(event) => {
-                            dispatch({ name: "username", value: event.target.value.replace(/[^a-zA-Z0-9]/g, '') })
-                            validateUsername()
-
-                        }} id={"username"} label={"Username"} />
-
-                </Indicator>
-                <button onClick={usernameExists}>Check</button>
-            </div>
+            <UsernameInput
+                state={state}
+                dispatch={dispatch}
+                />
             <PasswordInput value={password} description={"Password must contain atleast one uppercase letter, one lowercase letter, and one special character"} placeholder={"Enter your password..."} onChange={handleChange} id={"password"} label={"Password"} />
             <PasswordInput value={confirmPassword} placeholder={"Confirm your password"} onChange={handleChange} id={"confirmPassword"} label={"Confirm Password"} />
             <Button className={styles.button} onClick={() => {
