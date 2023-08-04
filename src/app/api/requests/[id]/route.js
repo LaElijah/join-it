@@ -12,24 +12,26 @@ export async function GET(req) {
         await dbConnection()
 
         const id = req.headers.get('query')
-        console.log(id)
 
         const post = await Request.findOne({ _id: id })
 
-        // if (post) {
-        //     const user = await User.findOne({ _id: post.user })
-         
-        //     const publicUserData = {
-        //         username: user.username,
-        //         profile: user.profile,
-        //         id: user._id,
-        //         identity: user.identity
-        //     }
-            return NextResponse.json({ status: "success", data: post  })
-        // }
-        // else {
-        //     return NextResponse.json({ status: "failure" })
-        // }
+        if (post) {
+            const user = await User.findOne({ username: post.username })
+         console.log(user)
+
+         const publicUser = {
+                username: user.username,
+                profile: user.profile,
+                id: user._id,
+                identity: user.identity
+         }
+            return NextResponse.json({ status: "success", data: { post: post, userData: publicUser} })
+            
+           
+           
+        } else {
+            return NextResponse.json({ status: "failure" })
+        }
     }
     catch (error) {
         console.log(error)

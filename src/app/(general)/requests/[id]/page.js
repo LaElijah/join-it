@@ -24,7 +24,7 @@ export default async function Post({ params }) {
 
     return ( 
         <div>
-            <h1>{data.image}</h1>
+            {/* <h1>{data.image}</h1> */}
         </div>
 
 
