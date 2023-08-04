@@ -40,7 +40,9 @@ export default function IdentityInput(props) {
 
 
             <div className={styles.buttonWrapper} >
-                <Button className={styles.button} onClick={() => {
+                <Button 
+                className={styles.button} 
+                onClick={() => {
                     dispatch({ name: "page", value: 0 })
                 }} >Previous</Button>
 

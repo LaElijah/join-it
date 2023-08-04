@@ -1,5 +1,6 @@
 "use client"
 import { useRouter } from "next/navigation"
+import { Button } from "@mantine/core"
 
 import styles from "./error.module.scss"
 

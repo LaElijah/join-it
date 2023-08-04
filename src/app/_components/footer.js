@@ -1,8 +1,13 @@
 "use client"
 
-import { createStyles, Container, Group, Anchor, rem } from '@mantine/core';
+
+import { createStyles, Container, Group, rem } from '@mantine/core';
 import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
+import styles from "./layout.module.scss"
+
+
+
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -29,6 +34,45 @@ const useStyles = createStyles((theme) => ({
       marginTop: theme.spacing.md,
     },
   },
+
+  links: {
+    [theme.fn.smallerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  burger: {
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  link: {
+    display: 'block',
+    lineHeight: 1,
+    padding: `${rem(8)} ${rem(12)}`,
+    borderRadius: theme.radius.sm,
+    textDecoration: 'none',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    '&:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      borderRadius: 0,
+      padding: theme.spacing.md,
+    },
+  },
+
+  linkActive: {
+    '&, &:hover': {
+      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+    },
+  },
 }));
 
 
@@ -37,9 +81,9 @@ export default function FooterSimple({ links }) {
   const items = links.map((link) => (
     <Link
       color="dimmed"
+      className={styles.link}
       key={link.label}
       href={link.link}
-      onClick={(event) => event.preventDefault()}
       size="sm"
     >
       {link.label}

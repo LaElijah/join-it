@@ -8,7 +8,7 @@ export default async function Requests() {
     const session = await getServerSession(authOptions)
     console.log(session)
     if (!session) {
-        redirect("/auth/signin")
+        redirect("/api/auth/signin")
     }
 
 
@@ -16,7 +16,7 @@ export default async function Requests() {
         const response = await fetch('http://localhost:3000/api/requests', {
             method: 'GET',
             next: {
-                revalidate: 0
+                revalidate: 60,
             },
         })
         const data = await response.json();

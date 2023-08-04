@@ -90,23 +90,18 @@ const useStyles = createStyles((theme) => ({
 
 export default function HeaderResponsive({ links }) {
 
-  const router = useRouter();
-    
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+
+  
 
   const items = links.map((link) => (
     <Link
       key={link.label}
       href={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-        router.push(link.link);
-        close();
-      }}
+      
     >
       {link.label}
     </Link>

@@ -1,6 +1,7 @@
-import {  Stack } from "@mui/material";
-import Link from "next/link"
 import styles from "./styles/page.module.scss"
+import Onboarding from "./_components/onboarding";
+
+
 
 
 export default function Index() {
@@ -15,21 +16,13 @@ export default function Index() {
                 
             </div>
 
+            <Onboarding  />
+
 
             
 
 
-        <div className={styles.onboarding} >
-            <h2>Thanks for trying the Join-It demo</h2>
-            <h4>Make an account and visit the site!</h4>
-
-
-                <Stack direction="row" spacing={2}>
-                    <Link href="/signup">Sign up</Link>
-                    <Link href="/api/auth/signin">Login</Link>
-                </Stack>
-
-            </div>
+     
 
         </div>
     )

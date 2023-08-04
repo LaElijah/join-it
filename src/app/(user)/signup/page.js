@@ -51,6 +51,8 @@ export default function Register() {
         verifyUsername: false,
         disableForm: true,
         usernameExists: false,
+        tagGroup: "all",    
+        passwordMatchError: false,
     })
 
     const handleSubmit = async (event) => {

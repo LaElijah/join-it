@@ -27,9 +27,24 @@ export default function CredentialsInput(props) {
 
     const handleChange = async (event) => {
          dispatch({ name: event.target.id, value: event.target.value })
-    }
+            if (event.target.id === "password" && event.target.value !== state.password_confirmation) {
+                dispatch({ name: "passwordMatchError", value: true })
+            }
+            else if (event.target.id === "password" && event.target.value === state.password_confirmation) {
+                dispatch({ name: "passwordMatchError", value: false })
+            }
+            if (event.target.id === "password_confirmation" && event.target.value !== state.password) {
+                dispatch({ name: "passwordMatchError", value: true })
+            }
+            else if (event.target.id === "password_confirmation" && event.target.value === state.password) {
+                dispatch({ name: "passwordMatchError", value: false })
+            }
+             
+        }
+
 
     useEffect(() => {
+        console.log(state.passwordMatchError)
         dispatch({ name: "disableForm", value: validation.fails() })
     }, [state.password, state.password_confirmation, state.email, state.username])
 
@@ -49,7 +64,14 @@ export default function CredentialsInput(props) {
                 validation={validation}
             />
             <PasswordInput value={password} description={"Password must contain atleast one uppercase letter, one lowercase letter, and one special character"} placeholder={"Enter your password..."} onChange={handleChange} id={"password"} label={"Password"} />
-            <PasswordInput value={password_confirmation} placeholder={"Confirm your password"} onChange={handleChange} id={"password_confirmation"} label={"Confirm Password"} />
+            <PasswordInput 
+            value={password_confirmation} 
+            placeholder={"Confirm your password"} 
+            onChange={handleChange} 
+            id={"password_confirmation"} 
+            label={"Confirm Password"} 
+            error={state.passwordMatchError ? "Passwords do not match" : null}
+            />
             <Button 
             disabled={isDisabled()}
             className={styles.button} 

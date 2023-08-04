@@ -10,6 +10,7 @@ export default function RequestList(props) {
    
  
     const requests = props.data
+    console.log(requests)   
 
     const data = requests.data || [{ 
         username: "Loading",

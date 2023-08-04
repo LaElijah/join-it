@@ -1,5 +1,5 @@
 
-import { Chip } from "@mantine/core"
+import { Chip, NativeSelect } from "@mantine/core"
 import styles from "./identityInput.module.scss"
 import { identitiesData } from "@/app/_utils/data/identitiesData"
 
@@ -19,16 +19,48 @@ export default function IdentityTags(props) {
    
 
     const { state, dispatch } = props
+
+    const filteredTags = identitiesData.filter((identity) => {
+        if (state.tagGroup === "all") {
+            return true
+        }
+        else {
+
+        return identity.group === state.tagGroup
+        }
+    })
+
+
+    // Filter identities data and link to state
+
+    const tagGroups = identitiesData.map((identity) => {
+        return identity.group
+    })
     
     
 
 
 
     return (
-        <section>
+        <section className={styles.container}>
+
+            <NativeSelect 
+                label="Tag Group"
+                value={state.tagGroup}
+                onChange={(event) => {
+                    dispatch({ name: "tagGroup", value: event.target.value })
+                }}
+                data={[
+                    { value: "all", label: "All" },
+                    ...tagGroups.map((tagGroup) => {
+                        return { value: tagGroup, label: tagGroup }
+                    })
+
+                ]}
+            />
 
             <div className={styles.scrollBody}>
-                {identitiesData.map((identity) => {
+                {filteredTags.map((identity) => {
                     return (
                         <div    key={identity.key}>
                             <h4>{identity.group}</h4>
@@ -43,7 +75,6 @@ export default function IdentityTags(props) {
                                             total += state[key].length
                                         }
                                     }
-                                    console.log(state)
                                     dispatch({ name: identity.key, value: event })
                                     dispatch({ name: "submit", value: "Submit" })
                                 }}
