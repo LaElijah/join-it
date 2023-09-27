@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-
-const { Schema } = mongoose
+const {Schema} = mongoose;
 
 const resourceSchema = new Schema({
     name: String,
@@ -13,4 +12,4 @@ const resourceSchema = new Schema({
 })
 
 
-module.exports = mongoose.models.Resource || mongoose.model('Resource', resourceSchema)
+export default mongoose.models.Resource || mongoose.model('Resource', resourceSchema)

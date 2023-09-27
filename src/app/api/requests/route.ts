@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 import dbConnection from '@/app/_utils/db/dbConnection'
 import Request from '@/app/_utils/models/request'
@@ -6,15 +6,28 @@ import Request from '@/app/_utils/models/request'
 
 
 
+type NextUrl = {
+  page: string
+}
 
-
-export async function GET(req) {
+export async function GET(req: NextRequest) {
   console.log("GET")
   await dbConnection()
+
+
   try {
-    const page = parseInt(req.nextUrl.page) || 1
-    const requests = await Request.find({})
-    console.log(requests)
+
+ 
+    const page: number = parseInt(req.nextUrl.page) || 1
+    const limit: number = parseInt(req.nextUrl.limit) || 10
+
+   
+
+
+   
+    const requests: Array<Request> = await Request.find({}).skip(Math.ceil((page - 1) * limit)).limit(limit)
+
+
     return NextResponse.json({ status: "success", data: requests })
   } catch (error) {
     return NextResponse.json({ status: "failure" })

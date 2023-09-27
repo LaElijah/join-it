@@ -1,6 +1,6 @@
-import InputBoxes from "./components/inputBoxes";
+import CreateBoxes from "../../../_components/createBoxes";
 import { getServerSession } from "next-auth/next";
-
+import { redirect } from "next/navigation";
 
 
 export default async function CreateResources() {
@@ -14,7 +14,7 @@ export default async function CreateResources() {
     return (
         <div>
             <h2>Share a Resource</h2>
-            <InputBoxes />
+            <CreateBoxes />
             
         </div>
     )

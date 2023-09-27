@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const crypto = require("crypto");
+
+import mongoose from "mongoose";
+import crypto from "crypto";
 
 
 const { Schema } = mongoose
@@ -35,5 +36,4 @@ const userSchema = new Schema({
 
 })
 
-const User = mongoose.models.User || mongoose.model('User', userSchema)
-module.exports = User
+export default mongoose.models.User || mongoose.model('User', userSchema)

@@ -1,30 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
+import Request from "@/app/_utils/models/request"
+import { getServerSession } from "next-auth";
+import authOptions from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from 'next/navigation'
+import dbConnection from "@/app/_utils/db/dbConnection";
+import User from "@/app/_utils/models/user";
 
-const getPost = async (id) => {
-    const response = await fetch(`http://localhost:3000/api/requests/${id}`, {
-        method: 'GET',
-        headers: {  
-            'Content-Type': 'application/json',
-            'query': id,
-        },
-        next: {
-            revalidate: 0,
-        },
-    })
-    const data = await response.json();
-    console.log(data)
-    return data;
+
+interface Props {
+    params: any
 }
 
+export default async function Post({ params }: Props) {
 
-export default async function Post({ params }) {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+        return redirect("/api/auth/signin")
+    }
 
-    const response = await getPost(params.id)
-    const { data, status } = response
-    const { post, userData } = data
-    const { username, profile, id, identity } = userData
-   const {
+    await dbConnection()
+    const request = await Request.findById(params.id)
+    const user = await User.findOne({ username: request.username})
+    const { username, profile, id, identity } = user
+    
+    
+    const {
     date,
     resource,
     details,
@@ -34,7 +35,8 @@ export default async function Post({ params }) {
     description,
     metric,
     image
-   } = post
+   } = request
+
 
     return ( 
         <div>
@@ -43,6 +45,7 @@ export default async function Post({ params }) {
             <section>
                 <h1>{username}</h1>
                 <Image
+                    alt="request image"
                     width={100}
                     height={100}
                     src={image}
@@ -53,7 +56,7 @@ export default async function Post({ params }) {
                 <p>{goal}</p>
                 <p>{progress}</p>
                 <p>{details}</p>
-                <p>{date}</p>
+                <p>{new Date(date).toLocaleDateString()}</p>
         
                 <p>{metric}</p>
               

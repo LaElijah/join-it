@@ -1,8 +1,8 @@
 "use client"
 
 import { useReducer } from "react"
-import Credentials from "./components/credentials/credentials"
-import Identity from "./components/identity/identity"
+import SignUp from "@/app/_components/signUp"
+import Identity from "@/app/_components/identity"
 
 
 import { urlToFile } from "@/app/_utils/images/imageUtils"
@@ -12,7 +12,7 @@ export default function Register() {
 
     const router = useRouter()
 
-    const reducer = (state, dispatch) => {
+    const reducer = (state: any, dispatch: any) => {
         return {
             ...state,
             [dispatch.name]: dispatch.value
@@ -55,7 +55,7 @@ export default function Register() {
         passwordMatchError: false,
     })
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async () => {
         const form = new FormData()
         const file = await urlToFile(state.croppedImage, "croppedImage.png");
         
@@ -100,7 +100,7 @@ export default function Register() {
 
     if (state.page === 0) {
         return (
-            <Credentials state={state} dispatch={dispatch} />
+            <SignUp state={state} dispatch={dispatch} />
 
         )
     }

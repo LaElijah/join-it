@@ -1,7 +1,7 @@
 
-const mongoose = require("mongoose");
 
-const { Schema } = mongoose
+import mongoose from "mongoose";
+const {Schema} = mongoose;
 
 
 const requestSchema = new Schema({
@@ -38,5 +38,5 @@ const requestSchema = new Schema({
 
 })
 
-const NewRequest = mongoose.models.Request || mongoose.model('Request', requestSchema)
-module.exports = NewRequest
+
+export default mongoose.models.Request || mongoose.model('Request', requestSchema)

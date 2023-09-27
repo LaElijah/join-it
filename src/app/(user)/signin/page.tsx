@@ -1,7 +1,7 @@
 
-import CredentialsInput from "./components/credentialsInput";
+import SignInInputs from "@/app/_components/elements/signInInputs"
 import Link from "next/link"
-import styles from "./page.module.scss"
+import styles from "@/app/styles/pages/signin.module.scss"
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation"
@@ -17,13 +17,14 @@ export default async function SignIn() {
 
 
     return (
+
         <div className={styles.container}>
 
             <section className={styles.wrapper}>
                 <h2>Sign in</h2>
                 <p>Sign in with your credentials</p>
 
-                <CredentialsInput />
+                <SignInInputs />
 
                 <div className={styles.options}>
 
@@ -49,5 +50,6 @@ export default async function SignIn() {
 
 
         </div>
+
     )
 }

@@ -1,0 +1,29 @@
+
+.sharedInput > :first-child {
+    width: 70%;
+}
+
+.sharedInput > :last-child {
+    width: 30%;
+}
+
+.container {
+    padding: 32px 88px;
+    gap: 16px;
+}
+
+
+.container h2 {
+    margin: 0px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #42b47d;
+    font-family: sans-serif;
+    padding: 8px 0px;
+    width: 48%;
+    text-align: left;
+    margin-bottom: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+}

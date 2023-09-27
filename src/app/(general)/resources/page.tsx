@@ -1,5 +1,5 @@
 
-import ResourceList from "./components/resourcetList";
+import ResourceList from "../../_components/resourcetList";
 import Link from "next/link"
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";

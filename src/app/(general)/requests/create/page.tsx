@@ -1,9 +1,10 @@
 import authOptions from "@/app/api/auth/[...nextauth]/options";
-import InputBoxes from "./components/inputBoxes/inputBoxes";
+import RequestInputs from "../../../_components/requestInputs";
 import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
 
 export default async function CreateRequests() {
-    // YOU MUST USE AUTHOPTIONS TO GET SESSION
+
     const session = await getServerSession(authOptions)
     if (!session) {
         return redirect("/api/auth/signin?callbackUrl=/requests")
@@ -14,7 +15,7 @@ export default async function CreateRequests() {
     return (
         <div>
             
-            <InputBoxes session={session} />
+            <RequestInputs session={session} />
             
         </div>
     )

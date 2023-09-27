@@ -1,37 +1,26 @@
-import RequestComponent from "./components/requestComponent";
+import RequestComponent from "@/app/_components/requestComponent";
 import { getServerSession } from "next-auth";
-import authOptions from "../../api/auth/[...nextauth]/options";
+import authOptions from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from 'next/navigation'
+import Request from "@/app/_utils/models/request";
+import dbConnection from "@/app/_utils/db/dbConnection";
+
+
 
 export default async function Requests() {
 
     const session = await getServerSession(authOptions)
-    console.log(session)
     if (!session) {
         redirect("/api/auth/signin")
     }
 
-
-    const getRequests = async () => {
-        const response = await fetch('http://127.0.0.1:3000/api/requests', {
-            method: 'GET',
-            next: {
-                revalidate: 60,
-            },
-        })
-        const data = await response.json();
-        return data;
-    }
-
-    const data = await getRequests()
-
-
+    await dbConnection()
+    
     return (
 
-        <section>
-            
-            <RequestComponent data={data} />
-        </section>
+        <>
+            <RequestComponent requests={await Request.find({})} />
+        </>
 
     )
 

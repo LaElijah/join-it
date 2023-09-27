@@ -1,3 +1,17 @@
+
+[ ] Style the unique request full page 
+[ ] add some functions to the request 
+    - [ ] coming soon
+[ ] 
+
+
+
+
+
+
+
+
+
 Goals
 - Create a login page 
 - show a list from the database 
