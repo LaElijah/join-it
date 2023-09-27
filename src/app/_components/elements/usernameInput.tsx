@@ -34,11 +34,23 @@ export default function UsernameInput(props: any) {
     
 
     useEffect(() => {
-       const updateValidity = async () => await usernameExists() 
+       const updateValidity = async () =>{
+        
+        const response = await fetch(`api/auth/confirmUser`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username: searchUserName })
+        })
+        const data = await response.json()
+        dispatch({ name: "usernameExists", value: data.exists })
+      
+       }
 
         updateValidity()
 
-    }, [searchUserName])
+    }, [searchUserName, dispatch])
 
 
 

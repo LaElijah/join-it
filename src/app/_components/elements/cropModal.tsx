@@ -15,13 +15,11 @@ export default function CropModal(props: any) {
 
     const isMobile = useMediaQuery("(max-width: 50em)");
 
-    const setPixels = (croppedAreaPixels: any) => {
-        dispatch({ name: "croppedAreaPixels", value: croppedAreaPixels })
-    }
+    
 
     const handleCropComplete = useCallback(async (croppedArea: any, croppedAreaPixels: any) => {
-       setPixels(croppedAreaPixels)
-    }, [setPixels])
+        dispatch({ name: "croppedAreaPixels", value: croppedAreaPixels })
+    }, [dispatch])
 
     const handleCropSubmit = useCallback(async () => {
 
@@ -37,7 +35,7 @@ export default function CropModal(props: any) {
         formDispatch({ name: "croppedImage", value: croppedImage })
 
 
-    }, [state.croppedAreaPixels, state.rotation])
+    }, [state.croppedAreaPixels, state.rotation, state.imageURL, dispatch, formDispatch])
 
 
     return (

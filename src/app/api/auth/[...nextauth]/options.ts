@@ -17,7 +17,7 @@ async function isAuthorized(credentials: Credentials) {
     if (username) {
     const user = await User.findOne({ username: username.toLowerCase() })
    
- console.log(user)
+ console.log("here", user)
     if (user) {
 
         const match = await bcrypt.compare(password, user.password);
