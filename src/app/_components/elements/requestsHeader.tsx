@@ -1,6 +1,6 @@
 
 import { Stack } from "@mui/material"
-import styles from '@/app/styles/components/list.module.scss'
+import styles from '@/app/_styles/components/list.module.scss'
 import Link from "next/link"
 
 // TODO: Extract styles to a separate file

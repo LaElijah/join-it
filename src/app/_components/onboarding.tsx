@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import Link from "next/link"
-import styles from "../styles/page.module.scss"
+import styles from "@/app/_styles/components/hero.module.scss"
 import { getServerSession } from "next-auth/next"
 import authOptions from "@/app/api/auth/[...nextauth]/options";
 

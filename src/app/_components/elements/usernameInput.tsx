@@ -1,6 +1,6 @@
 "use client"
 import { TextInput, Indicator, Button } from "@mantine/core"
-import styles from "@/app/styles/elements/usernameInput.module.scss"
+import styles from "@/app/_styles/elements/usernameInput.module.scss"
 import { useEffect } from "react";
 import { useDebouncedValue } from "@mantine/hooks"
 

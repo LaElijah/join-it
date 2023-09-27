@@ -41,7 +41,7 @@ export default async function Communication () {
             <h1>Page</h1>
             <h2>Groups</h2>
             <div>
-            {GroupList}
+            {/* {groups} */}
             </div>
 
         </div>

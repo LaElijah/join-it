@@ -1,7 +1,7 @@
 
 import { Stack } from "@mui/material"
 import RequestsHeader from "./elements/requestsHeader"
-import styles from '@/app/styles/components/list.module.scss'
+import styles from '@/app/_styles/components/list.module.scss'
 import RequestsActions from "./requestsActions"
 
 

@@ -5,7 +5,7 @@ import authOptions from '../auth/[...nextauth]/options'
 
 
 // Valuidates access to a group and privilages
-export async function GET(req) {
+export async function GET(req: any) {
     try {
 
         return NextResponse.json({ status: "success" })

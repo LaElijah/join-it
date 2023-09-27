@@ -4,7 +4,7 @@ import dbConnection from '@/app/_utils/db/dbConnection'
 import User from '@/app/_utils/models/user'
 
 
-export async function POST(req) {
+export async function POST(req: any) {
     await dbConnection()
     try {
 

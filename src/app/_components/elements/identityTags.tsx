@@ -1,6 +1,6 @@
 
 import { Chip, NativeSelect } from "@mantine/core"
-import styles from "@/app/styles/elements/identityInput.module.scss"
+import styles from "@/app/_styles/elements/identityInput.module.scss"
 import { identitiesData } from "@/app/_utils/data/identitiesData"
 
 // race: [],

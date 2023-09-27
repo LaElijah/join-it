@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest} from "next/server";
 import User from '@/app/_utils/models/user'
 import dbConnection from '@/app/_utils/db/dbConnection'
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
     try {
         await dbConnection()
         const body = await req.json()

@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@mantine/core"
-import styles from "@/app/styles/elements/identityInput.module.scss"
+import styles from "@/app/_styles/elements/identityInput.module.scss"
 import IdentityTags from "./identityTags"
 import FileUploader from "../fileUploader"
 

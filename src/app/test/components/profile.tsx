@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 
 
-export default function Profile(props) {
+export default function Profile(props: any) {
     const router = useRouter()
 
 

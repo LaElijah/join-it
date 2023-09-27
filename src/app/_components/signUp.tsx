@@ -1,5 +1,5 @@
 
-import styles from "@/app/styles/pages/signUp.module.scss"
+import styles from "@/app/_styles/pages/signUp.module.scss"
 import Link from "next/link"
 import SignUpInputs from "./elements/signUpInputs"
 

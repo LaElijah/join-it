@@ -1,6 +1,6 @@
 "use client"
 import { useSearchParams, useRouter } from "next/navigation"
-import styles from '../styles/functions/error.module.scss'
+import styles from '@/app/_styles/functions/error.module.scss'
 import { Button } from "@mantine/core"
 
 

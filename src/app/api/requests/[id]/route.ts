@@ -7,7 +7,7 @@ import { getServerSession } from 'next-auth/next'
 import authOptions from '../../auth/[...nextauth]/options'
 
 
-export async function GET(req) {
+export async function GET(req: any) {
     try {
         await dbConnection()
 
@@ -39,7 +39,7 @@ export async function GET(req) {
     }
 }
 
-export async function DELETE(req, res) {
+export async function DELETE(req: any, res: any) {
     try {
         const session = await getServerSession(authOptions)
         await dbConnection()
@@ -50,7 +50,7 @@ export async function DELETE(req, res) {
             else {
         const id = req.headers.get('query')
         console.log(id)
-        const post = Request.findOne({ _id: id })
+        const post: any = Request.findOne({ _id: id })
         if (post.userId !== session.user.id) {
             return NextResponse.json({ status: "failure" })
         }

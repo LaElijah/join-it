@@ -1,13 +1,9 @@
 "use client"
 import styles from './navbar.module.scss'
-import { useState } from 'react';
-import Body from './components/body.js'
+import Body from './components/body'
 import Divider from './components/divider';
 import Footer from './components/footer';
 import Header from './components/header';
-
-import { useRouter } from 'next/router'
-import { Button } from '@mantine/core';
 
 
 

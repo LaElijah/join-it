@@ -3,14 +3,20 @@ import bcrypt from 'bcrypt'
 import dbConnection from '@/app/_utils/db/dbConnection'
 import User from '@/app/_utils/models/user'
 
+interface Credentials {
+    username?: string,
+    password: string
+}
 
 
-async function isAuthorized(credentials) {
+async function isAuthorized(credentials: Credentials) {
     const { username, password } = credentials;
     
     await dbConnection();
 
+    if (username) {
     const user = await User.findOne({ username: username.toLowerCase() })
+   
  console.log(user)
     if (user) {
 
@@ -28,9 +34,10 @@ async function isAuthorized(credentials) {
     } else {
         return null
     }
-
-
 }
+}
+
+
 
 
 
@@ -39,14 +46,15 @@ const authOptions = {
 
     // LEAVE CALLBACKS ALONE, JWT DECONSTRUCTS AND PASSES DOWN USER INFO
     // TO SESSION, SESSION.USER STORES THE USER DATA FOUND IN THE TOKEN
+    
     callbacks: {
-        async jwt({token, user, account, profile, isNewUser}) {
+        async jwt({token, user, account, profile, isNewUser}: any) {
             if (user) {
                 token.user = user
             }
             return token
         },
-        async session({session, token}) {
+        async session({session, token}: any) {
 
             session.user = token.user
             return session
@@ -72,10 +80,10 @@ const authOptions = {
                 password: { label: "Password", type: "password" }
             },
 
-            async authorize(credentials) {
+            async authorize(credentials: any) {
                 console.log("credentials", credentials)
 
-                const response = await isAuthorized(credentials);
+                const response: any = await isAuthorized(credentials);
                console.log(response)
                 if (response.auth) {
                     return response.user

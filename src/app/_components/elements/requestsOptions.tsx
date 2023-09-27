@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Stack } from "@mui/material"
 import { Autocomplete, SegmentedControl } from "@mantine/core"
 import { categoryData } from "@/app/_utils/data/categoryData"
-import styles from '@/app/styles/components/list.module.scss'
+import styles from '@/app/_styles/components/list.module.scss'
 
 
 

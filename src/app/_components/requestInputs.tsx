@@ -8,7 +8,7 @@ import { resourceData, categoryData, metrics } from "@/app/_utils/data/categoryD
 import { urlToFile } from "@/app/_utils/images/imageUtils";
 import { useRouter } from "next/navigation";
 import FileUploader from "./fileUploader";
-import styles from '@/app/styles/elements/requestInputs.module.scss'
+import styles from '@/app/_styles/elements/requestInputs.module.scss'
 
 
 export default function InputBoxes(props: any) {

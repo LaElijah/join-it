@@ -1,5 +1,5 @@
 
-import styles from '@/app/styles/elements/request.module.scss'
+import styles from '@/app/_styles/elements/request.module.scss'
 import Image from 'next/image'
 import Progress from './progress'
 import Link from 'next/link'

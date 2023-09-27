@@ -4,7 +4,7 @@ import { useReducer } from 'react'
 import Image from 'next/image'
 import { readFile, urlToFile } from '@/app/_utils/images/imageUtils'
 import CropModal from './elements/cropModal'
-import styles from '@/app/styles/components/fileUploader.module.scss'
+import styles from '@/app/_styles/components/fileUploader.module.scss'
 import FileUploaderButton from './elements/fileUploaderButton'
 import { Stack } from '@mui/material'
 

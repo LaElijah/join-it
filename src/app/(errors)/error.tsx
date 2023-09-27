@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 
-import styles from "../styles/functions/error.module.scss"
+import styles from "@/app/_styles/functions/error.module.scss"
 
 export default function IndexError() {
     const router = useRouter()

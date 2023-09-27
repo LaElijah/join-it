@@ -9,8 +9,12 @@ import User from '@/app/_utils/models/user'
 import Message from '@/app/_utils//models/message'
 
 
-const producer = kafka.producer({ 
-    groupId: 'join-message-group',
+const producer = kafka.producer({
+    allowAutoTopicCreation: true,
+    retry: {
+        initialRetryTime: 100,
+        retries: 8
+    }
 })
 
 
@@ -22,7 +26,7 @@ const producer = kafka.producer({
 // saves the message
 // queues the message to kafka
 // redirects to comms page
-export async function POST() {
+export async function POST(req: any) {
 
     try{
     const session = await getServerSession(authOptions)
@@ -61,7 +65,7 @@ export async function POST() {
 
 
 
-async function queueMessage(message) {
+async function queueMessage(message: any) {
 
     const success = await producer.send({
         topic: 'messaging-service',

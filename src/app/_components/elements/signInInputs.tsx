@@ -2,7 +2,7 @@
 
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { signIn } from "next-auth/react"
-import styles from "@/app/styles/elements/credentialsInput.module.scss"
+import styles from "@/app/_styles/elements/credentialsInput.module.scss"
 import { useState } from "react";
 
 export default function SignInInputs() {

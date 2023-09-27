@@ -1,5 +1,5 @@
 import { Button, Autocomplete, PasswordInput } from "@mantine/core"
-import styles from "@/app/styles/elements/signupInputs.module.scss"
+import styles from "@/app/_styles/elements/signupInputs.module.scss"
 import UsernameInput from "./usernameInput";
 import Validator from "validatorjs";
 import { useEffect } from "react";

@@ -17,9 +17,11 @@ export async function GET(req: NextRequest) {
 
   try {
 
+    const nextUrl: any = req.nextUrl
+
  
-    const page: number = parseInt(req.nextUrl.page) || 1
-    const limit: number = parseInt(req.nextUrl.limit) || 10
+    const page: number = parseInt(nextUrl.page) || 1
+    const limit: number = parseInt(nextUrl.limit) || 10
 
    
 
@@ -36,7 +38,7 @@ export async function GET(req: NextRequest) {
 }
 
 
-export async function POST(req) {
+export async function POST(req: any) {
   
 
   try {

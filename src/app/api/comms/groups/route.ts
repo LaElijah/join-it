@@ -4,6 +4,8 @@ import dbConnection from '@/app/_utils/db/dbConnection'
 import User from '@/app/_utils/models/user'
 import bcrypt from 'bcrypt'
 import { headers } from 'next/headers'
+import { getServerSession } from "next-auth";
+import authOptions  from "@/app/api/auth/[...nextauth]/options";
 
 
 
@@ -18,9 +20,11 @@ import { headers } from 'next/headers'
 // adds the user to the group
 // saves the user
 // redirects to comms page
-export async function POST(req) {
+export async function POST(req: any) {
 
     try {
+
+        const session = await getServerSession(authOptions)
    
 
     const body = await req.json()
@@ -72,7 +76,7 @@ export async function POST(req) {
 
 // Returns a list of the groups that the user is in
 // checks the users session and uses the user id to find the user
-export async function GET(req) {
+export async function GET(req: any) {
 
     
 

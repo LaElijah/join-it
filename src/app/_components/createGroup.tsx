@@ -1,5 +1,5 @@
 "use client"
-import { Modal, TextField, Button } from '@mantine/core';
+import { Modal, TextInput, Button } from '@mantine/core';
 import { useState } from 'react';
 
 // add an area to select friends to add to the group
@@ -12,13 +12,13 @@ export default function CreateGroup(props: any) {
 
 
 
-const handleSubmit = async (event) => {
+const handleSubmit = async (event: any) => {
     event.preventDefault()
     const response = await fetch('http://localhost:3000/api/comms/groups', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'user-id': session.user.id,
+            'user-id': props.session.user.id,
         },
         body: JSON.stringify({
             groupName,
@@ -31,9 +31,9 @@ const handleSubmit = async (event) => {
 
 
     return (
-        <Modal open={props.open}>
+        <Modal opened={props.open} onClose={props.closed}>
             <h1>Create a new group</h1>
-            <TextField label="Group Name" onChange={(event) => { setGroupName(event.target.value ) } } />
+            <TextInput label="Group Name" onChange={(event: any) => { setGroupName(event.target.value ) } } />
 
             <div>
                 <Button onClick={handleSubmit}>Create</Button>

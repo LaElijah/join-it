@@ -2,7 +2,7 @@
 import { useMediaQuery } from '@mantine/hooks'
 import { useCallback } from 'react'
 import Cropper from 'react-easy-crop'
-import styles from '@/app/styles/elements/cropModal.module.scss'
+import styles from '@/app/_styles/elements/cropModal.module.scss'
 import { Modal, Slider, Button } from '@mantine/core'
 import { getCroppedImg } from '@/app/_utils/images/imageUtils'
 
@@ -15,10 +15,13 @@ export default function CropModal(props: any) {
 
     const isMobile = useMediaQuery("(max-width: 50em)");
 
-    const handleCropComplete = useCallback((croppedArea: number, croppedAreaPixels: number) => {
+    const setPixels = (croppedAreaPixels: any) => {
         dispatch({ name: "croppedAreaPixels", value: croppedAreaPixels })
-        
-    }, [])
+    }
+
+    const handleCropComplete = useCallback(async (croppedArea: any, croppedAreaPixels: any) => {
+       setPixels(croppedAreaPixels)
+    }, [setPixels])
 
     const handleCropSubmit = useCallback(async () => {
 

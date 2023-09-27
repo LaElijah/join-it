@@ -1,5 +1,5 @@
 
-import styles from "@/app/styles/components/identity.module.scss"
+import styles from "@/app/_styles/components/identity.module.scss"
 import IdentityInputs from "./elements/identityInputs"
 
 

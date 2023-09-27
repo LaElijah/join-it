@@ -1,4 +1,4 @@
-import styles from "../styles/page.module.scss"
+import styles from "@/app/_styles/page.module.scss"
 import Onboarding from "../_components/onboarding";
 
 

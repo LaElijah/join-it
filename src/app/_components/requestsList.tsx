@@ -1,4 +1,4 @@
-import styles from '@/app/styles/components/list.module.scss'
+import styles from '@/app/_styles/components/list.module.scss'
 import Request from './elements/request'
 
 export default function RequestsList({ requests }: any) {
