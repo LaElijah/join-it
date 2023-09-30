@@ -1,25 +1,24 @@
 "use client"
-import { useSearchParams, useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import styles from '@/app/_styles/functions/error.module.scss'
 import { Button } from "@mantine/core"
-
+import Link from "next/link"
 
 export default function AuthError() {
     const searchParams = useSearchParams()
-    const router = useRouter()
-
     const error = searchParams.get("error")
+
     let message
     switch (error) {
         case "Cannot read properties of null (reading 'auth')":
-            message = "You are not signed in"
+            message = "You are not signed in, please check your credentials and try again"
             break;
         case "jwt malformed":
-            message = "Your session is invalid"
+            message = "Your session is invalid, please sign in again"
             break;
             
         case "jwt expired":
-            message = "Your session has expired"
+            message = "Your session has expired, please sign in again"
             break;
         default:
             message = "An unknown error has occurred"
@@ -31,14 +30,14 @@ export default function AuthError() {
 
             <div className={styles.wrapper}>
 
-            <h2>Auth Error</h2>
+            <h2>Login Error</h2>
 
             <label>Error message</label>
             <p>{message || error}</p>
 
-            <Button onClick={() => {
-                router.push("/")
-            }} >Go home</Button>
+            <Link href="/signin">
+                Sign in
+            </Link>
 
             </div>
 

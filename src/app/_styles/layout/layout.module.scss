@@ -1,10 +1,16 @@
+@use '@/app/variables.scss' as variables;
+
+@mixin DefaultContent { @include variables.DefaultContent; }
 
 
-.link {
-    color: #42a86c;
-    text-decoration: none;
-    background-color: transparent;
-    font-family: sans-serif;
-    padding: 0px 8px;
-    font-weight: 600;
+
+.content {
+    @include DefaultContent;
+
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0px 16px;
 }

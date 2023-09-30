@@ -3,6 +3,16 @@
 [ ] add some functions to the request 
     - [ ] coming soon
 [ ] 
+[ ] "Book"Shelf 
+[ ] Resources list 
+[ ] Groups 
+    - [ ] Only track the neighboorhood
+    - ? Is there a way to find neighboorhoods from address
+    - ! Let users know not to put exact address on website or to other people do it off the app
+[ ] Profile page
+[ ] Add Mutuals 
+[ ] Add friends
+
 
 
 

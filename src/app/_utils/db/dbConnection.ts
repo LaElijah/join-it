@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI = process.env.MONGODB_URI
-
-let cached = global.mongoose
+const MONGODB_URI: string = process.env.MONGODB_URI || ''
+let newGlobal: any = global
+let cached = newGlobal.mongoose
 
 if (!cached) {
-    cached = global.mongoose = { conn: null, promise: null}
+    cached = newGlobal.mongoose = { conn: null, promise: null}
 }
 
 async function dbConnection () {
@@ -14,7 +14,7 @@ async function dbConnection () {
     }
   
     if (!cached.promise) {
-      const opts = {
+      const opts: any = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       }

@@ -1,26 +1,34 @@
 "use client"
 
-import styles from "../styles/functions/error.module.scss"
-import { useRouter } from "next/navigation"
+import styles from "@/app/_styles/functions/error.module.scss"
+import Link from "next/link"
+import { useEffect } from "react"
 
-export default function FallbackError() {
-    const router = useRouter()
+export default function GlobalError({ error, reset }: {
+    error: Error,
+    reset: () => void
+}) {
+
+    useEffect(() => {
+        console.log(error)
+    }, [error])
 
     return (
         <div className={styles.container}>
+            
 
-            <div className={styles.wrapper}>
+                <div className={styles.wrapper}>
 
-                <h2>Auth Error</h2>
+                    <h2>Something went wrong!</h2>
 
-                <label>Error message</label>
-                <p>Error</p>
+                    
+                    <button onClick={reset} >Try Again</button>
+                    <Link href="/">Go Home</Link>
 
-                <button onClick={() => {
-                    router.push("/")
-                }} >Go home</button>
+                </div>
 
-            </div>
+        
+
         </div>
     )
 }

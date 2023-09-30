@@ -1,7 +1,5 @@
 
 import mongoose from "mongoose";
-import crypto from "crypto";
-
 
 const { Schema } = mongoose
 
@@ -21,11 +19,6 @@ const userSchema = new Schema({
         occupation: Array,
         political: Array,
         hobbies: Array,
-    },
-    
-    UUID: {
-        type: String,
-        default: crypto.randomUUID(),
     },
     groups: [
         {

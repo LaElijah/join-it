@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import authOptions from "../../api/auth/[...nextauth]/options"
 import Image from "next/image"
+import SingOut from "@/app/_components/elements/signOut"
 
 
 export default async function Profile() {
@@ -25,6 +26,8 @@ export default async function Profile() {
                     src={session.user.profile}
                     alt="profile image"
                 />
+                <SingOut />
+                
             </div>
         )
 

@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "app/_utils/db/authConnection.js", "app/_utils/db/dbConnection.js"  ],
+, "app/_utils/db/authConnection.js", "app/_utils/db/dbConnection.ts"  ],
   "exclude": [
     "node_modules"
   ]

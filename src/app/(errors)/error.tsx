@@ -1,10 +1,17 @@
 "use client"
-import { useRouter } from "next/navigation"
 
 import styles from "@/app/_styles/functions/error.module.scss"
+import Link from "next/link"
+import { useEffect } from "react"
 
-export default function IndexError() {
-    const router = useRouter()
+export default function IndexError({ error, reset }: {
+    error: Error,
+    reset: () => void
+}) {
+
+    useEffect(() => {
+        console.log(error)
+    }, [error])
 
     return (
         <div className={styles.container}>
@@ -12,14 +19,11 @@ export default function IndexError() {
 
                 <div className={styles.wrapper}>
 
-                    <h2>Auth Error</h2>
+                    <h2>Something went wrong!</h2>
 
-                    <label>Error message</label>
-                    <p>Error</p>
-
-                    <button onClick={() => {
-                        router.push("/")
-                    }} >Go home</button>
+                    
+                    <button onClick={reset} >Try Again</button>
+                    <Link href="/">Go Home</Link>
 
                 </div>
 

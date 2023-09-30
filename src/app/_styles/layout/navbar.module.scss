@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 800px;
+    justify-content: space-between;
+    margin: 16px;
+}
+
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &.actions > :last-child {
+        margin-left: 16px;
+    }
+
+}
+

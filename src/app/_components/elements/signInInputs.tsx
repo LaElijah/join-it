@@ -6,25 +6,16 @@ import styles from "@/app/_styles/elements/credentialsInput.module.scss"
 import { useState } from "react";
 
 export default function SignInInputs() {
-    
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
 
 
-    const handleChange = (event: any) => {
-        if (event.target.name === "username") {
-            setUsername(event.target.value)
-        } else if (event.target.name === "password") {
-            setPassword(event.target.value)
-        }
-    }
-
-
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
-        
+
         signIn("credentials", {
             username,
             password,
@@ -32,16 +23,31 @@ export default function SignInInputs() {
         })
     }
 
-    
+
 
 
     return (
         <div className={styles.container} >
-                    <TextInput onChange={handleChange} name="username" label="Username" placeholder={"Enter your username..."} />
-        
-                    <PasswordInput onChange={handleChange} name="password" label="Password" placeholder={"Enter your password..."}  />
-               
-                <Button className={styles.button} onClick={handleSubmit}> Sign in</Button>
+            <TextInput
+                onChange={(event) => setUsername(event.target.value)}
+                name="username"
+                label="Username"
+                placeholder="Enter your username..."
+            />
+
+            <PasswordInput
+                onChange={(event) => setPassword(event.target.value)}
+                name="password"
+                label="Password"
+                placeholder="Enter your password..."
+            />
+
+            <Button
+                className={styles.button}
+                onClick={handleSubmit}
+            >
+                Sign in
+            </Button>
 
         </div>
     )

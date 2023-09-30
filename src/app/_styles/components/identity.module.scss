@@ -1,33 +1,17 @@
-
+@use '@/app/variables.scss';
 
 @mixin LinkColor {
-    color: #387AB7;
-    text-align: right;
-    font-family: sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    }
+    @include variables.LinkColor;
+}
 
     
 @mixin RegularBlack {
-    color: #000;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    @include variables.RegularBlack;
 }
 
 
 @mixin BoldGreenRegular {
-    color: #01ad60;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    @include variables.BoldGreenRegular;
 }
 
 
