@@ -59,19 +59,21 @@ export default function NavBurger(props: Props): React.ReactElement | undefined 
 
                             else {
 
-                                {
+                                return (
                                     link.links.map((link: any) => {
-                                        <Menu.Item
-                                            key={link.key}
-                                            onClick={() => router.push(`/${link.name.toLowerCase()}`)}
-                                        >
-                                            {link.name}
-                                        </Menu.Item>
+                                        return (
+                                            <Menu.Item
+                                                key={link.key}
+                                                onClick={() => router.push(`/${link.name.toLowerCase()}`)}
+                                            >
+                                                {link.name}
+                                            </Menu.Item>
+                                        )
                                     }
                                     )
-                                }
+                                )
                             }
-                    })
+                        })
                     }
 
 
@@ -80,10 +82,10 @@ export default function NavBurger(props: Props): React.ReactElement | undefined 
 
 
 
-            </Menu.Dropdown >
-        </Menu >
-        
-    )
+                </Menu.Dropdown >
+            </Menu >
+
+        )
 
     }
 }
