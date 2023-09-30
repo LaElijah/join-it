@@ -10,8 +10,16 @@ import './globals.scss'
 
 type Link = {
   name: string,
-  key: number
+  key: number,
 }
+
+type LinkGroup = {
+  group: string,
+  links: Link[]
+}
+
+type LinkData = LinkGroup | Link
+
 
 
 
@@ -28,13 +36,32 @@ export default async function RootLayout({
 
   const session = await getServerSession(authOptions)
 
-  const links: Link[] = [
-    { name: "Requests", key: 1 },
-    { name: "Resources", key: 2 },
-    { name: "Groups", key: 3 },
-    { name: "Events", key: 4},
-    { name: "Jobs", key: 5 }, // Make a community based job board for freelance workers
-    { name: "Bookshelf", key: 6}
+  const linksData: Link[] | LinkData[] = [
+
+
+    {
+      group: "Aid",
+      links: [
+        { name: "Requests", key: 1 },
+        { name: "Resources", key: 2 },
+        { name: "Volunteer", key: 3 },
+      ]
+
+    },
+
+    {
+      group: "Community",
+      links: [
+        { name: "Groups", key: 1 },
+        { name: "Events", key: 2 },
+        { name: "Jobs", key: 3 }, // Make a community based job board for freelance workers
+        { name: "Bookshelf", key: 4 }
+      ]
+    },
+
+    { name: "About", key: 1 },
+   
+    
   ]
   return (
     <html lang="en">
@@ -49,7 +76,7 @@ export default async function RootLayout({
 
           <Navbar
             session={session}
-            links={links}
+            linksData={linksData}
           />
 
           <section className={styles.content}>

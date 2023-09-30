@@ -54,6 +54,8 @@ export async function POST(req: any) {
 
     const formData = new FormData();
 
+    
+
     formData.append('file', file);
     formData.append('api_key', `${process.env.CLOUDINARY_API_KEY}`);
     formData.append('upload_preset', 'uploadImage');
@@ -68,6 +70,7 @@ export async function POST(req: any) {
     })
 
     const data = await response.json();
+    console.log(data)
 
     const document = new Request(
       {

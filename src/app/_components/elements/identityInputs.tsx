@@ -47,7 +47,7 @@ export default function IdentityInput(props: any) {
                 <Button 
                 className={styles.button} 
                 onClick={() => {
-                    dispatch({ name: "page", value: 0 })
+                    dispatch({ name: "page", payload: 0 })
                 }} >Previous</Button>
 
                 <Button className={styles.button} onClick={props.handleSubmit} >{state.submit}</Button>

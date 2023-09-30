@@ -6,11 +6,11 @@
 
 .content {
     @include DefaultContent;
+    
 
 }
 
 .wrapper {
     width: 100%;
     max-width: 800px;
-    margin: 0px 16px;
 }

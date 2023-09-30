@@ -2,7 +2,7 @@ import authOptions from "@/app/api/auth/[...nextauth]/options";
 import RequestInputs from "../../../_components/requestInputs";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-
+import styles from "@/app/_styles/pages/create.module.scss"
 export default async function CreateRequests() {
 
     const session = await getServerSession(authOptions)
@@ -13,7 +13,7 @@ export default async function CreateRequests() {
 
   
     return (
-        <div>
+        <div className={styles.container}>
             
             <RequestInputs session={session} />
             

@@ -28,27 +28,26 @@ export default function SignUpInputs(props: any) {
         : [];
 
     const handleChange = async (event: any) => {
-        dispatch({ name: event.target.id, value: event.target.value })
+        dispatch({ name: event.target.id, payload: event.target.value })
         if (event.target.id === "password" && event.target.value !== state.password_confirmation) {
-            dispatch({ name: "passwordMatchError", value: true })
+            dispatch({ name: "passwordMatchError", payload: true })
         }
         else if (event.target.id === "password" && event.target.value === state.password_confirmation) {
-            dispatch({ name: "passwordMatchError", value: false })
+            dispatch({ name: "passwordMatchError", payload: false })
         }
         if (event.target.id === "password_confirmation" && event.target.value !== state.password) {
-            dispatch({ name: "passwordMatchError", value: true })
+            dispatch({ name: "passwordMatchError", payload: true })
         }
         else if (event.target.id === "password_confirmation" && event.target.value === state.password) {
-            dispatch({ name: "passwordMatchError", value: false })
+            dispatch({ name: "passwordMatchError", payload: false })
         }
 
     }
 
 
     useEffect(() => {
-        console.log(state.passwordMatchError)
         dispatch({ name: "disableForm", value: validation.fails() })
-    }, [state.password, state.password_confirmation, state.email, state.username, dispatch, validation, state.passwordMatchError])
+    }, [email, password, password_confirmation])
 
 
     const isDisabled = () => {
@@ -58,7 +57,7 @@ export default function SignUpInputs(props: any) {
 
     return (
         <div className={styles.container}>
-            <Autocomplete value={email} placeholder={"your-email@provider.com"} onChange={(event) => { dispatch({ name: "email", value: event }) }} id={"email"} data={emailCategories} label={"Email"} />
+            <Autocomplete value={email} placeholder={"your-email@provider.com"} onChange={(event) => { dispatch({ name: "email", payload: event }) }} id={"email"} data={emailCategories} label={"Email"} />
 
             <UsernameInput
                 state={state}
@@ -79,8 +78,8 @@ export default function SignUpInputs(props: any) {
                 className={styles.button}
                 onClick={() => {
 
-                    dispatch({ name: "submit", value: "Skip" })
-                    dispatch({ name: "page", value: 1 })
+                    dispatch({ name: "submit", payload: "Skip" })
+                    dispatch({ name: "page", payload: 1 })
                 }} >Next</Button>
 
         </div>

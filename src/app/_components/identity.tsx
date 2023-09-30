@@ -7,7 +7,7 @@ import IdentityInputs from "./elements/identityInputs"
 
 export default function Credentials(props: any) {
 
-    const { state, dispatch } = props
+    const { state, dispatch, handleSubmit } = props
 
     return (
         <div className={styles.container}>
@@ -17,7 +17,7 @@ export default function Credentials(props: any) {
                 <p>Describe your identity here </p>
 
 
-                <IdentityInputs handleSubmit={props.handleSubmit} state={state} dispatch={dispatch} />
+                <IdentityInputs handleSubmit={handleSubmit} state={state} dispatch={dispatch} />
 
 
 

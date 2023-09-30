@@ -18,8 +18,8 @@ export default function UsernameInput(props: any) {
 
 
     async function usernameExists() {
-        
-      
+
+
         const response = await fetch(`api/auth/confirmUser`, {
             method: "POST",
             headers: {
@@ -28,28 +28,16 @@ export default function UsernameInput(props: any) {
             body: JSON.stringify({ username: searchUserName })
         })
         const data = await response.json()
-        dispatch({ name: "usernameExists", value: data.exists })
-      
+        dispatch({ name: "usernameExists", payload: data.exists })
+
     }
-    
+
 
     useEffect(() => {
-       const updateValidity = async () =>{
-        
-        const response = await fetch(`api/auth/confirmUser`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username: searchUserName })
-        })
-        const data = await response.json()
-        dispatch({ name: "usernameExists", value: data.exists })
-      
-       }
-
+        const updateValidity = async () => {
+            await usernameExists()
+        }
         updateValidity()
-
     }, [searchUserName, dispatch])
 
 
@@ -71,9 +59,9 @@ export default function UsernameInput(props: any) {
                     value={username}
                     placeholder={"Enter your username..."}
                     onChange={(event) => {
-                      
-                        dispatch({ name: "username", value: event.target.value.replace(/[^a-zA-Z0-9]/g, '') })
-                        dispatch({ name: "usernameExists", value: false })
+
+                        dispatch({ name: "username", payload: event.target.value.replace(/[^a-zA-Z0-9]/g, '') })
+                        dispatch({ name: "usernameExists", payload: false })
                     }}
                     id={"username"}
                     label={"Username"} />

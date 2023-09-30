@@ -11,7 +11,7 @@ import FileUploader from "./fileUploader";
 import styles from '@/app/_styles/elements/requestInputs.module.scss'
 
 
-export default function InputBoxes(props: any) {
+export default function RequestInputs(props: any) {
 
     const router = useRouter()
 
@@ -39,7 +39,7 @@ export default function InputBoxes(props: any) {
     async function handleSubmit() {
         const form = new FormData()
         const file = await urlToFile(state.croppedImage, "croppedImage.png");
-
+        
         const body = {
             resource: state.resource,
             goal: state.goal,
@@ -52,6 +52,8 @@ export default function InputBoxes(props: any) {
 
         form.append('file', file)
         form.append('body', JSON.stringify(body))
+
+        console.log(form)
 
         const response = await fetch('/api/requests', {
             method: 'POST',
@@ -66,13 +68,10 @@ export default function InputBoxes(props: any) {
         else {
             dispatch({ name: "error", payload: data.message })
         }
-
-
-
-
     }
 
-
+   
+ 
 
 
     return (
@@ -87,11 +86,12 @@ export default function InputBoxes(props: any) {
                     id="resource"
                     placeholder="Request any resource"
                     value={state.resource}
-                    onChange={(event) => dispatch({
+                    data={resourceData}
+                    onChange={(event) => {
+                        dispatch({
                         name: "resource",
                         payload: event
-                    })}
-                    data={resourceData}
+                    })}}
                 />
 
                 <Autocomplete
@@ -99,10 +99,11 @@ export default function InputBoxes(props: any) {
                     id="category"
                     placeholder="Type of resource"
                     value={state.category}
-                    onChange={(event) => dispatch({
+                    onChange={(event) => {
+                        dispatch({
                         name: "category",
                         payload: event
-                    })}
+                    })}}
                     data={categoryData}
                 />
 

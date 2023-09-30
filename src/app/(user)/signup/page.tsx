@@ -15,7 +15,7 @@ export default function Register() {
     const reducer = (state: any, dispatch: any) => {
         return {
             ...state,
-            [dispatch.name]: dispatch.value
+            [dispatch.name]: dispatch.payload
         }
     }
 
@@ -92,7 +92,7 @@ export default function Register() {
             router.push('/api/auth/signin')
         }
         if (data.status === "error") {
-            dispatch({ name: "error", value: data.message })
+            dispatch({ name: "error", payload: data.message })
         }
     }
     

@@ -3,9 +3,51 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '@/app/_styles/elements/navProfile.module.scss'
-import { Menu, Text } from '@mantine/core'
+import { Avatar, Menu } from '@mantine/core'
 import { signOut } from 'next-auth/react'
-import UserButton from './userButton'
+import { useMediaQuery } from '@mantine/hooks'
+
+
+
+
+
+
+const AvatarMenu = ({ session, isMobile }: any) => {
+
+    if (isMobile) return (
+
+        <Image
+            src={session.user.profile}
+            alt="profile"
+            width={40}
+            height={40}
+        />
+    )
+    else return (
+        <>
+            <Image
+                src={session.user.profile}
+                alt="profile"
+                width={40}
+                height={40}
+            />
+
+            <div>
+                <h3 className={styles.username}>
+                    {session.user.username}
+                </h3>
+
+                <p>
+                    {session.user.email}
+                </p>
+
+            </div>
+        </>
+
+    )
+
+}
+
 
 type ProfileLink = {
     name: string,
@@ -27,9 +69,13 @@ export default function NavProfile(props: { session: any }) {
     ]
 
 
+
     // if logged in show profile
     if (session) {
+
+
         return (
+
             <div className={styles.container}>
 
                 <Menu
@@ -41,27 +87,8 @@ export default function NavProfile(props: { session: any }) {
 
                     <Menu.Target>
                         <div className={styles.account}>
-                            <Image
-                                src={session.user.profile}
-                                alt="profile"
-                                width={40}
-                                height={40}
-                            />
-
-                            <div>
-                                <h3 className={styles.username}>
-                                    {session.user.username}
-                                </h3>
-
-                                <p>
-                                    {session.user.email}
-                                </p>
-
-                            </div>
-
-
+                            <AvatarMenu isMobile={useMediaQuery('(max-width: 424px)')} session={session} />
                         </div>
-
                     </Menu.Target>
 
                     <Menu.Dropdown>
@@ -99,7 +126,9 @@ export default function NavProfile(props: { session: any }) {
 
             </div>
         )
+
     }
+
     else {
         return (
             <div className={styles.altContainer}>

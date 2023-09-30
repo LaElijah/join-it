@@ -32,7 +32,7 @@ export default function CropModal(props: any) {
         dispatch({ name: "croppedImage", value: croppedImage })
         dispatch({ name: "opened", value: false })
         
-        formDispatch({ name: "croppedImage", value: croppedImage })
+        formDispatch({ name: "croppedImage", payload: croppedImage })
 
 
     }, [state.croppedAreaPixels, state.rotation, state.imageURL, dispatch, formDispatch])

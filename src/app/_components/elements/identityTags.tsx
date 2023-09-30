@@ -48,7 +48,7 @@ export default function IdentityTags(props: any) {
                 label="Tag Group"
                 value={state.tagGroup}
                 onChange={(event) => {
-                    dispatch({ name: "tagGroup", value: event.target.value })
+                    dispatch({ name: "tagGroup", payload: event.target.value })
                 }}
                 data={[
                     { value: "all", label: "All" },
@@ -77,8 +77,8 @@ export default function IdentityTags(props: any) {
                                             total += state[key].length
                                         }
                                     }
-                                    dispatch({ name: identity.key, value: event })
-                                    dispatch({ name: "submit", value: "Submit" })
+                                    dispatch({ name: identity.key, payload: event })
+                                    dispatch({ name: "submit", payload: "Submit" })
                                 }}
                                 value={state[identity.group]}
                             >

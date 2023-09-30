@@ -9,17 +9,24 @@ import Link from 'next/link';
 
 type Link = {
   name: string,
-  key: number
+  key: number,
 }
 
-interface Props {
+type LinkGroup = {
+  group: string,
   links: Link[]
+}
+
+type LinkData = LinkGroup | Link
+
+interface Props {
+  linksData: LinkData[]
   session: any
 }
 
 
 export default function Navbar(props: Props): React.ReactElement | undefined {
-  const { session, links } = props
+  const { session, linksData } = props
 
   return (
     <section className={styles.container}>
@@ -34,14 +41,14 @@ export default function Navbar(props: Props): React.ReactElement | undefined {
           <h1>Logo</h1>
         </Link>
 
-        <NavLinks links={links} />
+        <NavLinks linksData={linksData} />
 
 
         <div className={styles.actions}>
 
           <NavProfile session={session} />
 
-          <NavBurger links={links} />
+          <NavBurger links={linksData} />
 
         </div>
 
