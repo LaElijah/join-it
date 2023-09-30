@@ -1,3 +1,7 @@
+@use '@/app/variables.scss';
+
+
+
 .container {
     width: 100%;
     display: flex;
@@ -26,3 +30,8 @@
 
 }
 
+
+.logo {
+    @include variables.RegularBlack;
+    text-decoration: none;
+}

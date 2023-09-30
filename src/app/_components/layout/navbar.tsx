@@ -5,6 +5,7 @@ import styles from '@/app/_styles/layout/navbar.module.scss'
 import NavBurger from '../elements/navBurger';
 import NavLinks from '../elements/navLinks';
 import NavProfile from '../elements/navProfile';
+import Link from 'next/link';
 
 type Link = {
   name: string,
@@ -25,9 +26,13 @@ export default function Navbar(props: Props): React.ReactElement | undefined {
 
       <div className={styles.wrapper}>
 
-        <div className={styles.logo}>
+        <Link
+          href="/"
+        className={styles.logo}
+       
+        >
           <h1>Logo</h1>
-        </div>
+        </Link>
 
         <NavLinks links={links} />
 
