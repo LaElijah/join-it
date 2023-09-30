@@ -31,7 +31,10 @@ export default async function RootLayout({
   const links: Link[] = [
     { name: "Requests", key: 1 },
     { name: "Resources", key: 2 },
-    { name: "Groups", key: 3 }
+    { name: "Groups", key: 3 },
+    { name: "Events", key: 4},
+    { name: "Jobs", key: 5 }, // Make a community based job board for freelance workers
+    { name: "Bookshelf", key: 6}
   ]
   return (
     <html lang="en">

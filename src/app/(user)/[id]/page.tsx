@@ -2,8 +2,9 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import authOptions from "../../api/auth/[...nextauth]/options"
 import Image from "next/image"
-import SingOut from "@/app/_components/elements/signOut"
-
+import SignOut from "@/app/_components/elements/signOut"
+import styles from "@/app/_styles/pages/profile.module.scss"
+import SettingsPage from "@/app/_components/settingsPage"
 
 export default async function Profile() {
     const session = await getServerSession(authOptions)
@@ -17,18 +18,14 @@ export default async function Profile() {
 
     else {
         return (
-            <div>
-                <h2>Profile</h2>
-                <p>Username:{session.user.username}</p>
-                <Image
-                    height={128}
-                    width={128}
-                    src={session.user.profile}
-                    alt="profile image"
-                />
-                <SingOut />
-                
-            </div>
+            <section className={styles.container}>
+
+               
+            <SettingsPage session={session} />
+
+              
+
+            </section>
         )
 
     }

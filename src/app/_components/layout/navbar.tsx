@@ -28,8 +28,8 @@ export default function Navbar(props: Props): React.ReactElement | undefined {
 
         <Link
           href="/"
-        className={styles.logo}
-       
+          className={styles.logo}
+
         >
           <h1>Logo</h1>
         </Link>
@@ -41,7 +41,7 @@ export default function Navbar(props: Props): React.ReactElement | undefined {
 
           <NavProfile session={session} />
 
-          <NavBurger  links={links} />
+          <NavBurger links={links} />
 
         </div>
 
