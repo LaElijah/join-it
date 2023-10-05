@@ -4,6 +4,8 @@
 
 import styles from "@/app/_styles/elements/mediaItem.module.scss"
 import { Media, MediaData, BookData, VideoData } from "@/app/_types"
+import Image from "next/image"
+
 
 export default function MediaItem(props: Media) {
     
@@ -13,7 +15,7 @@ export default function MediaItem(props: Media) {
         return (
             <div className={styles.container}>
                 {item?.isbn && <p>ISBN: {item.isbn}</p>}
-                {item?.cover && <img src={item.cover} alt="cover"/>}
+                {item?.cover && <Image src={item.cover} alt="cover"/>}
                 {item?.publisher && <p>Publisher: {item.publisher}</p>}
                 {item?.datePublished && <p>Date Published: {item.datePublished}</p>}
                 {item?.language && <p>Language: {item.language}</p>}

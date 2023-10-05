@@ -10,13 +10,14 @@ export default function Shelf() {
         {
             key: "0",
             title: "The Hobbit",
-            type: "book",
+            type: "video",
             subjects: ["fantasy", "fiction", "adventure"],
             metadata: {
                 submittedBy: "J.R.R. Tolkien",
                 verified: true,
                 dateSubmitted: "2021-01-01",
             },
+            
             reactions: [
                 {
                     likes: 0,
@@ -33,13 +34,8 @@ export default function Shelf() {
                 }
             ],
             data: {
-                isbn: "123456789",
-                cover: "https://picsum.photos/200/300",
-                publisher: "Penguin",
-                datePublished: "2021-01-01",
-                language: "English",
+                url: "https://www.youtube.com/embed/3n3Hq7XSBjA",
                 description: "This is a description",
-                authors: ["J.R.R. Tolkien"],
                 keywords: ["fantasy", "fiction", "adventure"],
                 key: "16"
 
@@ -167,7 +163,7 @@ export default function Shelf() {
             <p>Bookshelf</p>
 
 
-            <FeaturedMedia mediaData={mediaData[0]} />
+            <FeaturedMedia mediaData={mediaData[1]} />
 
             <MediaShelf mediaData={mediaData} />
 

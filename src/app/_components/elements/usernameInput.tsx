@@ -1,8 +1,8 @@
 "use client"
 import { TextInput, Indicator, Button } from "@mantine/core"
 import styles from "@/app/_styles/elements/usernameInput.module.scss"
-import { useEffect } from "react";
-import { useDebouncedValue } from "@mantine/hooks"
+import { useMemo, useState } from "react";
+import { debounce } from "@/app/_utils/tools/debounce"
 
 
 
@@ -10,40 +10,43 @@ import { useDebouncedValue } from "@mantine/hooks"
 export default function UsernameInput(props: any) {
 
 
-    const { state, dispatch } = props
+    const { state, dispatch, isInvalid } = props
 
     const { username } = state
+    const [usernameResponse, setUsernameResponse ] = useState()
 
-    const [searchUserName] = useDebouncedValue(username, 300)
+     function usernameExists(event: any) {
 
-
-    async function usernameExists() {
-
+        const getData = async () => {
 
         const response = await fetch(`api/auth/confirmUser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ username: searchUserName })
+            body: JSON.stringify({ username: event.target.value })
         })
         const data = await response.json()
-        dispatch({ name: "usernameExists", payload: data.exists })
+        return data
+    }
+        const data: any = getData()
 
+        dispatch({ name: "usernameExists", payload: data.exists })
+        return data.exists
     }
 
-
-    useEffect(() => {
-        const updateValidity = async () => {
-            await usernameExists()
-        }
-        updateValidity()
-    }, [searchUserName, dispatch])
-
-
-
-
-
+    const debouncedUsernameExists = useMemo(
+       () => debounce(async (event: any) => {
+         
+           isInvalid(event, async () => {
+            let response = await usernameExists(event)
+            console.log(response)
+            return response
+           })
+          
+        }, 300),
+        []
+    );
 
 
     return (
@@ -58,14 +61,17 @@ export default function UsernameInput(props: any) {
                     error={state.usernameExists}
                     value={username}
                     placeholder={"Enter your username..."}
+                    id={"username"}
+                    label={"Username"}
                     onChange={(event) => {
 
                         dispatch({ name: "username", payload: event.target.value.replace(/[^a-zA-Z0-9]/g, '') })
                         dispatch({ name: "usernameExists", payload: false })
+                       
+                            debouncedUsernameExists(event)
+                       
                     }}
-                    id={"username"}
-                    label={"Username"} />
-
+                />
             </Indicator>
             <Button onClick={usernameExists}>Check</Button>
         </div>

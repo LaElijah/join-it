@@ -66,8 +66,10 @@ export default function NavProfile(props: { session: any }) {
         { name: "Check activity", key: 4, icon: null },
         { name: "Settings", key: 5, icon: null },
 
+
     ]
 
+    const isMobile = useMediaQuery('(max-width: 424px)')
 
 
     // if logged in show profile
@@ -87,7 +89,7 @@ export default function NavProfile(props: { session: any }) {
 
                     <Menu.Target>
                         <div className={styles.account}>
-                            <AvatarMenu isMobile={useMediaQuery('(max-width: 424px)')} session={session} />
+                            <AvatarMenu isMobile={isMobile} session={session} />
                         </div>
                     </Menu.Target>
 

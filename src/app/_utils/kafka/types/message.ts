@@ -9,19 +9,15 @@ export default avro.Type.forSchema({
             type: 'string'
         },
         {
-            name: 'from',
-            type: 'string'
-        },
-        {
-            name: 'to',
-            type: 'string'
-        },
-        {
             name: 'message',
             type: 'string'
         },
         {
-            name: 'timestamp',
+            name: 'username',
+            type: 'string'
+        },
+        {
+            name: 'type',
             type: 'string'
         }
     ]
