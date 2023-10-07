@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family='Inter':wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 /******************************************/
 /**Includes**/
 
@@ -6,6 +8,8 @@
 
 $PrimaryGreen: #38982F;
 
+
+$PrimaryBlue: #0b20bb;
 
 $PrimaryYellow: #FFC626;
 
@@ -53,11 +57,45 @@ $ButtonOutline: #FDFDE6;
 /******************************************/
 /*Typography*/
 
+@mixin D1Bold {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    line-height: normal;
+    margin: 0;
+    font-weight: 700;
+}
 
-@mixin H4Regular {
-    /* Heading/H4/Regular */
-    font-family: Roboto, sans-serif;
-    font-size: 23px;
+@mixin D1SemiBold {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin D2SemiBold {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H1SemiBold {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+@mixin H1Light {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -66,38 +104,55 @@ $ButtonOutline: #FDFDE6;
 
 @mixin H2SemiBold {
     /* Heading/H2/Semi Bold */
-    font-family: Roboto, sans-serif;
-    font-size: 37px;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
-    margin: 0;
-}
-
-@mixin H4Light {
-    /* Heading/H4/Light */
-    font-family: Roboto, sans-serif;
-    font-size: 23px;
-    font-style: normal;
-    font-weight: 300;
     line-height: normal;
     margin: 0;
 }
 
 @mixin H3SemiBold {
     /* Heading/H3/Semi Bold */
-    font-family: Roboto, sans-serif;
-    font-size: 29px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     margin: 0;
 }
 
+
+
+
+@mixin H4Regular {
+    /* Heading/H4/Regular */
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+
+
+@mixin H4Light {
+    /* Heading/H4/Light */
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin: 0;
+}
+
+
+
 @mixin H4ExtraBold {
     /* Heading/H4/Extra Bold */
-    font-family: Roboto, sans-serif;
-    font-size: 23px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -106,8 +161,8 @@ $ButtonOutline: #FDFDE6;
 
 @mixin H4SemiBold {
     /* Heading/H4/Extra Bold */
-    font-family: Roboto, sans-serif;
-    font-size: 23px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -116,8 +171,8 @@ $ButtonOutline: #FDFDE6;
 
 @mixin S1Light {
     /* Subheading/S1/Light */
-    font-family: Roboto, sans-serif;
-    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
     font-style: normal;
     font-weight: 300;
     line-height: normal;
@@ -126,7 +181,7 @@ $ButtonOutline: #FDFDE6;
 
 @mixin BoldGreenRegular {
     color: #01ad60;
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -138,7 +193,7 @@ $ButtonOutline: #FDFDE6;
 @mixin LinkColor {
     color: #387AB7;
     text-align: right;
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -148,7 +203,7 @@ $ButtonOutline: #FDFDE6;
 
 @mixin RegularBlack {
     color: #000;
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -314,7 +369,17 @@ $ButtonOutline: #FDFDE6;
     word-break: break-word;
     cursor: default;
     -webkit-tap-highlight-color: transparent;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,'Inter',Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
     line-height: 1.55;
 
+}
+
+
+
+
+/****************Contextual Rulesets*************/
+/************************************************/
+
+@mixin Subtitle {
+    @include S1Light;
 }

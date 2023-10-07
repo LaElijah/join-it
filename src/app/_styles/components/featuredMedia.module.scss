@@ -1,20 +1,18 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 800px;
-    justify-content: center;
-    align-items: center;
-   
+@use "@/app/variables.scss";
 
-    & img {
-        border: 1px solid #ccc;
-        padding: 16px;
-        width: 100%;
-        max-width: 400px;
-        height: 100%;
-        max-height: 400px;
-        border-radius: 8px;
+.container {
+
+    background-color: variables.$PrimaryBlue;
+    padding: 32px;
+    border-radius: 32px 32px 0 0;
+
+
+    & h1 {
+        @include variables.H2SemiBold;
+        margin-bottom: 16px;
+        color: white;
+        
     }
 
+    
 }
