@@ -1,8 +1,6 @@
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import authOptions from "../../api/auth/[...nextauth]/options"
-import Image from "next/image"
-import SignOut from "@/app/_components/elements/signOut"
 import styles from "@/app/_styles/pages/profile.module.scss"
 import SettingsPage from "@/app/_components/settingsPage"
 
@@ -22,8 +20,7 @@ export default async function Profile() {
 
                
             <SettingsPage session={session} />
-
-              
+        
 
             </section>
         )
