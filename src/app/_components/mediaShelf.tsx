@@ -28,7 +28,7 @@ export default function MediaShelf(props: any) {
             {uniqueSubjects.map((subject: string) => {
                 return (
                     <section
-                        className={styles.subject}
+                        className={styles.shelf}
                         key={subject}
                     >
                         <h2>{subject}</h2>

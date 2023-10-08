@@ -1,0 +1,18 @@
+
+.details {
+    padding: 32px;
+    padding-bottom: 64px;
+    border-radius: 0 0 32px 32px;
+    border: 2px solid black;
+
+}
+
+
+@media (min-width: 672px) {
+  
+
+    .details {
+        width: 100%;
+        border-radius: 0 32px 32px 0;
+    }
+}
