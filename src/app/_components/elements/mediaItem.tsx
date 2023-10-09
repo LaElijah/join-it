@@ -14,19 +14,19 @@ export default function MediaItem(props: Media) {
         const item = props.data as BookData
         return (
             <div className={styles.container}>
-                {
+                {/* {
                     item?.isbn
                     && <p>ISBN: {item.isbn}</p>
-                }
+                } */}
                 {
                     item?.cover
                     && <img
                         src={item.cover}
-                        alt="cover" width={64}
-                        height={64}
+                        alt="cover" width={400}
+                        height={200}
                     />
                 }
-                {
+                {/* {
                     item?.publisher
                     && <p>Publisher: {item.publisher}</p>
                 }
@@ -49,18 +49,18 @@ export default function MediaItem(props: Media) {
                 {
                     item?.keywords
                     && <p>Keywords: {item.keywords.join(", ")}</p>
-                }
+                } */}
             </div>
         )
     }
-    else if (props.type === "video") {
-        let item = props.data as VideoData
+    // else if (props.type === "video") {
+    //     let item = props.data as VideoData
 
-        return (
-            <div className={styles.container}>
-                <p>Video</p>
-                {item && <p>{item.description}</p>}
-            </div>
-        )
-    }
+    //     return (
+    //         <div className={styles.container}>
+    //             <p>Video</p>
+    //             {item && <p>{item.description}</p>}
+    //         </div>
+    //     )
+    // }
 }

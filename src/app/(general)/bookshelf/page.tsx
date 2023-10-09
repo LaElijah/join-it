@@ -11,10 +11,6 @@ export default function Shelf() {
 
     return (
         <section>
-            <h2>Bookshelf</h2>
-            <p>Bookshelf</p>
-
-
             <FeaturedMedia mediaData={mediaData[1]} />
 
             <MediaShelf mediaData={mediaData} />

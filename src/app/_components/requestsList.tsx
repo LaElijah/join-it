@@ -3,7 +3,7 @@ import Request from './elements/request'
 
 export default function RequestsList({ requests }: any) {
 
-    const data = requests || [
+    const data = JSON.parse(requests) || [
 
         {
             _id: "none",
@@ -19,35 +19,21 @@ export default function RequestsList({ requests }: any) {
         }
 
     ]
+    // Have the original children displayed 
+    // into the 
 
+    // Create a map 
 
-    return (
-
-        <section className={styles.list}>
-
-
-            {data.map((data: any) => {
-                let date = new Date(data.date)
-                return (
-                    <Request
-                        key={data._id}
-                        username={data.username}
-                        resource={data.resource}
-                        details={data.details}
-                        progress={data.progress}
-                        goal={data.goal}
-                        category={data.category}
-                        url={`/requests/${data._id}`}
-                        image={data.image}
-                        date={date.toLocaleDateString()}
-                        id={data._id}
-                    />
-                )
-            })}
-
-        </section>
-
-
-    )
+    // TODO: Add an infinite scroll option
+    return (data.map((data: any) =>
+    (
+        <Request
+            {...data}
+            key={data._id}
+            url={`/requests/${data._id}`}
+            date={(new Date(data.date)).toLocaleDateString()}
+        />
+    )))
 }
+
 

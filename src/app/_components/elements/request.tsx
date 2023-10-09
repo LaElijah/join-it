@@ -12,8 +12,8 @@ export default function Request(props: any) {
     
 
     const { url, username, resource, details, progress, goal, category, image, date, id } = props
-
-  
+console.log(props)
+  console.log(props.username)
 
 
     return (
@@ -34,7 +34,7 @@ export default function Request(props: any) {
 
                 <Image height={64} width={64} alt="" src={image}/>
                 <div className={styles.description}>
-                    <h2 className={styles.body}>{details}</h2>
+                    <h3 className={styles.body}>{details}</h3>
                     <Link href={`/requests/${id}`} className={styles.link}>Show more</Link>
                 </div>
 

@@ -1,4 +1,4 @@
-"use state"
+"use client"
 import { useState } from "react"
 import { Stack } from "@mui/material"
 import { Autocomplete, SegmentedControl } from "@mantine/core"
@@ -8,8 +8,11 @@ import styles from '@/app/_styles/components/list.module.scss'
 
 
 
-
-export default function RequestsOptions() {
+// TODO: Update types here
+// TODO: Change from stack to section
+export default function RequestsOptions({ children }: {
+    children: any
+}) {
     const [category, setCategory] = useState("")
     const [segment, setSegment] = useState("")
 
@@ -18,7 +21,9 @@ export default function RequestsOptions() {
 
 
     return (
-        <Stack direction={"row"} className={styles.filters}  >
+        <>
+
+            <Stack direction={"row"} className={styles.filters}  >
                 <SegmentedControl
                     value={segment}
                     onChange={(event: any) => setSegment(event)}
@@ -35,5 +40,9 @@ export default function RequestsOptions() {
                     data={categoryData}
                 />
             </Stack>
+
+            {children}
+
+        </>
     )
 }

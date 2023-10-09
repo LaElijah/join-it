@@ -13,4 +13,13 @@
     padding: 32px;
     border-top: 1px solid rgba(42, 61, 147, 0.118);
     box-shadow: 0 8px 8px rgba(42, 62, 147, 0.302);
+
+    & h2 {
+        color: blue;
+    }
+
+    & h3 {
+        color: red;
+    }
 }
+
