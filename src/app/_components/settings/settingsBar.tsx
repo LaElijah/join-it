@@ -1,9 +1,7 @@
 "use client"
 
-import styles from '@/app/_styles/components/settingsBar.module.scss'
+import styles from '@/app/_styles/components/settings/settingsBar.module.scss'
 import { useState } from "react";
-import SettingsPage from './settingsPage';
-
 
 type OptionGroup = {
     label: string,
@@ -48,8 +46,6 @@ export function OptionGroup({ label, options, setPage, page }: OptionGroupProps)
 }
 
 export default function SettingsBar({ children }: any) {
-
-
 
     const [page, setPage] = useState("Account Details")
 

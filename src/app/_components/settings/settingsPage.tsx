@@ -1,9 +1,9 @@
 
 
 import SettingsBar from "./settingsBar"
-import styles from '@/app/_styles/components/settingsPage.module.scss'
-import SettingsAccountDetails from "./SettingsAccountDetails"
-import SettingsPrivacy from "./SettingsPrivacy"
+import styles from '@/app/_styles/components/settings/settingsPage.module.scss'
+import SettingsAccountDetails from "./settingsAccountDetails"
+import SettingsPrivacy from "./settingsPrivacy"
 
 
 

@@ -2,7 +2,7 @@
 
 
 import Image from "next/image"
-import styles from "@/app/_styles/components/settingsAccountDetails.module.scss"
+import styles from "@/app/_styles/components/settings/settingsAccountDetails.module.scss"
 
 export default function SettingsAccountDetails({ session }: any): JSX.Element {
 
