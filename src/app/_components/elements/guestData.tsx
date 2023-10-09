@@ -56,7 +56,7 @@ export default function GuestData() {
 
             <h2>Click the button below to generate your account details.</h2>
 
-            <button onClick={getCredentials}>Generate credentials</button>
+            <button onClick={async () => await getCredentials()}>Generate credentials</button>
             </>
         )
     }
