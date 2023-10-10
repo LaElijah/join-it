@@ -13,7 +13,7 @@ const MediaContent = ({ type, data }: any) => {
 export default function FeaturedMedia(props: { mediaData: Media }) {
 
     const { title, type, subjects, metadata, reactions, data } = props.mediaData
-    console.log(props)
+
 
     // I cound have chip icons that
     // i can click on that expands into more

@@ -10,12 +10,6 @@
 }
 
 .container {
-   display: flex;
-   align-items: center;
-
-}
-
-.account {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -46,27 +40,3 @@
 
   
 }
-
-
-.altContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-.altContainer a {
-    @include LinkColor;
-    text-decoration: none;
-}
-
-.altContainer a:first-child {
-    color: #b2cabe;
-}
-
-
-.altContainer a:last-child {
-    @include ActionButton;
-}
-
-

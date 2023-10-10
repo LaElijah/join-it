@@ -31,7 +31,7 @@ export default function SettingsPage({ session }: any) {
 
     return (
         <div className={styles.container}>
-            <SettingsBar>
+            <SettingsBar session={session}>
                     {pages}
             </SettingsBar>
         </div>

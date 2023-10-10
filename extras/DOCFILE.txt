@@ -1,0 +1,129 @@
+// I need to merge feature/bookshelf
+
+
+// I should json.stringify the data and render on the client
+// and store it 
+
+
+[ ] Events
+
+[ ] Hero
+    - Add a simple input box and send button
+      during beta to aggregate name change responses 
+
+[ ] Style the unique request full page 
+[ ] add some functions to the request 
+    - [ ] At the top of the list is an event module
+    - [ ] Add to broadcasted request button
+    - [ ] check user profile
+    - [ ] give aid
+    - [ ] (For poster) Upload aid changes to the site
+    - ? I could have a server auto count the adds that a user confirms
+    - [ ] Add infinite scroll
+
+[ ] "Book" Shelf 
+    - [ ] Horizontal media Shelf with scroll
+    - [ ] Add a featured media header
+    - [ ] Add a unique media page
+        - [ ] Add features soon
+
+[ ] Resources list 
+    - [ ] Add community link to this
+    - [ ] Can have third party resource
+    - [ ] Add features soon
+
+
+[ ] Commnities 
+    - [ ] Only track the neighboorhood
+
+    - ? Is there a way to find neighboorhoods from address
+    - ! Let users know not to put exact address on website or to other people do it off the app
+
+
+[ ] Profile page
+    - [ ]Current broadcasted requests and resources
+    - [ ] Profile Settings
+        - [ ] Privacy
+        - [ ] 
+
+
+        
+[ ] Add Mutuals 
+[ ] Add friends
+
+
+[ ] Changelog 
+    - Github actions on push checks package.json version 
+    - When version is updated itll generate a mongodb
+    - document that holds update information based on my commit message
+    - depending on the version update
+
+
+[ ] Comms routing page 
+    - [ ] Commnity tab
+        - [ ] Find communities to join and collaborate
+        - [ ] Create a Community
+        - [ ] Community feed
+        - [ ] Community channels
+            - [ ] Public channels
+            - [ ] Private channels
+                - [ ] If a user or a community admin
+                      creates a channel on private the channels
+                      wont pop up in a channel list for the community, even to
+                      other people
+    - [ ] Peers tab
+        - [ ] Find recent messages
+        - [ ] Send a new messages
+        - [ ] Create a group 
+            - [ ] Page Mobile
+                - [ ] Scroll box of messages
+    
+
+- [ ] Channels api 
+        use the messaging service and direct aws to gener
+        how does a load balancer work, can i use a load balancer to 
+        set up two different highways so to speak? 
+
+
+Im kind acreating two sides of the application
+kindof like the ungerground rave versus the public 
+infrastructure like a park, both house and help people (have fun)
+but the underground rave you gotta get in so to speak
+
+
+
+
+
+
+
+
+
+
+
+
+Goals
+- Create a login page 
+- show a list from the database 
+- add to the database with resources 
+
+
+
+Request object
+- name
+- resource
+- date of creation
+- length 
+
+
+resources
+- name
+- resources offered
+- category 
+
+
+
+i need to organize requests in a categorical fashion
+i need to have requests by username so that people can visit their profile
+friends! and mutuals!!
+location based support to and later allocation to specific communities 
+requests should be by username 
