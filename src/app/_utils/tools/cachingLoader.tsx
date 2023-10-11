@@ -29,7 +29,13 @@ export default async function cachingLoader(
 	map: ElementMap,
 	url: string,
 	{ action, middleware, callback, cache, page = 2, limit = 10 }: Options
-): Promise<ElementMap | void> {
+): Promise<
+	| {
+			newMap: ElementMap | undefined;
+			cache?: CacheMap | undefined;
+	  }
+	| undefined
+> {
 	try {
 		let oldMap: ElementMap = map;
 		if (middleware) oldMap = middleware(map);
@@ -44,7 +50,7 @@ export default async function cachingLoader(
 					payload: { newElements },
 				}: APIResponse = await (
 					await fetch(
-						`${url}${page ? `&page=${page}` : ``}${
+						`${url}${page ? `?page=${page}` : ``}${
 							limit ? `&limit=${limit}` : ``
 						}`
 					)
@@ -62,7 +68,8 @@ export default async function cachingLoader(
 			}
 
 			case 'retrieve': {
-				if (cache && limit < oldMapLength) {
+				// TODO: Update, this used to have 'limit < oldMapLength'
+				if (cache) {
 					for (let i = 0; i <= oldMapLength - limit - 1; i++) {
 						// from cache
 						workingMap.set(i, JSON.parse(cache.get(i) as string));
@@ -96,7 +103,9 @@ export default async function cachingLoader(
 			newMap = workingMap;
 		}
 
-		return newMap;
+		let data: { newMap: ElementMap; cache?: CacheMap } = { newMap };
+		if (cache) data.cache = cache;
+		return data;
 	} catch (error) {
 		console.log('Caching loader failed: ', error);
 	}

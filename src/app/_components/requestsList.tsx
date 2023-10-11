@@ -1,9 +1,10 @@
-import styles from '@/app/_styles/components/list.module.scss'
 import Request from './elements/request'
 
-export default function RequestsList({ requests }: any) {
 
-    const data = JSON.parse(requests) || [
+
+export default function RequestsList({ requestData }: {requestData: string}) {
+
+    const requests = JSON.parse(requestData) || [
 
         {
             _id: "none",
@@ -19,13 +20,16 @@ export default function RequestsList({ requests }: any) {
         }
 
     ]
+
+ 
+   
     // Have the original children displayed 
     // into the 
 
     // Create a map 
 
     // TODO: Add an infinite scroll option
-    return (data.map((data: any) =>
+    return (requests.map((data: any) =>
     (
         <Request
             {...data}

@@ -88,11 +88,11 @@ export default function NavMenu(props: { session: any }) {
 						<Menu.Divider />
 
 						{profileLinks.map(({ key, link, name, icon }: ProfileLink) => (
-							<div className={styles.option}>
-								<Menu.Item
-									key={key}
-									onClick={() => router.push(link)}
-								>
+							<div
+								className={styles.option}
+								key={key}
+							>
+								<Menu.Item onClick={() => router.push(link)}>
 									{icon}
 									{name}
 								</Menu.Item>
