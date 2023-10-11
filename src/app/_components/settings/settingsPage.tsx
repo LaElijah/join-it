@@ -1,11 +1,16 @@
 
 
-import SettingsBar from "./settingsBar"
+import ScrollBar from "./settingsBar"
 import styles from '@/app/_styles/components/settings/settingsPage.module.scss'
-import SettingsAccountDetails from "./settingsAccountDetails"
-import SettingsPrivacy from "./settingsPrivacy"
+import AccountDetails from "./settingsAccountDetails"
+import Privacy from "./settingsPrivacy"
 
-
+import AccountSecurity from "./settingsAccountSecurity"
+import Notifications from "./settingsAccountNotifications"
+import Customization from "./settingsCustomization"
+import CommunicationPreferences from "./settingsCommunicationPreferences"
+import AccountDeactivation from "./settingsAccountDeactivation"
+import Help from "./settingsHelp"
 
 
 export default function SettingsPage({ session }: any) {
@@ -13,14 +18,53 @@ export default function SettingsPage({ session }: any) {
     const pages = new Map([
         [
             "Account Details", 
-            <SettingsAccountDetails 
+            <AccountDetails 
             session={session} 
             />
         ],
         [
+            "Account Security",
+            <AccountSecurity
+            session={session}
+            />
+        ],
+        [
             "Privacy", 
-            <SettingsPrivacy 
+            <Privacy 
             session={session} 
+            />
+        ],
+        [
+            "Notifications",
+            <Notifications 
+            session={session}
+            />
+        ],
+        [
+            "Communication Preferences",
+            <CommunicationPreferences
+            session={session} 
+            />
+        ],
+
+        [
+            "Customization",
+            <Customization
+            session={session}
+            />
+        ],
+
+        [
+            "Deactivate Account",
+            <AccountDeactivation 
+            session={session}
+            />
+        ],
+
+        [
+            "Help & Feedback",
+            <Help 
+            session={session}
             />
         ],
     ])
@@ -31,9 +75,9 @@ export default function SettingsPage({ session }: any) {
 
     return (
         <div className={styles.container}>
-            <SettingsBar session={session}>
+            <ScrollBar session={session}>
                     {pages}
-            </SettingsBar>
+            </ScrollBar>
         </div>
     )
 }

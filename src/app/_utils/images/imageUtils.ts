@@ -140,8 +140,13 @@ export function readFile(file: any) {
   })
 }
 
+
+// Try removing mime type argument from file constructor
 export async function urlToFile (url: any, filename: any) {
+
+
   const blob = await (await fetch(url)).blob()
   return new File([blob], filename, { type: "image/png" })
+  // had { type: "image/png" } as third argument for file constructor
 
 }

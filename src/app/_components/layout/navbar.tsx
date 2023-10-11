@@ -1,5 +1,5 @@
 import styles from '@/app/_styles/layout/navbar.module.scss';
-
+import Image from "next/image"
 import NavBurger from '../elements/navBurger';
 import NavLinks from '../elements/navLinks';
 import NavMenu from '../elements/navMenu';
@@ -32,7 +32,7 @@ export default function Navbar(props: Props): React.ReactElement | undefined {
 					href='/'
 					className={styles.logo}
 				>
-					<h1>Logo</h1>
+					<Image alt="logo" src={"/iconography/logo.svg"} width={32} height={32} />
 				</Link>
 
 				<NavLinks linksData={linksData} />

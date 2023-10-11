@@ -4,10 +4,8 @@ import authOptions from "../../api/auth/[...nextauth]/options"
 import styles from "@/app/_styles/pages/profile.module.scss"
 import SettingsPage from "@/app/_components/settings/settingsPage"
 
-export default async function Profile() {
+export default async function Settings() {
     const session = await getServerSession(authOptions)
-    console.log(session)
-
     if (!session) {
         return redirect("/api/auth/signin?callbackUrl=/profile")
     }

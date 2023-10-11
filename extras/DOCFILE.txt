@@ -127,3 +127,83 @@ i need to have requests by username so that people can visit their profile
 friends! and mutuals!!
 location based support to and later allocation to specific communities 
 requests should be by username 
+
+
+
+
+
+
+Settings Page
+
+[ ] Account Details
+    - [ ] Card header 
+        - [ ] Display Username 
+        - [ ] Display Profile picture
+        - [ ] Display your main community
+            - [ ] When clicked, open a modal for main community selection
+            - [ ] Have a list of searchable communities by different attributes
+                - [ ] brainstorm attributes applicable to a community
+    
+    - [ ] Page Body 
+        - [ ] Section 1
+            - [ ] Change broadcasted item
+        - [ ] Change username
+        - [ ] Change avatar
+        - [ ] Change bio
+    
+
+
+[ ] Account security
+    - [ ] Change email address
+    - [ ] Change password
+    - [ ] Security question 
+    -  ? Two factor auth in a future update
+
+
+
+
+
+[ ] Privacy settings
+    - [ ] Private or public mututals
+    - [ ] Public or private communities joined
+    - [ ] Public or private profile
+    - [ ] Who can send you messages 
+
+
+
+
+[ ] Notifications
+    - [ ] Email notifications
+    - [ ] Activity notifications
+        - [ ] Aid recieved
+        - [ ] Mentioned in channel
+
+
+
+
+[ ] Communication preferences
+    - [ ] Email subscription to updates
+        - [ ] Come up with email updates
+
+
+
+ ?  Customization 
+    - ? Light mode and dark mode
+    - ? and more
+
+
+
+
+[ ] Account Deactivation and deletion 
+    - [ ] Deactivate account 
+    - [ ] Delete account
+        - [ ] Will be done in 3 days
+
+
+        
+[ ] Help Legal and Feedback 
+    - [ ] Contact support
+    - [ ] Access FAQ
+    - [ ] Provide feedback 
+    - [ ] Legal terms 
+

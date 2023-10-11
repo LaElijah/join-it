@@ -81,13 +81,14 @@ export default function RequestsOptions({
 					}
 				})}
 
-			<LoadFooter 
+				{/* TODO: Fix Load Footer */}
+			{/* <LoadFooter 
 
 			{...state}
 			elementMap={elementMap}
 			cache={cache}
 			setRenderer={(value: any) => dispatch({type: 'set', payload: { name: 'renderer', value } })}
-			 />
+			 /> */}
 		</>
 	);
 }
