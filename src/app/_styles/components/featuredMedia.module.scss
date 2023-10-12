@@ -1,71 +1,59 @@
 @use "@/app/variables.scss";
 
 .media {
+  background-color: variables.$PrimaryBlue;
+  padding: 32px;
+  border-radius: 32px 32px 0 0;
+  align-items: center;
 
-    background-color: variables.$PrimaryBlue;
-    padding: 32px;
-    border-radius: 32px 32px 0 0;
-    align-items: center;
-
-
-    & h1 {
-        @include variables.H2SemiBold;
-        margin-bottom: 16px;
-        color: white;
-
-    }
-
-
+  & h1 {
+    @include variables.H2SemiBold;
+    margin-bottom: 16px;
+    color: white;
+  }
 }
 
 .details {
-    padding: 32px;
-    padding-bottom: 64px;
-    border-radius: 0 0 32px 32px;
-    border: 2px solid black;
-
+  padding: 32px;
+  padding-bottom: 64px;
+  border-radius: 0 0 32px 32px;
+  border: 2px solid black;
 }
 
 .mediaContainer {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-
-
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
-
 
 @media (min-width: 512px) and (max-width: 671px) {
-    .mediaContainer {
-        :last-child {
-            margin-left: 32px;
-        }
+  .mediaContainer {
+    :last-child {
+      margin-left: 32px;
     }
+  }
 }
-
 
 @media (max-width: 511px) {
-    .mediaContainer {
-        justify-content: center;
-
-    }
+  .mediaContainer {
+    justify-content: center;
+  }
 }
 
-
 @media (min-width: 672px) {
-    .container {
-        width: 100%;
+  .container {
+    width: 100%;
 
-        display: flex;
-        flex-direction: row;
-    }
+    display: flex;
+    flex-direction: row;
+  }
 
-    .media {
-        border-radius: 32px 0 0 32px;
-    }
+  .media {
+    border-radius: 32px 0 0 32px;
+  }
 
-    .details {
-        width: 100%;
-        border-radius: 0 32px 32px 0;
-    }
+  .details {
+    width: 100%;
+    border-radius: 0 32px 32px 0;
+  }
 }

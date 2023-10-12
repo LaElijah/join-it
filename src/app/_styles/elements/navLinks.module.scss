@@ -1,38 +1,36 @@
-@use '@/app/variables.scss';
-
+@use "@/app/variables.scss";
 
 @mixin LinkColor {
-    @include variables.LinkColor;
+  @include variables.LinkColor;
 }
 
 @mixin ActionButton {
-    @include variables.ActionButton;
+  @include variables.ActionButton;
 }
 
 .container {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40%;
 }
 
 .link {
-    @include LinkColor;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    color: #161c25;
-    transition: all 0.2s ease-in-out;
+  @include LinkColor;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #161c25;
+  transition: all 0.2s ease-in-out;
 
-    &:hover {
-        color: #b2cabe;
-    }
+  &:hover {
+    color: #b2cabe;
+  }
 }
 
-
 .activeLink {
-    @include ActionButton;
-    text-decoration: none;
+  @include ActionButton;
+  text-decoration: none;
 }

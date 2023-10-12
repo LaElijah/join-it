@@ -1,17 +1,7 @@
-
-
-
-
-
-export default function CommunicationPreferences({session}: any) {
-
-
-
-    return (
-        <>
-        <div>
-            Communication preferences
-            </div>
-        </>
-    )
+export default function CommunicationPreferences({ session }: any) {
+  return (
+    <>
+      <div>Communication preferences</div>
+    </>
+  );
 }

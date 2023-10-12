@@ -1,17 +1,3 @@
-
-
-
-
-
-
-
-
-
-export default function Media({params}: any) {
-
-
-    return (
-        <>
-        </>
-    )
+export default function Media({ params }: any) {
+  return <></>;
 }

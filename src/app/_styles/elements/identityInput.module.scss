@@ -1,145 +1,126 @@
-
-
 @mixin LinkColor {
-    color: #387AB7;
-    text-align: right;
-    font-family: sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    }
-
-    
-@mixin RegularBlack {
-    color: #000;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  color: #387ab7;
+  text-align: right;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
+@mixin RegularBlack {
+  color: #000;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
 @mixin BoldGreenRegular {
-    color: #01ad60;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  color: #01ad60;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
-
-.avatarUploader h2, .inputWrapper h2 {
-    @include RegularBlack;
-    font-size: 24px;
-    margin-bottom: 16px;
-    padding: 0;
+.avatarUploader h2,
+.inputWrapper h2 {
+  @include RegularBlack;
+  font-size: 24px;
+  margin-bottom: 16px;
+  padding: 0;
 }
 
 .avatarUploader h2 {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 .container {
-    
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
-    gap: 40px;
-
+  gap: 40px;
 }
 
 .button {
-    width: 100%
+  width: 100%;
 }
 
-
 .buttonWrapper {
-    gap: 24px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  gap: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .buttonWrapper > :first-child {
-    
-    border: 1px solid #000;
-    background-color: transparent;
-    color: #000;
-
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
 }
 
 .buttonWrapper > :first-child:hover {
-    
-    background-color: #000;
-    color: #fff;
-
+  background-color: #000;
+  color: #fff;
 }
 
 .buttonWrapper > :first-child:active {
-    
-    background-color: #000;
-    color: #fff;
-
+  background-color: #000;
+  color: #fff;
 }
 
 .buttonWrapper > :first-child:focus {
-    
-    background-color: #000;
-    color: #fff;
-
+  background-color: #000;
+  color: #fff;
 }
 
 .buttonWrapper > :first-child:disabled {
-    
-    background-color: #000;
-    color: #fff;
-
+  background-color: #000;
+  color: #fff;
 }
 
-
 .chipGroup {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 4px;
-    width: 100%;
-    flex-wrap: wrap;
-    padding: 24px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 24px 0px;
 }
 
 .scrollBody {
-    max-height: 240px;
-    overflow-y: auto;
+  max-height: 240px;
+  overflow-y: auto;
 }
 
 .scrollBody h4 {
-    margin-bottom: 16px;
-    padding: 0;
-    @include RegularBlack;
-    color: #4d4d4d;
-    font-size: 16px;
-
+  margin-bottom: 16px;
+  padding: 0;
+  @include RegularBlack;
+  color: #4d4d4d;
+  font-size: 16px;
 }
 
 .tagTracker {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 1px solid #000;
-    background-color: #fff;
-    @include RegularBlack;
-    font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #000;
+  background-color: #fff;
+  @include RegularBlack;
+  font-size: 16px;
 }
 
-
-.tagTracker h2, .tagTracker p {
-    margin: 0;
-    padding: 0;
+.tagTracker h2,
+.tagTracker p {
+  margin: 0;
+  padding: 0;
 }

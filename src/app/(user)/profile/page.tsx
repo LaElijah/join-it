@@ -1,18 +1,14 @@
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/api/auth/[...nextauth]/options";
-import styles from "@/app/_styles/pages/profile.module.scss"
-
-
+import styles from "@/app/_styles/pages/profile.module.scss";
+import { redirect } from "next/navigation";
 
 export default async function Profile() {
-    const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
 
+  if (!session) {
+    return redirect("/signin");
+  }
 
-    return (
-        <section className={styles.container}>
-            Profile
-        </section>
-    )
-
-
+  return <section className={styles.container}>Profile</section>;
 }

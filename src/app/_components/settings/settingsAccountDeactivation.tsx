@@ -1,20 +1,7 @@
-
-
-
-
-
-
-
-export default function AccountDeactivation({session}: any) {
-
-
-
-    return (
-        <>
-        <div>
-            Deactivate
-
-        </div>
-        </>
-    )
+export default function AccountDeactivation({ session }: any) {
+  return (
+    <>
+      <div>Deactivate</div>
+    </>
+  );
 }

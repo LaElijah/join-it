@@ -1,15 +1,13 @@
 .container {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #22312948;
+
+  & h3 {
+    font-size: 12px;
+    border-bottom: 1px solid #22312948;
     margin-right: 8px;
-    display: flex;
-    flex-direction: column; 
-    border-right: 2px solid #22312948;
-
-    & h3 {
-        font-size: 12px;
-        border-bottom: 1px solid #22312948;
-        margin-right: 8px;
-        margin-bottom: 8px;
-    }
-
+    margin-bottom: 8px;
+  }
 }
-

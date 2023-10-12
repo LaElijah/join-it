@@ -1,256 +1,235 @@
-
 @mixin BoldGreenRegular {
-    color: #01ad60;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  color: #01ad60;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 @mixin RegularBlack {
-    color: #000;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  color: #000;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 
-text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 
 @mixin LinkColor {
-color: #387AB7;
-text-align: right;
-font-family: sans-serif;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  color: #387ab7;
+  text-align: right;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-
-@mixin GreenButton{
-    background-color: #01ad60;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
+@mixin GreenButton {
+  background-color: #01ad60;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
 }
 
 @mixin GreenButtonHover {
-    background-color: #13aa5f;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
+  background-color: #13aa5f;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
 }
 
 @mixin GreenButtonActive {
-    background-color: #13aa5f;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
+  background-color: #13aa5f;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
 }
 
 @mixin GreenButtonDisabled {
-    background-color: #01ad60;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
+  background-color: #01ad60;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
 }
 
 @mixin GreenButtonFocus {
-    background-color: #13aa5f;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 4px;
+  background-color: #13aa5f;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 4px;
 }
-
-
-
 
 .container {
-   
-    box-shadow: 0px 4px 8px 1px #84cfa64b;
-    padding: 8px 16px;
+  box-shadow: 0px 4px 8px 1px #84cfa64b;
+  padding: 8px 16px;
 }
 
-
-.container h2{
-    margin: 0;
-
-
+.container h2 {
+  margin: 0;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
 }
 
 .header :first-child {
-   @include BoldGreenRegular;
+  @include BoldGreenRegular;
 }
 
 .resource {
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 0px;
-    
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
 }
 
 .resource h2 {
-    @include RegularBlack;
-    padding: 0px 2px
+  @include RegularBlack;
+  padding: 0px 2px;
 }
 
 .resource :first-child {
-    @include BoldGreenRegular
+  @include BoldGreenRegular;
 }
 
 .details {
-    display: flex;
-    margin: 2px 0px;
-    @include RegularBlack;
-    font-size: 14px;
-    
+  display: flex;
+  margin: 2px 0px;
+  @include RegularBlack;
+  font-size: 14px;
 }
 
 .details :first-child > h2 {
-    @include BoldGreenRegular;
-    color: #3b5a4b;
-   
+  @include BoldGreenRegular;
+  color: #3b5a4b;
 }
 
 .body {
-    margin: 0px 8px !important;
-    color: #3b5a4b;
-    font-size: 16px;
+  margin: 0px 8px !important;
+  color: #3b5a4b;
+  font-size: 16px;
 }
 
 .description {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .details a {
-    @include LinkColor;
-    text-decoration: none;
-    display: flex;
-    justify-content: right;
+  @include LinkColor;
+  text-decoration: none;
+  display: flex;
+  justify-content: right;
 }
 
 .progress {
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
 }
 
 .footer :first-child {
-    @include BoldGreenRegular;
+  @include BoldGreenRegular;
 }
 
 .category {
-    display: flex;
-    justify-content: space-between;
-    margin: 2px 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
 }
 
 .category :first-child {
-    @include BoldGreenRegular;
+  @include BoldGreenRegular;
 }
 
 .category :last-child {
-    padding: 0px 2px;
-    @include RegularBlack;
+  padding: 0px 2px;
+  @include RegularBlack;
 }
 
-
 .container > :last-child a {
-    @include BoldGreenRegular;
-    color: #fff; 
-    @include GreenButton; 
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-     
-    
+  @include BoldGreenRegular;
+  color: #fff;
+  @include GreenButton;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .container > :last-child a:hover {
-    @include BoldGreenRegular;
-    color: #fff; 
-    @include GreenButton; 
-    @include GreenButtonHover;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    
+  @include BoldGreenRegular;
+  color: #fff;
+  @include GreenButton;
+  @include GreenButtonHover;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .container > :last-child a:active {
-    @include BoldGreenRegular;
-    color: #fff; 
-    @include GreenButton; 
-    @include GreenButtonActive;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    
+  @include BoldGreenRegular;
+  color: #fff;
+  @include GreenButton;
+  @include GreenButtonActive;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .container > :last-child a:disabled {
-    @include BoldGreenRegular;
-    color: #fff; 
-    @include GreenButton; 
-    @include GreenButtonDisabled;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    
+  @include BoldGreenRegular;
+  color: #fff;
+  @include GreenButton;
+  @include GreenButtonDisabled;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
 .container > :last-child a:focus {
-    @include BoldGreenRegular;
-    color: #fff; 
-    @include GreenButton; 
-    @include GreenButtonFocus;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-
-    
+  @include BoldGreenRegular;
+  color: #fff;
+  @include GreenButton;
+  @include GreenButtonFocus;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
-

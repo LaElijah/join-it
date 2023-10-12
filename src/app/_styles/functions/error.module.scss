@@ -1,54 +1,47 @@
-
-@use '@/app/variables.scss';
+@use "@/app/variables.scss";
 
 @mixin LinkColor {
-    @include variables.LinkColor;
+  @include variables.LinkColor;
 }
 
 @mixin RegularBlack {
-    @include variables.RegularBlack;
+  @include variables.RegularBlack;
 }
 
 @mixin BoldGreenRegular {
-    @include variables.BoldGreenRegular;
+  @include variables.BoldGreenRegular;
 }
 
 @mixin DefaultCard {
-    @include variables.DefaultCard;
+  @include variables.DefaultCard;
 }
 
-
-
-
 .container {
-    @include DefaultCard
+  @include DefaultCard;
 }
 
 .wrapper > h2 {
-    @include BoldGreenRegular;
-    font-size: 24px;
-    margin-bottom: 20px;
+  @include BoldGreenRegular;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .wrapper > p {
-    @include RegularBlack;
-    font-size: 16px;
-    margin-bottom: 20px;
-    text-align: center;
+  @include RegularBlack;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-
-// TODO: Change to a button design 
+// TODO: Change to a button design
 .wrapper a {
-    @include LinkColor;
-    text-decoration: none;
-    font-size: 16px;
-   
+  @include LinkColor;
+  text-decoration: none;
+  font-size: 16px;
 }
-
 
 .wrapper label {
-    @include RegularBlack;
-    font-size: 16px;
-    margin-bottom: 10px;
+  @include RegularBlack;
+  font-size: 16px;
+  margin-bottom: 10px;
 }

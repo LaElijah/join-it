@@ -1,42 +1,35 @@
-@use '@/app/variables.scss';
-
+@use "@/app/variables.scss";
 
 @mixin LinkColor {
-    @include variables.LinkColor;
+  @include variables.LinkColor;
 }
 
 @mixin ActionButton {
-    @include variables.ActionButton;
+  @include variables.ActionButton;
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
+  & > :first-child {
+    border-radius: 100%;
+  }
 
-    & > :first-child {
-        border-radius: 100%;
-   }
+  & > :last-child {
+    margin-left: 8px;
+    cursor: pointer;
+  }
 
-   & > :last-child {
-       margin-left: 8px;
-       cursor: pointer;
-   }
+  & h3 {
+    @include variables.BoldGreenRegular;
+    font-size: 16px;
+  }
 
-  
-
-   & h3 {
-       @include variables.BoldGreenRegular;
-       font-size: 16px;
-   }
-
-    & p {
-         @include variables.RegularBlack;
-         color: #37413b;
-         font-size: 12px;
-    }
-
-
-  
+  & p {
+    @include variables.RegularBlack;
+    color: #37413b;
+    font-size: 12px;
+  }
 }

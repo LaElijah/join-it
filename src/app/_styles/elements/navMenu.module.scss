@@ -1,53 +1,43 @@
-@use '@/app/variables.scss';
-
+@use "@/app/variables.scss";
 
 @mixin LinkColor {
-    @include variables.LinkColor;
+  @include variables.LinkColor;
 }
 
 @mixin ActionButton {
-    @include variables.ActionButton;
+  @include variables.ActionButton;
 }
 
-
 .option {
-
-    & :first-child {
+  & :first-child {
     display: flex;
     flex-direction: row;
     gap: 4px;
     align-items: center;
-
-    }
+  }
 }
 
 .container {
-   display: flex;
-   align-items: center;
-
+  display: flex;
+  align-items: center;
 }
-
-
 
 .altContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 .altContainer a {
-    @include LinkColor;
-    text-decoration: none;
+  @include LinkColor;
+  text-decoration: none;
 }
 
 .altContainer a:first-child {
-    color: #b2cabe;
+  color: #b2cabe;
 }
-
 
 .altContainer a:last-child {
-    @include ActionButton;
+  @include ActionButton;
 }
-
-

@@ -6,33 +6,24 @@
 /******************************************/
 /*Text Colors*/
 
-$PrimaryGreen: #38982F;
-
+$PrimaryGreen: #38982f;
 
 $PrimaryBlue: #112ae9;
 
+$PrimaryYellow: #ffc626;
 
-$PrimaryYellow: #FFC626;
+$PrimaryRed: #ff4e50;
 
-
-$PrimaryRed: #FF4E50;
-
-
-$PrimaryBody: #7A7979;
-
+$PrimaryBody: #7a7979;
 
 $SecondaryBody: #525252;
-
-
 
 /******************************************/
 /*Background Colors*/
 
-$PrimaryBackground: #F6E6FD;
+$PrimaryBackground: #f6e6fd;
 
-
-$SecondaryBackground: #EDEDED;
-
+$SecondaryBackground: #ededed;
 
 /******************************************/
 /*Button Colors*/
@@ -42,345 +33,301 @@ $ButtonPrimary: #00b664;
 $ButtonPrimaryHover: #03d677;
 $ButtonPrimaryActive: #009451;
 
-
-
-$ButtonOutline: #FDFDE6;
-
-
-
-
+$ButtonOutline: #fdfde6;
 
 /******************************************/
 /******************************************/
 /**Mixins**/
 
-
 /******************************************/
 /*Typography*/
 
 @mixin D1Bold {
-    font-family: 'Inter', sans-serif;
-    font-size: 48px;
-    font-style: normal;
-    line-height: normal;
-    margin: 0;
-    font-weight: 700;
+  font-family: "Inter", sans-serif;
+  font-size: 48px;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+  font-weight: 700;
 }
 
 @mixin D1SemiBold {
-    font-family: 'Inter', sans-serif;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin D2SemiBold {
-    font-family: 'Inter', sans-serif;
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin H1SemiBold {
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin H1Light {
-    font-family: 'Inter', sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin H2SemiBold {
-    /* Heading/H2/Semi Bold */
-    font-family: 'Inter', sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H2/Semi Bold */
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin H3SemiBold {
-    /* Heading/H3/Semi Bold */
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H3/Semi Bold */
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
 }
-
-
-
 
 @mixin H4Regular {
-    /* Heading/H4/Regular */
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H4/Regular */
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
 }
-
-
 
 @mixin H4Light {
-    /* Heading/H4/Light */
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H4/Light */
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
 }
 
-
-
 @mixin H4ExtraBold {
-    /* Heading/H4/Extra Bold */
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H4/Extra Bold */
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin H4SemiBold {
-    /* Heading/H4/Extra Bold */
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-    margin: 0;
+  /* Heading/H4/Extra Bold */
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin S1Light {
-    /* Subheading/S1/Light */
-    font-family: 'Inter', sans-serif;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    margin: 0;
+  /* Subheading/S1/Light */
+  font-family: "Inter", sans-serif;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
 }
 
 @mixin BoldGreenRegular {
-    color: #01ad60;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #01ad60;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
-
-
 
 @mixin LinkColor {
-    color: #387AB7;
-    text-align: right;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #387ab7;
+  text-align: right;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-
 
 @mixin RegularBlack {
-    color: #000;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
-
 
 /******************************************/
 /*Buttons*/
 
 @mixin defaultButton {
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 4px;
-    border: 1px solid $ButtonPrimary;
-    box-shadow: 1px 2px 2px 1px rgba(46, 146, 98, 0.317);
-
-
-
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  border: 1px solid $ButtonPrimary;
+  box-shadow: 1px 2px 2px 1px rgba(46, 146, 98, 0.317);
 }
 
 @mixin defaultButtonActions {
+  :hover {
+    box-shadow: none;
+    background-color: $ButtonPrimaryHover;
+  }
 
-    :hover {
-        box-shadow: none;
-        background-color: $ButtonPrimaryHover;
-
-
-    }
-
-    :active {
-        background-color: $ButtonPrimaryActive;
-
-
-    }
+  :active {
+    background-color: $ButtonPrimaryActive;
+  }
 }
 
 @mixin outlineButton {
-    display: flex;
-    padding: 8px 12px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 4px;
-    border: 1px solid $ButtonOutline;
+  display: flex;
+  padding: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  border: 1px solid $ButtonOutline;
 
+  :hover {
+    box-shadow: none;
+    border: 1px solid $ButtonPrimaryHover;
+  }
 
-    :hover {
-        box-shadow: none;
-        border: 1px solid $ButtonPrimaryHover;
-
-    }
-
-    :active {
-        border: 1px solid $ButtonPrimaryActive;
-
-    }
+  :active {
+    border: 1px solid $ButtonPrimaryActive;
+  }
 }
 
 @mixin outlineButtonActions {
+  :hover {
+    box-shadow: none;
+    border: 1px solid $ButtonPrimaryHover;
+  }
 
-    :hover {
-        box-shadow: none;
-        border: 1px solid $ButtonPrimaryHover;
-
-
-    }
-
-    :active {
-        border: 1px solid $ButtonPrimaryActive;
-
-
-    }
+  :active {
+    border: 1px solid $ButtonPrimaryActive;
+  }
 }
-
-
-
-
 
 /******************************************/
 
-
 @mixin DefaultContent {
-    margin: 32px 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  margin: 32px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  & > :first-child {
     width: 100%;
 
-    & > :first-child {
-        width: 100%;
-        
-        max-width: 800px;
+    max-width: 800px;
 
-        @media ( max-width: 816px ) {
-            padding: 0px 16px;
-        }
-
-        }
-    
+    @media (max-width: 816px) {
+      padding: 0px 16px;
     }
-
+  }
+}
 
 @mixin ActionButton {
-    background-color: #006eec;
-    padding: 4px 12px;
-    margin-left: 8px;
-    color: #f7f7f7;
-    border-radius: 16px;
+  background-color: #006eec;
+  padding: 4px 12px;
+  margin-left: 8px;
+  color: #f7f7f7;
+  border-radius: 16px;
 
-    text-decoration: none;
+  text-decoration: none;
 
-        &:hover {
-            background-color: #003b7e;
-            
-        }
+  &:hover {
+    background-color: #003b7e;
+  }
 
-        &:active {
-            background-color: #73b0f5;
-            color: black;
-        }
-
+  &:active {
+    background-color: #73b0f5;
+    color: black;
+  }
 }
-
-
 
 @mixin DefaultCard {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+  width: 100%;
+
+  & > :first-child {
+    display: flex;
+
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 88vh;
     width: 100%;
+    max-width: 400px;
 
-    &> :first-child {
-        display: flex;
-
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        max-width: 400px;
-
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0px 4px 8px 1px #84cfa64b;
-    }
-
-
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px 1px #84cfa64b;
+  }
 }
-
 
 @mixin MantineLabel {
-    display: inline-block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #212529;
-    word-break: break-word;
-    cursor: default;
-    -webkit-tap-highlight-color: transparent;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,'Inter',Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-    line-height: 1.55;
-
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #212529;
+  word-break: break-word;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    "Inter",
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji;
+  line-height: 1.55;
 }
-
-
-
 
 /****************Contextual Rulesets*************/
 /************************************************/
 
 @mixin Subtitle {
-    @include S1Light;
+  @include S1Light;
 }

@@ -1,16 +1,14 @@
-@use '@/app/variables.scss' as variables;
+@use "@/app/variables.scss" as variables;
 
-@mixin DefaultContent { @include variables.DefaultContent; }
-
-
+@mixin DefaultContent {
+  @include variables.DefaultContent;
+}
 
 .content {
-    @include DefaultContent;
-    
-
+  @include DefaultContent;
 }
 
 .wrapper {
-    width: 100%;
-    max-width: 800px;
+  width: 100%;
+  max-width: 800px;
 }

@@ -1,13 +1,11 @@
-"use client"
+"use client";
 
-import { Progress } from '@mantine/core';
-
-
+import { Progress } from "@mantine/core";
 
 export default function Requests(props: any) {
-    return (
-        <>
-        <Progress value={props.value}  />
-        </>
-    )
+  return (
+    <>
+      <Progress value={props.value} />
+    </>
+  );
 }

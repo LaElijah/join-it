@@ -1,17 +1,7 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
 
-export { default } from 'next-auth/middleware'
-
-
+export { default } from "next-auth/middleware";
 
 export const config = {
-    matcher: [
-        "/resources/create`",
-        "/requests/create",
-    ],
-  
-
-
-}
-
-
+  matcher: ["/resources/create`", "/requests/create"],
+};

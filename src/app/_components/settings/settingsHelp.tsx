@@ -1,20 +1,7 @@
-
-
-
-
-
-
-
-export default function Help({session}: any) {
-
-
-
-    return (
-        <>
-        <div>
-            Help
-
-        </div>
-        </>
-    )
+export default function Help({ session }: any) {
+  return (
+    <>
+      <div>Help</div>
+    </>
+  );
 }

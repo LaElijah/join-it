@@ -1,38 +1,36 @@
-
 .option {
-    margin-right: 4px;
-    cursor: pointer;
-    border-radius: 8px;
-    
-    & :hover {
-        background-color: grey;
-        border-radius: 8px;
-    }
+  margin-right: 4px;
+  cursor: pointer;
+  border-radius: 8px;
 
-    & h2 {
+  & :hover {
+    background-color: grey;
+    border-radius: 8px;
+  }
+
+  & h2 {
     font-size: 16px;
     padding: 4px 4px;
-    }
+  }
 }
 
 .activeOption {
+  margin-right: 4px;
+  cursor: pointer;
+  background-color: blue;
+  border-radius: 8px;
 
-    margin-right: 4px;
-    cursor: pointer;
-    background-color: blue;
+  & :hover {
+    background-color: grey;
     border-radius: 8px;
-    
-    & :hover {
-        background-color: grey;
-        border-radius: 8px;
-    }
+  }
 
-    & h2 {
+  & h2 {
     font-size: 16px;
     padding: 4px 4px;
-    }
+  }
 }
 
 .group {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }

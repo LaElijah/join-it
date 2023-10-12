@@ -1,7 +1,9 @@
-@use '@/app/variables.scss';
+@use "@/app/variables.scss";
 
-@mixin MantineLabel { @include variables.MantineLabel; }
+@mixin MantineLabel {
+  @include variables.MantineLabel;
+}
 
 .label {
-   @include MantineLabel;
+  @include MantineLabel;
 }

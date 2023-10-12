@@ -1,13 +1,3 @@
-
-
-
-
 export default function CreateMedia() {
-
-
-    return (
-        <div>
-            Create Media Upload
-        </div>
-    )
+  return <div>Create Media Upload</div>;
 }

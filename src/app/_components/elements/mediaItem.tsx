@@ -1,32 +1,20 @@
-
-
-
-
-import styles from "@/app/_styles/elements/mediaItem.module.scss"
-import { Media, MediaData, BookData, VideoData } from "@/app/_types"
-import Image from "next/image"
-
+import styles from "@/app/_styles/elements/mediaItem.module.scss";
+import { Media, MediaData, BookData, VideoData } from "@/app/_types";
+import Image from "next/image";
 
 export default function MediaItem(props: Media) {
-
-
-    if (props.type === "book") {
-        const item = props.data as BookData
-        return (
-            <div className={styles.container}>
-                {/* {
+  if (props.type === "book") {
+    const item = props.data as BookData;
+    return (
+      <div className={styles.container}>
+        {/* {
                     item?.isbn
                     && <p>ISBN: {item.isbn}</p>
                 } */}
-                {
-                    item?.cover
-                    && <img
-                        src={item.cover}
-                        alt="cover" width={400}
-                        height={200}
-                    />
-                }
-                {/* {
+        {item?.cover && (
+          <img src={item.cover} alt="cover" width={400} height={200} />
+        )}
+        {/* {
                     item?.publisher
                     && <p>Publisher: {item.publisher}</p>
                 }
@@ -50,17 +38,17 @@ export default function MediaItem(props: Media) {
                     item?.keywords
                     && <p>Keywords: {item.keywords.join(", ")}</p>
                 } */}
-            </div>
-        )
-    }
-    // else if (props.type === "video") {
-    //     let item = props.data as VideoData
+      </div>
+    );
+  }
+  // else if (props.type === "video") {
+  //     let item = props.data as VideoData
 
-    //     return (
-    //         <div className={styles.container}>
-    //             <p>Video</p>
-    //             {item && <p>{item.description}</p>}
-    //         </div>
-    //     )
-    // }
+  //     return (
+  //         <div className={styles.container}>
+  //             <p>Video</p>
+  //             {item && <p>{item.description}</p>}
+  //         </div>
+  //     )
+  // }
 }
