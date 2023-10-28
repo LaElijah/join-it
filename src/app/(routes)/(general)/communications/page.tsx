@@ -19,7 +19,7 @@ type message = {
 import MessageInputs from "@/app/_components/elements/messageInputs";
 import MessageBox from "@/app/_components/elements/messageBox";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 
 export default async function Groups() {
   const session = await getServerSession(authOptions);

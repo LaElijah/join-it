@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import Link from "next/link";
 import styles from "@/app/_styles/components/hero.module.scss";
 import { getServerSession } from "next-auth/next";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 
 export default async function Onboarding() {
   const session = await getServerSession(authOptions);

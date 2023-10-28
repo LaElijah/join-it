@@ -2,7 +2,7 @@ import SignInInputs from "@/app/_components/elements/signInInputs";
 import Link from "next/link";
 import styles from "@/app/_styles/pages/signin.module.scss";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 export default async function SignIn() {

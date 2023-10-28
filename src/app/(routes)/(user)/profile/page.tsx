@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import styles from "@/app/_styles/pages/profile.module.scss";
 import { redirect } from "next/navigation";
 

@@ -3,10 +3,10 @@
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import styles from "@/app/_styles/layout/layout.module.scss";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import Navbar from "@/app/_components/layout/navbar";
 import "@mantine/core/styles.css";
-import "./globals.scss";
+import "../globals.scss";
 import { Roboto } from "next/font/google"
 
 const roboto = Roboto({

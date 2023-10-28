@@ -5,7 +5,7 @@ import User from "@/app/_utils/models/user";
 import bcrypt from "bcrypt";
 import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 
 //Creates a new group
 // verifies that a session exists

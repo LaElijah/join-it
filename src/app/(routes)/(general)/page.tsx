@@ -1,8 +1,8 @@
 import styles from "@/app/_styles/pages/index.module.scss";
-import Onboarding from "../_components/onboarding";
+import Onboarding from "../../_components/onboarding";
 import Link from "next/link";
 import { IconChevronRight, IconArrowRight } from "@tabler/icons-react";
-import ContentWrapper from "../_components/contentWrapper";
+import ContentWrapper from "../../_components/contentWrapper";
 
 export default function Index() {
   return (

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Request from "@/app/_utils/models/request";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import dbConnection from "@/app/_utils/db/dbConnection";
 import User from "@/app/_utils/models/user";
