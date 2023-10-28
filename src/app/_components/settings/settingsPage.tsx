@@ -12,14 +12,14 @@ import Help from "./settingsHelp";
 
 export default function SettingsPage({ session }: any) {
   const pages = new Map([
-    ["Details", <AccountDetails session={session} />],
-    ["Security", <AccountSecurity session={session} />],
-    ["Privacy", <Privacy session={session} />],
-    ["Notifications", <Notifications session={session} />],
-    ["Communication", <CommunicationPreferences session={session} />],
-    ["Customization", <Customization session={session} />],
-    ["Deactivate", <AccountDeactivation session={session} />],
-    ["Help & Feedback", <Help session={session} />],
+    ["Details", <AccountDetails key={0} session={session} />],
+    ["Security", <AccountSecurity key={1} session={session} />],
+    ["Privacy", <Privacy key={2} session={session} />],
+    ["Notifications", <Notifications key={3} session={session} />],
+    ["Communication", <CommunicationPreferences key={4} session={session} />],
+    ["Customization", <Customization key={5} session={session} />],
+    ["Deactivate", <AccountDeactivation key={6} session={session} />],
+    ["Help & Feedback", <Help key={7} session={session} />],
   ]);
 
   return (

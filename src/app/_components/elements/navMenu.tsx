@@ -41,7 +41,7 @@ export default function NavMenu(props: { session: any }) {
       name: "Settings",
       key: 3,
       icon: <IconChevronRight width={16} height={16} />,
-      link: "/profile",
+      link: "/profile/settings",
     },
   ];
 

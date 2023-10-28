@@ -1,3 +1,5 @@
+
+
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import styles from "@/app/_styles/layout/layout.module.scss";
 import { getServerSession } from "next-auth";
@@ -5,6 +7,13 @@ import authOptions from "@/app/api/auth/[...nextauth]/options";
 import Navbar from "@/app/_components/layout/navbar";
 import "@mantine/core/styles.css";
 import "./globals.scss";
+import { Roboto } from "next/font/google"
+
+const roboto = Roboto({
+  variable: '--font-roboto',
+  weight: ['100', '300', '400', '500', '700', '900'],
+  subsets: ["latin"]
+})
 
 type Link = {
   name: string;
@@ -62,18 +71,16 @@ export default async function RootLayout({
   if (session) linksData.push({ name: "Profile", key: 9 });
 
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.className}>
       <head>
         <ColorSchemeScript />
       </head>
 
       <body>
         <MantineProvider>
+       
           <Navbar session={session} linksData={linksData} />
-
-          <section className={styles.content}>
-            <div className={styles.wrapper}>{children}</div>
-          </section>
+          {children}
         </MantineProvider>
       </body>
     </html>

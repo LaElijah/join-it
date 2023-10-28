@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
     },
     "forceConsistentCasingInFileNames": true
   },
@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/_utils/db/authConnection.js",
-    "app/_utils/db/dbConnection.ts"
+    "app/_utils/db/dbConnection.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "typeRoots": ["./"]
 }

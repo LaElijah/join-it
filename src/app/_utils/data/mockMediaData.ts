@@ -1,4 +1,5 @@
-import { Media } from "@/app/_types/index";
+import { Media } from "@/app/_types/mediaTypes";
+
 
 export const MockMediaData: Media[] = [
   {

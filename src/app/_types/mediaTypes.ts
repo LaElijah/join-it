@@ -1,10 +1,10 @@
-export type Metadata = {
+export declare type Metadata = {
   submittedBy: string;
   verified: boolean;
   dateSubmitted: string;
 };
 
-export type BookData = {
+export declare type BookData = {
   isbn: string;
   cover: string;
   authors: string[];
@@ -17,19 +17,19 @@ export type BookData = {
   key: string;
 };
 
-export type VideoData = {
+export declare type VideoData = {
   url: string;
   description: string;
   keywords: string[];
   key: string;
 };
 
-export type CommentItem = {
+export declare type CommentItem = {
   message: string;
   dateSubmitted: string;
 };
 
-export type Reaction = {
+export declare type Reaction = {
   likes: number;
   dislikes: number;
   user: {
@@ -39,9 +39,9 @@ export type Reaction = {
   comment: CommentItem;
 };
 
-export type MediaData = BookData | VideoData;
+export declare type MediaData = BookData | VideoData;
 
-export type Media = {
+export declare interface Media {
   key: string;
   title: string;
   type: "book" | "video" | "article" | "podcast" | "other";

@@ -1,10 +1,9 @@
 import styles from "@/app/_styles/components/featuredMedia.module.scss";
-import { Media, BookData, VideoData, Metadata } from "@/app/_types/index";
 import Image from "next/image";
 import ImageDetails from "./elements/imageDetails";
-import PartiallyVisible from "./partiallyVisible";
+import { Media, BookData } from "../_types/mediaTypes";
 
-const MediaContent = ({ type, data }: any) => {};
+// const MediaContent = ({ type, data }: any) => {};
 
 export default function FeaturedMedia(props: { mediaData: Media }) {
   const { title, type, subjects, metadata, reactions, data } = props.mediaData;
@@ -61,24 +60,19 @@ export default function FeaturedMedia(props: { mediaData: Media }) {
                 alt="Book Cover"
               />
 
-              <PartiallyVisible
-                visibilityRules={["min-width: 512px", "max-width: 671px"]}
-              >
+            
                 <div className={styles.containedDetails}>
                   Hi these are details
                 </div>
-              </PartiallyVisible>
             </ImageDetails>
           </section>
         </div>
 
-        <PartiallyVisible visibilityRules={"min-width: 672px"}>
-          <div className={styles.details}>These are more details first</div>
-        </PartiallyVisible>
 
-        <PartiallyVisible visibilityRules={"max-width: 671px"}>
-          <div className={styles.details}>These are more details second</div>
-        </PartiallyVisible>
+          <div className={styles.details}>These are more details first</div>
+   
+          <div className={styles.moreDetails}>These are more details second</div>
+
       </div>
     );
   } else if (type === "video") {

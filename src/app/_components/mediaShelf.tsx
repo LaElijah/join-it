@@ -1,7 +1,6 @@
 import MediaItem from "@/app/_components/elements/mediaItem";
 import styles from "@/app/_styles/components/mediaShelf.module.scss";
-
-import { Media, BookData, VideoData, Metadata } from "@/app/_types/index";
+import { Media } from "../_types/mediaTypes";
 
 // TODO: Update types
 

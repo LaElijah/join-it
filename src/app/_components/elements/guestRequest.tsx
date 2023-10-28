@@ -4,7 +4,7 @@ export default function GuestRequest() {
       <h2>Want to try Join It?</h2>
 
       <h3>
-        Sign up for a guest account! You'll be able to use public features of
+        Sign up for a guest account! You&apos;ll be able to use public features of
         the site.
       </h3>
     </>
