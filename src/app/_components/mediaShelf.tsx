@@ -6,6 +6,7 @@ import { Media } from "../_types/mediaTypes";
 
 export default function MediaShelf(props: any) {
   const mediaData: Media[] = props.mediaData;
+  console.log(mediaData[0].title)
 
   const uniqueSubjects: string[] = Array.from(
     new Set(
@@ -22,17 +23,18 @@ export default function MediaShelf(props: any) {
   return (
     <section className={styles.container}>
       {uniqueSubjects.map((subject: string) => {
+        console.log(subject)
         return (
           <section className={styles.shelf} key={subject}>
-            <h2>{subject}</h2>
+            {((mediaData.filter((data) => data.subjects.includes(`${subject.charAt(0).toLowerCase() + subject.slice(1)}`)).length > 0)) && <h2>{subject}</h2>}
             <div className={styles.items}>
-              {mediaData.map((data: Media) => {
+              {mediaData.map(({data}: any) => {
                 if (
                   data.subjects.includes(
                     `${subject.charAt(0).toLowerCase() + subject.slice(1)}`,
                   )
                 ) {
-                  return <MediaItem {...data} key={data.key} />;
+                  return <MediaItem {...data._doc} key={data.key} />;
                 }
               })}
             </div>

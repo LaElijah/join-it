@@ -1,5 +1,14 @@
 import ContentWrapper from "@/app/_components/contentWrapper";
+import Media from "@/app/_utils/models/media";
+import { Media as MediaType } from "@/app/_types/mediaTypes";
 
-export default function Media({ params }: any) {
-  return <ContentWrapper>{params.id}</ContentWrapper>;
+export default async function MediaPage({ params }: any) {
+  const {
+    title
+  } = await Media.findById(params.id)
+  return (
+   <ContentWrapper>
+    {title}
+    </ContentWrapper>
+  )
 }

@@ -1,11 +1,13 @@
 import ContentWrapper from "@/app/_components/contentWrapper";
 import FeaturedMedia from "@/app/_components/featuredMedia";
 import MediaShelf from "@/app/_components/mediaShelf";
-import { Media } from "@/app/_types/global";
-import { MockMediaData } from "@/app/_utils/data/mockMediaData";
+import { Media as MediaType } from "@/app/_types/global";
+import Media from "@/app/_utils/models/media"
+import dbConnection from "@/app/_utils/db/dbConnection";
 
-export default function Shelf() {
-  const mediaData: Media[] = MockMediaData;
+export default async function Shelf() {
+  await dbConnection()
+  const mediaData: MediaType[] = await Media.find({});
 
   return (
     <section>
