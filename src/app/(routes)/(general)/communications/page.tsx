@@ -20,21 +20,37 @@ import MessageInputs from "@/app/_components/elements/messageInputs";
 import MessageBox from "@/app/_components/elements/messageBox";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
+import ContentWrapper from "@/app/_components/contentWrapper";
+import PeerComms from "@/app/_components/PeerComms";
+import CommunityComms from "@/app/_components/communityComms";
+import TabGroup from "@/app/_components/elements/tabGroup";
+
 
 export default async function Groups() {
   const session = await getServerSession(authOptions);
   const styles: any = "";
 
-  return (
-    <div>
-      <>
-        <section className={styles.tabs}>
-          <button>Communities</button>
-          <button>Peers</button>
-        </section>
+  const pages = new Map([
+    ["Community", <CommunityComms/>],
+    ["Peers", <PeerComms />]
+  ])
 
-        <section className={styles.content}>{styles}</section>
-      </>
+  
+
+  return (
+    <ContentWrapper>
+        <TabGroup tabs={[
+          {
+          key: "Community",
+          label: "Community"
+        },
+        {
+          key: "Peers",
+          label: "Peers"
+        }
+        ]}>
+          {pages}
+        </TabGroup>
 
       {/* <MessageInputs />
             <MessageBox 
@@ -42,6 +58,6 @@ export default async function Groups() {
             groupId="gate-1"
             message="Hello world"
             /> */}
-    </div>
+    </ContentWrapper>
   );
 }

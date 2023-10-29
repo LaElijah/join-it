@@ -1,0 +1,27 @@
+@use "@/app/variables.scss";
+
+.tab {
+    background-color: blue;
+    padding: 4px 8px;
+    border-radius: 4px 4px 0px 0px;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background: grey;
+}
+
+.tabPressed{
+    background: green;
+    padding: 4px 8px;
+    border-radius: 4px 4px 0px 0px;
+    cursor: default;
+
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid variables.$PrimaryBlue;
+    gap: 2px;
+    margin-bottom: 16px;
+}

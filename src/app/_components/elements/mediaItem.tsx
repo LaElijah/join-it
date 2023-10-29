@@ -5,12 +5,10 @@ import Link from "next/link";
 export default function MediaItem({_doc: props}: {_doc: Media}) {
   console.log(props)
   
- console.log(props.type)
   if (props.type === "book") {
-    console.log("h")
     const item = props.data as BookData;
     return (
-      <Link href={`/bookshelf/${props._id}`} className={styles.container}>
+      <Link href={`/bookshelf/${props._id}`} key={props._id} className={styles.container}>
         {/* {
                     item?.isbn
                     && <p>ISBN: {item.isbn}</p>

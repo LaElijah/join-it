@@ -9,7 +9,7 @@ export type BookData = {
   isbn: string;
   cover: string;
   authors: string[];
-  url?: Blob;
+  url?: string;
   description: string;
   publisher: string;
   datePublished: string;

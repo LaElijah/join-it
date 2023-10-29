@@ -28,13 +28,13 @@ export default function MediaShelf(props: any) {
           <section className={styles.shelf} key={subject}>
             {((mediaData.filter((data) => data.subjects.includes(`${subject.charAt(0).toLowerCase() + subject.slice(1)}`)).length > 0)) && <h2>{subject}</h2>}
             <div className={styles.items}>
-              {mediaData.map(({data}: any) => {
+              {mediaData.map((data: any) => {
                 if (
                   data.subjects.includes(
                     `${subject.charAt(0).toLowerCase() + subject.slice(1)}`,
                   )
                 ) {
-                  return <MediaItem {...data._doc} key={data.key} />;
+                  return <MediaItem {...data} key={data.key} />;
                 }
               })}
             </div>
