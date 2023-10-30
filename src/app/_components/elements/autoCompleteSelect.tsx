@@ -2,34 +2,26 @@
 
 import { useState } from "react"
 import {
-    Input,
-    InputBase,
     Combobox,
     useCombobox,
     TextInput,
     Divider
 } from '@mantine/core';
+import group from "@/app/_utils/models/group";
 
-type UserOption = {
-    username: string,
-    profile: string,
-    name?: string
-}
 
-type PlainOption = {
-    key: string,
-    value: string
-}
 
-type PlainGroupOption = {
-    key: string,
+
+
+
+
+type Option = {
+    key: string | number,
     value: string,
-    group: string
-
+    group? : string,
+    data?: any
 }
 
-
-type Option = UserOption | PlainOption | PlainGroupOption | any // TODO: Remove this any 
 
 interface AutoCompleteSelect {
     options: Option[],
@@ -47,7 +39,7 @@ interface AutoCompleteSelect {
 export function Selection({
     key,
     value,
-}: PlainOption) {
+}: Option) {
     return (
         <Combobox.Option value={value} key={key}>
             {value}
@@ -69,9 +61,7 @@ export default function AutoCompleteSelect({
     description
 }: AutoCompleteSelect) {
     const [query, setQuery] = useState("")
-
-    const Option = SelectElement || Selection
-
+    const Option = SelectElement ? SelectElement : Selection
     const groups = Array.from(new Set(options.map((option: any) => (option.group))))
     const nonGroupOptions = options.filter((option) => (!option.group))
 
@@ -82,12 +72,12 @@ export default function AutoCompleteSelect({
         else combobox.closeDropdown()
 
         setQuery(() => {
-            if (onChange) onChange(event.target.value)
+            if (onChange) onChange(event)
             return event.target.value
         })
     }
 
-
+console.log( groups[0] !== undefined)
 
     return (
         <Combobox
@@ -120,10 +110,10 @@ export default function AutoCompleteSelect({
                     }
                     )}
 
-                    {nonGroupOptions.map((option: any, index: number) => {
+                    {nonGroupOptions.map((option: Option, index: number) => {
                         return (
                             <>
-                                {(nonGroupOptions.length > 0 && index === 0 && <Divider my="xs" label="other" labelPosition="left" />)}
+                                {(nonGroupOptions.length > 0 && index === 0 && groups.length > 0 && groups[0] !== undefined && <Divider my="xs" label="other" labelPosition="left" />)}
                                 {(!option.group && option.value.includes(query)) && <Option {...option} />}
                             </>
                         )

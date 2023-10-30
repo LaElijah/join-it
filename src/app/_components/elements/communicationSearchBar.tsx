@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
-import { Autocomplete } from "@mantine/core"
+import { useState, useMemo } from "react"
 import { debounce } from "@/app/_utils/tools/debounce"
 import AutoCompleteSelect from "./autoCompleteSelect"
 
@@ -32,12 +31,12 @@ export default function CommunicationSearchBar() {
     ,800),[])
    
 
-    const handleSearch = (value: string) => {
+    const handleSearch = (event: any) => {
         setLoading(true)
-        setSearch(value)
+        setSearch(event.target.value)
         
         debouncedSearch(JSON.stringify({
-            search: value,
+            search: event.target.value,
             filter,
             page
         }))
@@ -54,27 +53,9 @@ export default function CommunicationSearchBar() {
         <section>
             <AutoCompleteSelect 
             value={search} 
+            label="Find a user"
             onChange={handleSearch} 
-            options={[
-                {
-                    group: "group-1",
-                    key: "0",
-                    value: "value-1"
-                },
-                {
-                    group: "group-2",
-                    key: "1",
-                    value: "value-2"
-                },
-                {
-                    key: "2",
-                    value: "value-3"
-                },
-                {
-                    key: "3",
-                    value: "value-4"
-                }
-            ]}
+            options={options}
             />
             <p>{loading ? "true" : "false"}</p>
             {search}
