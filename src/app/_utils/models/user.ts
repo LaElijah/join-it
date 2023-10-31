@@ -1,8 +1,17 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
+interface User {
+  email: String,
+  username: String,
+  password: String,
+  profile: String,
+  identity: any, 
+  groups: any[],
+  friends: any[]
+}
 
-const userSchema = new Schema({
+const userSchema = new Schema<User>({
   email: String,
   username: String,
   password: String,
@@ -25,6 +34,12 @@ const userSchema = new Schema({
       ref: "Group",
     },
   ],
+  friends: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    }
+  ]
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);
