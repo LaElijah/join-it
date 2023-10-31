@@ -14,12 +14,12 @@ export async function POST(req: NextRequest) {
         console.log(filter)
         let workingPage = page || 0
 
-        const index = Math.floor(workingPage * parseInt(API_LIMIT) )
+        const index = Math.floor(workingPage * parseInt(API_LIMIT))
         let searchParams: any = {}
         if (search) searchParams.username = search
-       
+
         await dbConnection()
-        const users = await User.find({username: { $regex: new RegExp(`.*${search}.*`)},...filter}).skip(index).limit(parseInt(API_LIMIT))
+        const users = await User.find({ username: { $regex: new RegExp(`.*${search}.*`) }, ...filter }).skip(index).limit(parseInt(API_LIMIT))
 
 
         return NextResponse.json({
@@ -41,33 +41,111 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
     try {
+        let isConnected
+        await dbConnection()
         const hostUser = (await getServerSession(authOptions)).user
-        const { user} = await req.json()
 
-        const userData = await User.findOne({ username: user})
-        const hostUserData = await User.findOne({ username: hostUser.username }).populate('friends')
 
-        let isFollowing =true
-        const userFound = hostUserData.friends.find((user: any) => {
-            return user.username === userData.username
-        })
+        const { user } = await req.json()
 
-        if (userFound) {
-            hostUserData.friends.splice(hostUserData.friends.indexOf(userData._id), 1)
+        const hostUserData = await User.findOne({ username: hostUser.username })
+            .populate('connections')
+            .populate('connectionRequests')
+
+        const userData = await User.findOne({ username: user })
+
+
+        const userFollows: any = hostUserData.connections.find((user: any) => user.username === userData.username) ? true : false
+        const userRequested = hostUserData.connectionRequests.find((user: any) => user.username === userData.username) ? true : false
+
+     
+
+        // most closed Layer
+        if ((
+            !hostUserData.settings.public["canFollow"]
+            || (
+                hostUserData["privacyMode"] !== "PUBLIC"
+                && hostUserData["privacyMode"] !== "OPEN"
+                && hostUserData["privacyMode"] !== "CUSTOM"
+            ))
+            && !userFollows
+            && !userRequested
+        ) {
+            return NextResponse.json({
+                status: "failure",
+                message: "You are unauthorized"
+
+            })
+        }
+
+        // Request connection
+        if ((
+            hostUserData["privacyMode"] !== "PUBLIC"
+            && hostUserData["privacyMode"] !== "OPEN"
+        )
+            && !userFollows
+            && !userRequested) {
+            // Push the request
+            hostUserData.connectionRequests.push(userData._id)
             await hostUserData.save()
-            isFollowing = false
-        }
-        else {
-            hostUserData.friends.push(userData._id)
+            isConnected = "PENDING"
 
-        await hostUserData.save()
-        isFollowing = true
+
+
+            return NextResponse.json({
+                status: "success",
+                payload: {
+                    isConnected: isConnected
+                }
+            })
         }
-   
+
+
+        // Direct connections
+        if ((
+            hostUserData.settings.public["canFollow"]
+            || (
+                hostUserData["privacyMode"] === "PUBLIC"
+                || hostUserData["privacyMode"] === "OPEN"
+            ))
+            && !userFollows
+            && !userRequested
+        ) {
+            // add a follower
+            hostUserData.connections.push(userData._id)
+            await hostUserData.save()
+            isConnected = "YES"
+
+
+            return NextResponse.json({
+                status: "success",
+                payload: {
+                    isConnected: isConnected
+                }
+            })
+        }
+
+        if (userRequested) {
+            //Splice the request
+            hostUserData.connectionRequests.splice(hostUserData.connectionRequests.indexOf(userData._id), 1)
+            await hostUserData.save()
+            isConnected = "NO"
+
+
+        }
+
+        if (userFollows) {
+            console.log("follower removed")
+            // Splice the follower off
+            hostUserData.connections.splice(hostUserData.connections.indexOf(userData._id), 1)
+            await hostUserData.save()
+            isConnected = "NO"
+        }
+
         return NextResponse.json({
             status: "success",
             payload: {
-                isFollowing
+                isConnected: isConnected
             }
         })
     }
@@ -76,8 +154,8 @@ export async function PUT(req: NextRequest) {
         console.log(error)
         return NextResponse.json({
             status: "failure",
-
+            message: "An internal server error occurred"
         })
-        
+
     }
 }

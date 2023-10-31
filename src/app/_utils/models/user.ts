@@ -1,6 +1,20 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
+
+
+interface GeneralUserSettings {
+
+}
+
+
+interface UserSettings {
+  canFollow: boolean;
+  canFriend: boolean
+
+}
+
+
 interface User {
   email: String,
   username: String,
@@ -8,7 +22,15 @@ interface User {
   profile: String,
   identity: any, 
   groups: any[],
-  friends: any[]
+  connections: any[],
+  connectionRequests: any,
+  settings: {
+    public: UserSettings,
+    private: UserSettings,
+    general: GeneralUserSettings
+  },
+  privacyMode: "CLOSED" | "PRIVATE" | "CUSTOM" | "PUBLIC" | "OPEN",
+  type: "GUEST" | "USER" | "ADMIN"
 }
 
 const userSchema = new Schema<User>({
@@ -34,12 +56,45 @@ const userSchema = new Schema<User>({
       ref: "Group",
     },
   ],
-  friends: [
+  connections: [
     {
     type: Schema.Types.ObjectId,
     ref: "User",
     }
-  ]
+  ],
+  connectionRequests: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    }
+  ],
+
+  settings: {
+    public: {
+      type: Object,
+      default: {
+        canFollow: true
+      }
+    },
+    private: {
+      type: Object,
+    },
+    general: {
+      type: Object
+    }
+  },
+  privacyMode: {
+    type: String,
+    default: "PUBLIC",
+    require: true
+  },
+  type: {
+    type: String,
+    default: "USER",
+    require: true
+  }
+
+  
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);
