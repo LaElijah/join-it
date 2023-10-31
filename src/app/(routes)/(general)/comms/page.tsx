@@ -21,7 +21,7 @@ import MessageBox from "@/app/_components/elements/messageBox";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import ContentWrapper from "@/app/_components/contentWrapper";
-import PeerComms from "@/app/_components/PeerComms";
+import PeerComms from "@/app/_components/peerComms";
 import CommunityComms from "@/app/_components/communityComms";
 import TabGroup from "@/app/_components/elements/tabGroup";
 

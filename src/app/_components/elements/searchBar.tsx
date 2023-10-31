@@ -9,26 +9,55 @@ type Filter = {
     value?: string;
 } 
 
-export default function CommunicationSearchBar() {
+type Option = {
+    key: string | number,
+    value: string,
+    group? : string,
+    data?: any
+}
+
+
+export default function SearchBar({ 
+    element: SelectElement,
+    url,
+    filter,
+    delay = 800
+}: {
+    element?: JSX.Element,
+    url: string,
+    filter?: Filter,
+    delay?: number
+} ) 
+    {
     const [search, setSearch] = useState("")
-    const [users, setUsers] = useState([])
-    const [filter, setFilter] = useState<Filter>({})
+    const [data, setData] = useState<Option[]>([])
     const [page, setPage] = useState(0)
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
 
     const debouncedSearch = useMemo(() => debounce(
         async (body: any) => { 
-            const response = await fetch('/api/comms/user',{
+            const response = await fetch(url,{
             method: "POST",
             body: body
         })
-            const {payload, status} = await response.json()
-            if (status === "failure") setError("An internal server error occured")
-            if (users) setUsers(payload.users)
+            const data = await response.json()
+           
+            if (data.status === "failure") setError("An internal server error occured")
+            console.log(data)
+
+            const res = data.payload.users.map((element: any, index: number) => {
+                return {
+                    key: index,
+                    value: element.username,
+                    data: data
+                }
+            })
+           console.log("res",res)
+            setData(res)
             setLoading(false)
         }
-    ,800),[])
+    ,delay),[])
    
 
     const handleSearch = (event: any) => {
@@ -42,12 +71,7 @@ export default function CommunicationSearchBar() {
         }))
     }
 
-    const options = Array.from(new Set(users?.map((user: any) => user.username))).map((username, index) => {
-        return {
-            key: index,
-            value: username, 
-        }
-    })
+
 
     return (
         <section>
@@ -55,7 +79,8 @@ export default function CommunicationSearchBar() {
             value={search} 
             label="Find a user"
             onChange={handleSearch} 
-            options={options}
+            options={data}
+            SelectElement={SelectElement}
             />
             <p>{loading ? "true" : "false"}</p>
             {search}

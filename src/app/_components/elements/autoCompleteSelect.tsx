@@ -71,13 +71,11 @@ export default function AutoCompleteSelect({
         if (event.target.value !== "") combobox.openDropdown()
         else combobox.closeDropdown()
 
-        setQuery(() => {
-            if (onChange) onChange(event)
-            return event.target.value
-        })
+        if (onChange) onChange(event)
+        setQuery(event.target.value)
     }
 
-console.log( groups[0] !== undefined)
+
 
     return (
         <Combobox
