@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, ReactElement } from "react"
 import { debounce } from "@/app/_utils/tools/debounce"
 import AutoCompleteSelect from "./autoCompleteSelect"
 
@@ -21,12 +21,14 @@ export default function SearchBar({
     element: SelectElement,
     url,
     filter,
-    delay = 800
+    delay = 800,
+    dataLabel: label
 }: {
-    element?: JSX.Element,
+    element?: ({key, value, data}: Option) => JSX.Element,
     url: string,
     filter?: Filter,
-    delay?: number
+    delay?: number,
+    dataLabel: string
 } ) 
     {
     const [search, setSearch] = useState("")
@@ -44,17 +46,16 @@ export default function SearchBar({
             const data = await response.json()
            
             if (data.status === "failure") setError("An internal server error occured")
-            console.log(data)
 
-            const res = data.payload.users.map((element: any, index: number) => {
+            const options = data.payload[label].map((element: any, index: number) => {
                 return {
                     key: index,
                     value: element.username,
-                    data: data
+                    data: element 
                 }
             })
-           console.log("res",res)
-            setData(res)
+
+            setData(options)
             setLoading(false)
         }
     ,delay),[])

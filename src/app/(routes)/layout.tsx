@@ -51,7 +51,7 @@ export default async function RootLayout({
     {
       group: "Community",
       links: [
-        { name: "Communications", key: 3 },
+        { name: "Comms", key: 3 },
         { name: "Events", key: 4 },
         { name: "Jobs", key: 5 }, // Make a community based job board for freelance workers
         { name: "Bookshelf", key: 6 },
