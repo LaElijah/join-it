@@ -16,19 +16,28 @@ type Option = {
     data?: any
 }
 
+const getOptions = (data: any, label: string) => data.payload[label].map((element: any, index: number) => {
+    return {
+        key: index,
+        value: element.username,
+        data: element 
+    }
+})
 
 export default function SearchBar({ 
     element: SelectElement,
     url,
     filter,
     delay = 800,
-    dataLabel: label
+    dataLabel: label,
+    onQuery = getOptions
 }: {
     element?: ({key, value, data}: Option) => JSX.Element,
     url: string,
     filter?: Filter,
     delay?: number,
-    dataLabel: string
+    dataLabel: string,
+    onQuery?: (data: any, label: string) => Option[]
 } ) 
     {
     const [search, setSearch] = useState("")
@@ -47,13 +56,7 @@ export default function SearchBar({
            
             if (data.status === "failure") setError("An internal server error occured")
 
-            const options = data.payload[label].map((element: any, index: number) => {
-                return {
-                    key: index,
-                    value: element.username,
-                    data: element 
-                }
-            })
+            const options = onQuery(data, label)
 
             setData(options)
             setLoading(false)

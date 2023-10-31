@@ -1,7 +1,9 @@
 "use client"
 import SearchBar from "./searchBar"
-import Link from "next/link"
 import { Combobox } from "@mantine/core"
+import { useRouter } from "next/navigation"
+import styles from "@/app/_styles/elements/userSearch.module.scss"
+
 
 type Option = {
     key: string | number,
@@ -11,16 +13,15 @@ type Option = {
 }
 
 
+
 function UserOption({key, value, data}: Option) {
+    const router = useRouter()
 
     return (
-        <Link key={key} href={`/comms/peers/${data._id}`}>
-             <Combobox.Option value={value} key={key}>
-            <img src={data.profile} />
+             <Combobox.Option className={styles.profileOption} onClick={() => router.push(`/comms/peers/${data._id}`)} value={value} key={key}>
+            <img src={data.profile} width={32} height={32} />
             <h3>{value}</h3>
             </Combobox.Option>
-
-        </Link>
     )
 }
 
@@ -40,7 +41,7 @@ export default function UserSearch() {
     
     return <SearchBar 
     url='/api/comms/user' 
-    // onQuery={handleQuery} 
+    onQuery={handleQuery} 
     element={UserOption} 
     dataLabel="users"
 
