@@ -4,7 +4,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     console.log(body);
-    const response = await fetch("http://54.209.121.134/create", {
+    const response = await fetch(`http://${process.env.EVENT_SERVICE_HOSTNAME}/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
