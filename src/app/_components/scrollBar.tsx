@@ -25,7 +25,7 @@ export default function SettingsBar({
   element: SingleTypeElement, 
   data
   }: SettingsBarProps) {
-  const [page, setPage] = useState("Account Details");
+  const [page, setPage] = SingleTypeElement ? ["", () => ""] : useState("Account Details");
   const body = SingleTypeElement ? <SingleTypeElement data={data} /> : children?.get(page)
 
   

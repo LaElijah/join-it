@@ -1,0 +1,13 @@
+
+.container:first-child  {
+    display: flex;
+    width: 100%;
+
+    & > :first-child {
+        width: 24%
+    }
+
+    & > :last-child {
+        width: 76%;
+    }
+}

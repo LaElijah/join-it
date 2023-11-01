@@ -1,5 +1,6 @@
 "use client"
 import ScrollBar from "@/app/_components/scrollBar"
+import styles from "@/app/_styles/components/messageController.module.scss"
 type OptionGroup = {
     label: string;
     options: string[];
@@ -23,13 +24,23 @@ export default async function MessageController({session}: any) {
     ];
 
     const data = {
-        username: "test"
+        username: "test",
+        groupId: 'hash',
+        type: 'message',
+        history: [
+            {
+                message: "can you see me here?"
+            }
+        ]
     }
 
 
     return (
-        <div>
-            <ScrollBar session={session} options={options}
+        <div className={styles.container}>
+            <ScrollBar 
+            
+            session={session} 
+            options={options}
             element={MessageBody} 
             data={data}
             />

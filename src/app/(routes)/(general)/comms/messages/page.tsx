@@ -14,7 +14,7 @@ export default async function Messages() {
         <ContentWrapper>
             <MessageController session={session} />
 
-            <MessageBody />
+          
         </ContentWrapper>
     )
 }
