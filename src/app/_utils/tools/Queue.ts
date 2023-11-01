@@ -1,3 +1,4 @@
+
 export default class Queue {
     private store: any[]
     private limit?: number = 20
@@ -7,13 +8,13 @@ export default class Queue {
         if (limit) this.limit = limit
         
         if (startingArray) {
-            console.log(startingArray.length)
             let workingArray = []
             let workingLimit = (this.limit || 20) -1
             let totalLimit = (startingArray.length < workingLimit) ? startingArray.length : workingLimit
             
             for (let i = 0; i <= totalLimit; i++) {
-                workingArray.push(startingArray.reverse()[i])
+                let element = startingArray.reverse()[i]
+                if (element) workingArray.push(element)
             }
             this.store = [...workingArray]
         } else this.store = []
@@ -21,16 +22,20 @@ export default class Queue {
     }
 
     public add(element: any) {
-        console.log("queuing")
+        console.log(element)
+     
         let limit = this.limit || 20
-        console.log(limit, this.store.length)
+     
         if (this.store.length >= limit) {
-            console.log("why are you here?")
+            let workingStore = [...this.store]
+            workingStore.shift()
+            // this.store = [...workingStore, element]
             this.store.shift()
             this.store.push(element)
         }
         else {
-            console.log(element)
+            // this.store = [...this.store, element]
+            console.log(this.store)
             this.store.push(element)
             console.log(this.store)
         }

@@ -1,7 +1,6 @@
 import ContentWrapper from "@/app/_components/contentWrapper";
 import MessageController from "@/app/_components/messageController";
-import MessageBody from "@/app/_components/messageBody";
-
+import styles from "@/app/_styles/pages/messages.module.scss"
 import authOptions from "../../../../(routes)/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 
@@ -11,10 +10,8 @@ export default async function Messages() {
 
 
     return (
-        <ContentWrapper>
+        <ContentWrapper className={styles.container}>
             <MessageController session={session} />
-
-          
         </ContentWrapper>
     )
 }

@@ -1,0 +1,13 @@
+.container {
+
+    height: 100%;
+    max-height: 72vh;
+
+    & > :first-child {
+        height: 100%;
+        max-height: 72vh;
+    
+    }
+
+    
+}

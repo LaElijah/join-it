@@ -15,7 +15,7 @@ export default function MessageActions({
     onEnter: () => void,
 }) {
     return (
-        <section className={styles.container}>
+        <footer className={styles.container}>
             <IconCamera />
             <TextInput 
             value={value}
@@ -23,7 +23,7 @@ export default function MessageActions({
             onKeyDown={(event) => { if (event.code === "Enter") onEnter() }}
             />
             <IconTriangleFilled onClick={onEnter}/>
-        </section>
+        </footer>
 
     )
 }
