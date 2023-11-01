@@ -1,4 +1,4 @@
-import ScrollBar from "./settingsBar";
+import ScrollBar from "../scrollBar";
 import styles from "@/app/_styles/components/settings/settingsPage.module.scss";
 import AccountDetails from "./settingsAccountDetails";
 import Privacy from "./settingsPrivacy";
@@ -9,6 +9,12 @@ import Customization from "./settingsCustomization";
 import CommunicationPreferences from "./settingsCommunicationPreferences";
 import AccountDeactivation from "./settingsAccountDeactivation";
 import Help from "./settingsHelp";
+
+type OptionGroup = {
+  label: string;
+  options: string[];
+};
+
 
 export default function SettingsPage({ session }: any) {
   const pages = new Map([
@@ -22,9 +28,29 @@ export default function SettingsPage({ session }: any) {
     ["Help & Feedback", <Help key={7} session={session} />],
   ]);
 
+  const options: OptionGroup[] = [
+    {
+      label: "Personal Settings",
+      options: ["Details", "Customization"],
+    },
+    {
+      label: "Security",
+      options: ["Security", "Privacy"],
+    },
+    {
+      label: "Preferences",
+      options: ["Notifications", "Communication"],
+    },
+    {
+      label: "More",
+      options: ["Deactivate", "Help & Feedback"],
+    },
+  ];
+
+
   return (
     <div className={styles.container}>
-      <ScrollBar session={session}>{pages}</ScrollBar>
+      <ScrollBar session={session} options={options}>{pages}</ScrollBar>
     </div>
   );
 }

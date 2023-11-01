@@ -26,23 +26,30 @@ export default function NavMenu(props: { session: any }) {
 
   const profileLinks: ProfileLink[] = [
     {
-      name: "View messages",
+      name: "Messages",
       key: 1,
       icon: <IconChevronRight width={16} height={16} />,
-      link: "/profile",
+      link: "/comms/messages",
     },
     {
-      name: "Check activity",
+      name: "Activity",
       key: 2,
+      icon: <IconChevronRight width={16} height={16} />,
+      link: "/profile/activity",
+    },
+    {
+      name: "Profile",
+      key: 3,
       icon: <IconChevronRight width={16} height={16} />,
       link: "/profile",
     },
     {
       name: "Settings",
-      key: 3,
+      key: 4,
       icon: <IconChevronRight width={16} height={16} />,
       link: "/profile/settings",
     },
+   
   ];
 
   const isMobile = useMediaQuery("(max-width: 424px)");
