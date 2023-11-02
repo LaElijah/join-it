@@ -23,7 +23,7 @@ export default function MessageBody({ data }: any) {
     // WebSocket set up and actions 
 
 
-    const ws: WebSocket = useMemo(() => new WebSocket(`ws://${process.env.EVENT_SERVICE_HOSTNAME || 'localhost'}`), [process.env.EVENT_SERVICE_HOSTNAME])
+    const ws: WebSocket = useMemo(() => new WebSocket(`ws://${process.env.EVENT_SERVICE_HOSTNAME || '18.117.128.139'}`), [process.env.EVENT_SERVICE_HOSTNAME])
 
 
 
