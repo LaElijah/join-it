@@ -1,7 +1,7 @@
 import { Media } from "@/app/_types/mediaTypes";
 
 
-export const MockMediaData: Media[] = [
+export const MockMediaData: any[] = [
   {
     key: "0",
     title: "The Hobbit",

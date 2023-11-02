@@ -22,7 +22,7 @@ export default class Queue {
     }
 
     public add(element: any) {
-        console.log(element)
+    
      
         let limit = this.limit || 20
      
@@ -35,9 +35,7 @@ export default class Queue {
         }
         else {
             // this.store = [...this.store, element]
-            console.log(this.store)
             this.store.push(element)
-            console.log(this.store)
         }
     }
 

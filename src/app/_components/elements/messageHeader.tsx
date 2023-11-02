@@ -4,9 +4,9 @@ export default function MessageHeader( { groupId, username }: any) {
 
 
     return (
-        <footer>
+        <header>
             {username}
             {groupId}
-        </footer>
+        </header>
     )
 }

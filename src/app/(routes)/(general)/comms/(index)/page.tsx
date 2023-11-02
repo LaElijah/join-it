@@ -31,8 +31,8 @@ export default async function Groups() {
   const styles: any = "";
 
   const pages = new Map([
-    ["Community", <CommunityComms/>],
-    ["Peers", <PeerComms />]
+    ["Community", <CommunityComms key="community" />],
+    ["Peers", <PeerComms key="peers" />]
   ])
 
   

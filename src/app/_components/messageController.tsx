@@ -24,7 +24,7 @@ export default async function MessageController({session}: any) {
     ];
 
     const data = {
-        username: "test",
+        username: session.user.username,
         groupId: 'hash',
         type: 'message',
         history: [
