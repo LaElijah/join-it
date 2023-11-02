@@ -9,6 +9,7 @@ import "@mantine/core/styles.css";
 import "../globals.scss";
 import { Roboto } from "next/font/google"
 
+
 const roboto = Roboto({
   variable: '--font-roboto',
   weight: ['100', '300', '400', '500', '700', '900'],
