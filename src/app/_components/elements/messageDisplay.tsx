@@ -2,7 +2,6 @@
 import styles from "@/app/_styles/elements/messageDisplay.module.scss"
 
 export default function MessageDisplay({ messages}: any) {
-    console.log(messages)
 
     return (
         <main className={styles.container}>

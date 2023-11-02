@@ -9,7 +9,7 @@ type OptionGroup = {
 import MessageBody from "./messageBody";
 
 
-export default async function MessageController({session}: any) {
+export default function MessageController({session}: any) {
 
     const options: OptionGroup[] = [
         {

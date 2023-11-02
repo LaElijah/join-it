@@ -55,28 +55,25 @@ export default function MessageBody({ data }: any) {
     }, [])
 
     const handleMessage = () => {
-        ws.send(JSON.stringify({
-            payload: {
-                sender: username,
-                receiver: 'admin',
-                groupId,
-                type: "message",
-                message,
-                timestamp: `${new Date()}`
-            },
-        }))
-        // messages.add({
-        //     message
-        // })
+        const payload =  {
+            sender: username,
+            receiver: 'admin',
+            groupId,
+            type: "message",
+            message,
+            timestamp: `${new Date()}`
+        }
+        ws.send(JSON.stringify({payload}))
+        messages.add(payload)
+        setCurrentMessages(messages.queue)
         setMessage("")
+        
     }
 
     const handleChange = (event: any) => {
         setMessage(event.target.value)
     }
 
-
-    console.log(messages)
 
 
 
