@@ -50,10 +50,7 @@ export default function MessageBody({ data }: any) {
             console.log(event)
         })
 
-        ws.addEventListener("close", (event) => {
-            ws.close()
-        })
-
+        window.addEventListener("unload", () => ws.close())
         ws.addEventListener("message", (response) => {
             const event = JSON.parse(response.data)
 
