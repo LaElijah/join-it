@@ -25,7 +25,8 @@ export default function MessageBody({ data }: any) {
     const hostname = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
 
     const ws: WebSocket = useMemo(() => new WebSocket(`wss://${hostname}`), [hostname]) 
-    
+
+
 
 
 
@@ -44,6 +45,13 @@ export default function MessageBody({ data }: any) {
                 type: "handshake",
             }))
 
+        })
+        ws.addEventListener("error", (event) => {
+            console.log(event)
+        })
+
+        ws.addEventListener("close", (event) => {
+            ws.close()
         })
 
         ws.addEventListener("message", (response) => {
