@@ -10,7 +10,7 @@ export default function GuestData() {
 
   const getCredentials = async () => {
     try {
-      const response = await fetch("/api/auth/guest");
+      const response = await fetch("/api/auth/guest", { next: {revalidate: 0}});
       const data = await response.json();
 
       const { username, password } = data.payload;
