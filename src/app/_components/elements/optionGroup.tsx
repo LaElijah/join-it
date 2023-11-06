@@ -8,6 +8,7 @@ type OptionGroup = {
 interface OptionGroupProps extends OptionGroup {
   setPage: (option: string) => void;
   page: string;
+  onClick?: (option: string) => void
 }
 
 export default function OptionGroup({
@@ -15,6 +16,7 @@ export default function OptionGroup({
   options,
   page,
   setPage,
+  onClick
 }: OptionGroupProps) {
   return (
     <div key={label}>
@@ -25,7 +27,11 @@ export default function OptionGroup({
           return (
             <div
               key={option}
-              onClick={() => setPage(option)}
+              onClick={() => {
+                if (onClick) onClick(option)
+                setPage(option)
+                
+              }}
               className={option === page ? styles.activeOption : styles.option}
             >
               <h2>{option}</h2>

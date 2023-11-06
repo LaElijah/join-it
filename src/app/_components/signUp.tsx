@@ -1,11 +1,14 @@
 import styles from "@/app/_styles/pages/signup.module.scss";
 import Link from "next/link";
 import SignUpInputs from "./elements/signUpInputs";
+import { useEffect } from "react";
 
 // TODO: Change pages length for register page
 
-export default function SignUp(props: any) {
-  const { state, dispatch } = props;
+export default function SignUp({ state, dispatch }: { state: any, dispatch: any }) {
+  
+
+  
 
   return (
     <div className={styles.container}>

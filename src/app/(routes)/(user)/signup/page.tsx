@@ -3,7 +3,6 @@
 import { useReducer } from "react";
 import SignUp from "@/app/_components/signUp";
 import Identity from "@/app/_components/identity";
-
 import { urlToFile } from "@/app/_utils/images/imageUtils";
 import { useRouter } from "next/navigation";
 
@@ -17,15 +16,6 @@ export default function Register() {
     };
   };
 
-  // personality: [],
-  // religion: [],
-  // education: [],
-  // age: [],
-  // family: [],
-  // relationship: [],
-  // location: [],
-  // physicalHealth: [],
-  // },
 
   const [state, dispatch] = useReducer(reducer, {
     username: "",

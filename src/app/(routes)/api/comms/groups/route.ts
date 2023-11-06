@@ -20,7 +20,7 @@ export async function POST(req: any) {
   try {
     const session = await getServerSession(authOptions);
 
-    const body = await req.json();
+    const {selectedUsers} = await req.json();
     await dbConnection();
 
     const user = await User.findOne({ _id: session.user.id });
@@ -28,12 +28,12 @@ export async function POST(req: any) {
       return NextResponse.json({ status: "failure" });
     }
 
-    const hashedGroupName = await bcrypt.hash(body.groupName, 10);
 
     const group = new Group({
-      access_key: hashedGroupName,
       users: [user._id],
-      requestedUsers: [],
+      requestedUsers: [...selectedUsers.map(async (user: string) => {
+          return (await User.findOne({username: user}))._id
+      })],
       banned: [],
       messages: [],
     });
@@ -44,7 +44,6 @@ export async function POST(req: any) {
 
     await user.save();
 
-    return NextResponse.redirect("/comms");
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: "failure" });

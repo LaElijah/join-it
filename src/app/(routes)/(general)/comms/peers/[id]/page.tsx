@@ -12,7 +12,7 @@ export default async function PeerProfile({ params }: any) {
 
 
     const hostUser = await User.findById(session.user.id).populate('connections').populate('connectionRequests')
-    const user = await User.findById(params.id)
+    const user = await User.findOne({ username: params.id })
 
     const userFollows = hostUser.connections.map((element: any) => element.username === user.username).length > 0
     const userRequested = hostUser.connectionRequests.map((element: any) => element.username === user.username).length > 0

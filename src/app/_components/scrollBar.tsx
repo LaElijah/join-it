@@ -15,7 +15,8 @@ interface SettingsBarProps {
   session: any,
   options: OptionGroup[],
   element?: (data: any) => JSX.Element,
-  data?: any
+  data?: any,
+  onClick?: (event: any) => void
 }
 
 export default function SettingsBar({ 
@@ -23,10 +24,11 @@ export default function SettingsBar({
   session, 
   options, 
   element: SingleTypeElement, 
-  data
+  data,
+  onClick
   }: SettingsBarProps) {
   const [page, setPage] =  useState("Account Details");
-  const body = SingleTypeElement ? <SingleTypeElement data={data} /> : children?.get(page)
+  const body = SingleTypeElement ? <SingleTypeElement data={data} session={session} /> : children?.get(page)
 
   
   
@@ -44,6 +46,7 @@ export default function SettingsBar({
               options={options}
               setPage={setPage}
               page={page}
+              onClick={onClick}
             />
           );
         })}

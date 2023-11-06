@@ -1,6 +1,8 @@
+
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
+
 
 
 interface GeneralUserSettings {
@@ -20,8 +22,9 @@ interface User {
   username: String,
   password: String,
   profile: String,
-  identity: any, 
+  identity: any,
   groups: any[],
+  groupRequests: any[],
   connections: any[],
   connectionRequests: any,
   settings: {
@@ -56,16 +59,22 @@ const userSchema = new Schema<User>({
       ref: "Group",
     },
   ],
+  groupRequests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Group",
+    }
+  ],
   connections: [
     {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     }
   ],
   connectionRequests: [
     {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: "User",
     }
   ],
 
@@ -94,7 +103,7 @@ const userSchema = new Schema<User>({
     require: true
   }
 
-  
+
 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

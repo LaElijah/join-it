@@ -1,17 +1,14 @@
 "use client";
 import { TextInput, Indicator, Button } from "@mantine/core";
 import styles from "@/app/_styles/elements/usernameInput.module.scss";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { debounce } from "@/app/_utils/tools/debounce";
 
-export default function UsernameInput(props: any) {
-  const { state, dispatch, isInvalid } = props;
-
+export default function UsernameInput({ state, dispatch, isInvalid }: 
+  { state: any, dispatch: any, isInvalid: any }) {
   const { username } = state;
-  const [usernameResponse, setUsernameResponse] = useState();
 
-  function usernameExists(event: any) {
-    const getData = async () => {
+  async function usernameExists(event: any) {
       const response = await fetch(`api/auth/confirmUser`, {
         method: "POST",
         headers: {
@@ -20,12 +17,8 @@ export default function UsernameInput(props: any) {
         body: JSON.stringify({ username: event.target.value }),
       });
       const data = await response.json();
-      return data;
-    };
-    const data: any = getData();
-
-    dispatch({ name: "usernameExists", payload: data.exists });
-    return data.exists;
+      return data.exists;
+    
   }
 
   const debouncedUsernameExists = useMemo(
@@ -33,7 +26,7 @@ export default function UsernameInput(props: any) {
       debounce(async (event: any) => {
         isInvalid(event, async () => {
           let response = await usernameExists(event);
-          console.log(response);
+          dispatch({ name: "usernameExists", payload: response });
           return response;
         });
       }, 300),
@@ -58,6 +51,7 @@ export default function UsernameInput(props: any) {
               name: "username",
               payload: event.target.value.replace(/[^a-zA-Z0-9]/g, ""),
             });
+
             dispatch({ name: "usernameExists", payload: false });
 
             debouncedUsernameExists(event);

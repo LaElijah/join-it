@@ -18,7 +18,7 @@ function UserOption({key, value, data}: Option) {
     const router = useRouter()
 
     return (
-             <Combobox.Option className={styles.profileOption} onClick={() => router.push(`/comms/peers/${data._id}`)} value={value} key={key}>
+             <Combobox.Option className={styles.profileOption} onClick={() => router.push(`/comms/peers/${data.username}`)} value={value} key={key}>
             <img src={data.profile} width={32} height={32} />
             <h3>{value}</h3>
             </Combobox.Option>

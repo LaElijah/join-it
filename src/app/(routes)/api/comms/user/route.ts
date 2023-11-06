@@ -57,16 +57,16 @@ export async function PUT(req: NextRequest) {
 
         const userFollows: any = hostUserData.connections.find((user: any) => user.username === userData.username) ? true : false
         const userRequested = hostUserData.connectionRequests.find((user: any) => user.username === userData.username) ? true : false
-
+        
      
 
         // most closed Layer
         if ((
-            !hostUserData.settings.public["canFollow"]
+            !userData.settings.public["canFollow"]
             || (
-                hostUserData["privacyMode"] !== "PUBLIC"
-                && hostUserData["privacyMode"] !== "OPEN"
-                && hostUserData["privacyMode"] !== "CUSTOM"
+                userData["privacyMode"] !== "PUBLIC"
+                && userData["privacyMode"] !== "OPEN"
+                && userData["privacyMode"] !== "CUSTOM"
             ))
             && !userFollows
             && !userRequested
@@ -80,14 +80,16 @@ export async function PUT(req: NextRequest) {
 
         // Request connection
         if ((
-            hostUserData["privacyMode"] !== "PUBLIC"
-            && hostUserData["privacyMode"] !== "OPEN"
+            userData["privacyMode"] !== "PUBLIC"
+            && userData["privacyMode"] !== "OPEN"
         )
             && !userFollows
             && !userRequested) {
             // Push the request
             hostUserData.connectionRequests.push(userData._id)
+            userData.connectionRequests.push(hostUserData._id)
             await hostUserData.save()
+            await userData.save()
             isConnected = "PENDING"
 
 
@@ -103,17 +105,20 @@ export async function PUT(req: NextRequest) {
 
         // Direct connections
         if ((
-            hostUserData.settings.public["canFollow"]
+            userData.settings.public["canFollow"]
             || (
-                hostUserData["privacyMode"] === "PUBLIC"
-                || hostUserData["privacyMode"] === "OPEN"
+                userData["privacyMode"] === "PUBLIC"
+                || userData["privacyMode"] === "OPEN"
+                || userData["privacyMode"] === "CUSTOM"
             ))
             && !userFollows
             && !userRequested
         ) {
             // add a follower
             hostUserData.connections.push(userData._id)
+            userData.connections.push(hostUserData._id)
             await hostUserData.save()
+            await userData.save()
             isConnected = "YES"
 
 
@@ -128,7 +133,9 @@ export async function PUT(req: NextRequest) {
         if (userRequested) {
             //Splice the request
             hostUserData.connectionRequests.splice(hostUserData.connectionRequests.indexOf(userData._id), 1)
+            userData.connectionRequests.splice(userData.connectionRequests.indexOf(hostUserData._id), 1)
             await hostUserData.save()
+            await userData.save()
             isConnected = "NO"
 
 
@@ -138,6 +145,8 @@ export async function PUT(req: NextRequest) {
             console.log("follower removed")
             // Splice the follower off
             hostUserData.connections.splice(hostUserData.connections.indexOf(userData._id), 1)
+            userData.connections.splice(userData.connections.indexOf(hostUserData._id), 1)
+            await userData.save()
             await hostUserData.save()
             isConnected = "NO"
         }

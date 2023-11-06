@@ -23,6 +23,7 @@ export default function MessageActions({
             onKeyDown={(event) => { if (event.code === "Enter") onEnter() }}
             />
             <IconTriangleFilled onClick={onEnter}/>
+            {/**TODO: Put a modal here for image uploads */}
         </footer>
 
     )

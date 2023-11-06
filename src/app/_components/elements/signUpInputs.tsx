@@ -1,64 +1,24 @@
+"use client"
 import { Button, Autocomplete, PasswordInput } from "@mantine/core";
 import styles from "@/app/_styles/elements/signupInputs.module.scss";
 import UsernameInput from "./usernameInput";
+import { useMemo } from "react";
 
-const rules: any = {};
-export default function SignUpInputs(props: any) {
-  const { state, dispatch } = props;
+export default function SignUpInputs({ state, dispatch }: { state: any, dispatch: any }) {
+
+  const rules = useMemo(() => new Map(), [])
 
   const { email, password, password_confirmation } = state;
 
   const emailCategories =
     email.trim().length > 0 && !email.includes("@")
       ? ["gmail.com", "outlook.com", "yahoo.com"].map(
-          (provider) => `${email}@${provider}`,
-        )
+        (provider) => `${email}@${provider}`,
+      )
       : [];
 
-  const isInvalid = async (
-    event: {
-      target: { id: string; value: string };
-    },
-    cb = console.log,
-  ) => {
-    const { id, value } = event.target;
-
-    switch (id) {
-      case "password":
-        rules[id] =
-          state.password === state.password_confirmation &&
-          state.password.length >= 8;
-
-        rules["password_confirmation"] =
-          state.password === state.password_confirmation &&
-          state.password_confirmation.length >= 8;
-        break;
-      case "password_confirmation":
-        rules[id] =
-          state.password === state.password_confirmation &&
-          state.password.length >= 8;
-        rules["password"] =
-          state.password === state.password_confirmation &&
-          state.password_confirmation.length >= 8;
-        break;
-      case "email":
-        rules[id] = state.email.includes("@") && state.email.includes(".");
-        break;
-      case "username":
-        rules[id] = cb(event);
-        break;
-      default:
-        rules.set(id, value !== "");
-        break;
-    }
-
-    // ruleList.forEach((rule) => handleRule(rule, state[rule], state))
-
-    console.log(rules);
-    const passes = Object.values(rules).includes(false);
-    console.log(passes);
-    return passes;
-  };
+  
+  
 
   return (
     <div className={styles.container}>
@@ -73,7 +33,7 @@ export default function SignUpInputs(props: any) {
               value: event,
             },
           };
-          dispatch({ name: "disableForm", payload: isInvalid(validEvent) });
+         
         }}
         type="email"
         id={"email"}
@@ -81,7 +41,7 @@ export default function SignUpInputs(props: any) {
         label={"Email"}
       />
 
-      <UsernameInput state={state} dispatch={dispatch} isInvalid={isInvalid} />
+      <UsernameInput state={state} dispatch={dispatch} isInvalid={undefined} />
       <PasswordInput
         value={password}
         description={
@@ -95,8 +55,6 @@ export default function SignUpInputs(props: any) {
           } else {
             dispatch({ name: "passwordMatchError", payload: false });
           }
-
-          dispatch({ name: "disableForm", payload: isInvalid(event) });
         }}
         id={"password"}
         label={"Password"}
@@ -114,15 +72,13 @@ export default function SignUpInputs(props: any) {
           } else {
             dispatch({ name: "passwordMatchError", payload: false });
           }
-
-          dispatch({ name: "disableForm", payload: isInvalid(event) });
         }}
         id={"password_confirmation"}
         label={"Confirm Password"}
         error={state.passwordMatchError ? "Passwords do not match" : null}
       />
       <Button
-        disabled={state.disableForm || state.usernameExists}
+        // disabled={state.disableForm || state.usernameExists}
         className={styles.button}
         onClick={() => {
           dispatch({ name: "submit", payload: "Skip" });
