@@ -61,6 +61,7 @@ export default function MessageBody({ data, session }: any) {
 
             ws.addEventListener("error", () => { console.log() })
             ws.addEventListener("close", () => console.log("closed"))
+            window.addEventListener("unload", () => ws.close())
            
             
             
