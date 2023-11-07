@@ -131,6 +131,9 @@ dependencies:
   validatorjs:
     specifier: ^3.22.1
     version: 3.22.1
+  ws:
+    specifier: ^8.14.2
+    version: 8.14.2
 
 devDependencies:
   '@types/bcrypt':
@@ -142,6 +145,9 @@ devDependencies:
   '@types/validatorjs':
     specifier: ^3.15.1
     version: 3.15.2
+  '@types/ws':
+    specifier: ^8.5.8
+    version: 8.5.8
   postcss:
     specifier: ^8.4.31
     version: 8.4.31
@@ -904,6 +910,12 @@ packages:
       '@types/node': 20.8.9
       '@types/webidl-conversions': 7.0.2
     dev: false
+
+  /@types/ws@8.5.8:
+    resolution: {integrity: sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==}
+    dependencies:
+      '@types/node': 20.8.9
+    dev: true
 
   /@typescript-eslint/parser@6.9.0(eslint@8.45.0)(typescript@5.2.2):
     resolution: {integrity: sha512-GZmjMh4AJ/5gaH4XF2eXA8tMnHWP+Pm1mjQR2QN4Iz+j/zO04b9TOvJYOX2sCNIQHtRStKTxRY1FX7LhpJT4Gw==}
@@ -4628,6 +4640,19 @@ packages:
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  /ws@8.14.2:
+    resolution: {integrity: sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
     peerDependenciesMeta:
       bufferutil:
         optional: true

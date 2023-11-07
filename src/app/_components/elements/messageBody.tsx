@@ -26,6 +26,12 @@ export default function MessageBody({ data, session }: any) {
     const ws: WebSocket = useMemo(() => new WebSocket(`wss://${wsHost}`), [wsHost, groupId])
 
 
+    function heartbeat(ws: any) {
+        clearTimeout(ws.pingTimeout);
+        ws.pingTimeout = setTimeout(() => {
+          ws.terminate();
+        }, 30000 + 1000);
+      }
 
 
     useEffect(() => {
@@ -45,16 +51,19 @@ export default function MessageBody({ data, session }: any) {
             })
         
 
-            ws.addEventListener("message", (response) => {
+            ws.addEventListener("message", (response: { data: string }) => {
                 const event = JSON.parse(response.data)
 
                 if (event.type === "message") messages.add(event.payload)
                 setCurrentMessages(messages.queue)
 
             })
-            ws.addEventListener("error", (event) => { console.log() })
-            ws.addEventListener("close", (event) => "")
-            window.addEventListener("unload", () => ws.close())
+
+            ws.addEventListener("error", () => { console.log() })
+            ws.addEventListener("close", () => console.log("closed"))
+           
+            
+            
         
     }, [data])
 
@@ -65,6 +74,7 @@ export default function MessageBody({ data, session }: any) {
 
 
         const handleMessage = () => {
+            
             const payload = {
                 message,
                 groupId,

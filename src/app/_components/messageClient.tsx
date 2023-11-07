@@ -41,7 +41,8 @@ export default function MessageClient({
             body: JSON.stringify({
                 groupName,
                 username: session.user.username
-            })
+            }),
+            next: { revalidate: 0 }
         })
 
         const data = await response.json()
