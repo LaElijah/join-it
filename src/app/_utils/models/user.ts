@@ -82,7 +82,8 @@ const userSchema = new Schema<User>({
     public: {
       type: Object,
       default: {
-        canFollow: true
+        canFollow: true,
+        canMessage: true
       }
     },
     private: {

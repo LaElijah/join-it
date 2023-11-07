@@ -8,68 +8,74 @@ import Queue from "../../_utils/tools/Queue"
 import MessageDisplay from "@/app/_components/elements/messageDisplay"
 import MessageHeader from "./messageHeader"
 import styles from "@/app/_styles/components/messageBody.module.scss"
-import User from "../../_utils/models/user"
 
 
 export default function MessageBody({ data, session }: any) {
-    const { username, groupId, type, history } = data
-    console.log("my history", history)
+    const { hostname, groupId, type, history, createGroup } = data
     const messages = useMemo(() => new Queue(40, history), [data])
+ 
+
+
+
     const [message, setMessage] = useState("")
+    const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
+    const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
+    const ws: WebSocket = useMemo(() => new WebSocket(`wss://${wsHost}`), [wsHost, groupId])
+
+
+
 
     useEffect(() => {
-        ws.addEventListener("open", (event: any) => {
-            ws.send(JSON.stringify({
-                sender: username,
-                receiever: 'admin',
-                groupId,
-                type: "handshake",
-                message,
-                timestamp: `${new Date()}`,
-                metadata: JSON.stringify({
-                    profile: session.user.profile
-                })
-            }))
+          
+            ws.addEventListener("open", (event: any) => {
+                ws.send(JSON.stringify({
+                    sender: hostname,
+                    groupId: groupId || "none",
+                    type: "handshake",
+                    message,
+                    timestamp: `${new Date()}`,
+                    metadata: JSON.stringify({
+                        profile: session.user.profile
+                    })
+                }))
 
-        })
+            })
+        
 
-        ws.addEventListener("message", (response) => {
-            const event = JSON.parse(response.data)
+            ws.addEventListener("message", (response) => {
+                const event = JSON.parse(response.data)
 
-            if (event.type === "message") messages.add(event.payload)
-            setCurrentMessages(messages.queue)
+                if (event.type === "message") messages.add(event.payload)
+                setCurrentMessages(messages.queue)
 
-        })
-        ws.addEventListener("error", (event) => { console.log() })
-        ws.addEventListener("close", (event) => ws.close())
-        window.addEventListener("unload", () => ws.close())
-    }, [])
+            })
+            ws.addEventListener("error", (event) => { console.log() })
+            ws.addEventListener("close", (event) => "")
+            window.addEventListener("unload", () => ws.close())
+        
+    }, [data])
 
     // Custom data
     // WebSocket set up and actions 
-    const hostname = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
-    const ws: WebSocket = useMemo(() => new WebSocket(`wss://${hostname}`), [hostname])
-
-
+   
     if (data.setting !== "default") {
+
 
         const handleMessage = () => {
             const payload = {
-                sender: username,
-                receiver: 'admin',
-                groupId,
-                type: "message",
                 message,
+                groupId,
+                sender: hostname,
+                type: "message",
                 timestamp: `${new Date()}`,
                 metadata: JSON.stringify({
                     profile: '',
-
                 })
             }
-            ws.send(JSON.stringify({ ...payload }))
+            ws.send(JSON.stringify(payload))
             messages.add(payload)
 
             setCurrentMessages(messages.queue)
@@ -84,7 +90,7 @@ export default function MessageBody({ data, session }: any) {
             <section className={styles.container}>
 
                 <MessageHeader {...data} />
-                <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} username={username} />
+                <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
                 <MessageActions onEnter={handleMessage} value={message} onChange={(event) => setMessage(event.target.value)} />
 
             </section>
@@ -92,49 +98,42 @@ export default function MessageBody({ data, session }: any) {
     }
     else {
 
-        
 
 
-        const createGroup = async ({ selectedUsers }: { selectedUsers: string[] }) => {
-            const response = await fetch("/api/comms/groups", {
-                method: "POST",
-                body: JSON.stringify({
-                    hostUser: session.user.username,
-                    selectedUsers
-                })
-            })
 
-            const data = await response.json()
-            console.log(data)
-
-        }
 
         const handleSelectedUsers = (value: any) => {
             if (selectedUsers.find((user: string) => value === user)) {
-                setSelectedUsers(current => current.slice(current.indexOf(value), 1))
+                setSelectedUsers(current => current.splice(current.indexOf(value), 1))
             } else {
                 setSelectedUsers(current => [value, ...current])
             }
         }
 
 
+        const handleUserClick = multiSelect ? handleSelectedUsers : createGroup
+
         return (
             <section>
-                <button onClick={() => createGroup({
-                    selectedUsers
-                })}>
-                    Select
+                <button onClick={() => setMultiSelect(!multiSelect)}>
+                    Select multiple
+                </button>
+
+
+                <button onClick={() => multiSelect ? createGroup(selectedUsers) : undefined}>
+                    Create group
                 </button>
 
                 {data.allConnections.map((connect: any) => (
-                    <div onClick={() => handleSelectedUsers(connect.username)} >
-                    <h3 >{connect.username}</h3>
+                    <div key={connect.username} onClick={() => handleUserClick(connect.username)} >
+                        <h3 >{connect.username}</h3>
                     </div>
                 ))}
 
-                {selectedUsers.length}
+                {JSON.stringify(selectedUsers, null, 4)}
+                <h3>Is multi: {multiSelect ? "true" : "false"}</h3>
 
-                
+
 
             </section>
         )

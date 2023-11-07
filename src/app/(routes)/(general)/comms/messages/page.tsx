@@ -31,6 +31,7 @@ export default async function Messages() {
             }
         ]
         )
+        .populate("connections")
         .populate("connectionRequests")
         .populate("groups")
         .populate("groupRequests")

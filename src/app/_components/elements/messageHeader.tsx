@@ -1,12 +1,13 @@
 
 
-export default function MessageHeader( { groupId, username }: any) {
+export default function MessageHeader( data: any) {
+    // console.log(data)
 
 
     return (
         <header>
-            {username}
-            {groupId}
+            {data.hostname}
+            {data.groupId}
         </header>
     )
 }
