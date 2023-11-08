@@ -51,6 +51,7 @@ export default function MessageBody({ data, session }: any) {
 
             socket.onmessage = (response: { data: string }) => {
                 const event = JSON.parse(response.data)
+                console.log(event)
 
                 if (event.type === "message") messages.add(event.payload)
                 setCurrentMessages(messages.queue)

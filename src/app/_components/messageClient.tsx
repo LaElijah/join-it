@@ -74,8 +74,10 @@ export default function MessageClient({
                     body: JSON.stringify({ selectedUsers }),
                     next: { revalidate: 0 }
                 })
+                
 
                 const { payload: { group: { _id: groupId, messages } } } = await response.json()
+                console.log("got", groupId)
                 setMessageData({
                     hostname: session.user.username,
                     groupId: groupId,
