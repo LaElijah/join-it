@@ -21,22 +21,15 @@ export default function MessageBody({ data, session }: any) {
     const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
+    const [connected, setConnected] = useState("DISCONNECTED")
 
     const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
-    const ws: WebSocket = useMemo(() => new WebSocket(`wss://${wsHost}`), [wsHost, groupId])
-
-
-    function heartbeat(ws: any) {
-        clearTimeout(ws.pingTimeout);
-        ws.pingTimeout = setTimeout(() => {
-          ws.terminate();
-        }, 30000 + 1000);
-      }
-
+    const ws: WebSocket = useMemo(() => new WebSocket(`wss://${wsHost}`), [wsHost, groupId, connected])
 
     useEffect(() => {
-          
             ws.addEventListener("open", (event: any) => {
+                setConnected("CONNECTED")
+                console.log("CONNECTED")
                 ws.send(JSON.stringify({
                     sender: hostname,
                     groupId: groupId || "none",
@@ -60,8 +53,10 @@ export default function MessageBody({ data, session }: any) {
             })
 
             ws.addEventListener("error", () => { console.log() })
-            ws.addEventListener("close", () => console.log("closed"))
-            window.addEventListener("unload", () => ws.close())
+            ws.addEventListener("close", () => {
+                setConnected("DISCONNECTED")
+                console.log("DISCONNECTED")
+            })
            
             
             
