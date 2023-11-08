@@ -66,9 +66,10 @@ export default function MessageBody({ data, session }: any) {
             if (socket.readyState === socket.OPEN) {
             socket.timer = setInterval(() => {
                 if (socket.readyState === socket.CLOSED) {
+                    console.log("refresh")
                     connect.current = !connect.current
                 }
-            })
+            }, 5000)
             }
 
             

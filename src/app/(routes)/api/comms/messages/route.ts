@@ -9,9 +9,11 @@ export async function POST(req: any) {
   try {
 
     const { groupName, username } = await req.json()
+    console.log(groupName)
     const user = await User.findOne({ username: username}).populate("groups")
 
     const group = user.groups.find((group: any) => group.groupName === groupName)
+    console.log(group)
 
     if (group) {
       return NextResponse.json({ payload: {group} })

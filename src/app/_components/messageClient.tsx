@@ -36,7 +36,7 @@ export default function MessageClient({
 
     const handleClick = async (groupName: string) => {
 
-        const response = await fetch("/api/comms/messages", {
+        const response = await fetch("/api/comms/groups", {
             method: "POST",
             body: JSON.stringify({
                 groupName,
