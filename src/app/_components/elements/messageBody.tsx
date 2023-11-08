@@ -23,6 +23,8 @@ export default function MessageBody({ data, session }: any) {
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
     const connect = useRef(false)
 
+    const test = connect.current
+
     const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
     const ws: any = useRef(null)
 
@@ -121,12 +123,18 @@ export default function MessageBody({ data, session }: any) {
         // }
         return (
             <section className={styles.container}>
+                {test ? "True" : "False"}
 
                 <MessageHeader {...data} />
+                
                 <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
                 <MessageActions onEnter={handleMessage} value={message} onChange={(event) => {
                     setMessage(event.target.value)
-                    if (ws.current.readyState === ws.current.CLOSED) connect.current = !connect.current
+                    console.log("OFF?", ws.current.readyState === ws.current.CLOSED)
+                    console.log("WHAT", ws.current.readyState, ws.current.CLOSED)
+
+                    if (ws.current.readyState === ws.current.CLOSED ) connect.current = !connect.current
+
                 }
                     } />
 
