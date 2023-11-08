@@ -94,7 +94,7 @@ export default function MessageBody({ data, session }: any) {
                     profile: '',
                 })
             }
-            ws.current.send("JSON.stringify(payload)")
+            ws.current.send(JSON.stringify(payload))
             messages.add(payload)
 
             setCurrentMessages(messages.queue)
