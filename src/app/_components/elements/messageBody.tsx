@@ -32,7 +32,6 @@ export default function MessageBody({ data, session }: any) {
 
     useEffect(() => {
         let socket = new WebSocket(`wss://${wsHost}`)
-        socket.
         
             socket.onopen = () => {
                 console.log("open")
