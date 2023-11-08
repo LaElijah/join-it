@@ -31,7 +31,7 @@ export default function MessageBody({ data, session }: any) {
 
 
     useEffect(() => {
-        let socket = new WebSocket(`wss://${wsHost}`)
+        let socket: any = new WebSocket(`wss://${wsHost}`)
         
             socket.onopen = () => {
                 console.log("open")
@@ -63,6 +63,16 @@ export default function MessageBody({ data, session }: any) {
                 console.log("CLOSED")
             }
 
+            if (socket.readyState === socket.OPEN) {
+            socket.timer = setInterval(() => {
+                if (socket.readyState === socket.CLOSED) {
+                    connect.current = !connect.current
+                }
+            })
+            }
+
+            
+
             ws.current = socket
 
             return () => {
@@ -72,7 +82,7 @@ export default function MessageBody({ data, session }: any) {
             
             
         
-    }, [data])
+    }, [data, connect.current])
 
 
 
