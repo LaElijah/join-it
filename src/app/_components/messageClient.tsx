@@ -71,7 +71,8 @@ export default function MessageClient({
 
                 const response = await fetch("/api/comms/groups", {
                     method: "POST",
-                    body: JSON.stringify({ selectedUsers })
+                    body: JSON.stringify({ selectedUsers }),
+                    next: { revalidate: 0 }
                 })
 
                 const { payload: { group: { _id: groupId, messages } } } = await response.json()

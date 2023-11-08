@@ -32,6 +32,7 @@ export default function MessageBody({ data, session }: any) {
 
     useEffect(() => {
         let socket = new WebSocket(`wss://${wsHost}`)
+        socket.
         
             socket.onopen = () => {
                 console.log("open")
@@ -60,6 +61,7 @@ export default function MessageBody({ data, session }: any) {
             // ws.current.addEventListener("error", () => { console.log() })
             socket.onclose = () => {
                 console.log("closed")
+                if (ws.current.readyState === socket.CLOSED)
                 connect.current = !connect.current
                 
             }
