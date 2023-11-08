@@ -61,7 +61,7 @@ export default function MessageBody({ data, session }: any) {
             socket.onclose = () => {
                 console.log("closed")
                 if (ws.current.readyState === socket.CLOSED) {
-                connect.current = !connect.current
+                 window.location.reload()
                 }
                 
             }
@@ -78,9 +78,6 @@ export default function MessageBody({ data, session }: any) {
     }, [data])
 
 
-    useEffect(() => {
-        window.location.reload()
-    },[connect.current])
 
     // Custom data
     // WebSocket set up and actions 
