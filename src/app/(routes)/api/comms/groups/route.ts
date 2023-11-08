@@ -79,7 +79,6 @@ export async function POST(req: any) {
 
     if (knownGroup) {
       console.log("here")
-      console.log(knownGroup)
       return NextResponse.json({
         payload: { group: knownGroup }
       })

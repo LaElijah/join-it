@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 
 import MessageActions from "./messageActions"
 import Queue from "../../_utils/tools/Queue"
@@ -24,13 +24,18 @@ export default function MessageBody({ data, session }: any) {
     const [connected, setConnected] = useState("DISCONNECTED")
 
     const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
-    const ws: WebSocket = useMemo(() => new WebSocket(`wss://${wsHost}`), [wsHost, groupId, connected])
+    const ws: any = useRef(null)
+   
+
+    
+
 
     useEffect(() => {
-            ws.addEventListener("open", (event: any) => {
-                setConnected("CONNECTED")
-                console.log("CONNECTED")
-                ws.send(JSON.stringify({
+        let socket = new WebSocket(`wss://${wsHost}`)
+        
+            socket.onopen = () => {
+                console.log("open")
+                socket.send(JSON.stringify({
                     sender: hostname,
                     groupId: groupId || "none",
                     type: "handshake",
@@ -41,22 +46,28 @@ export default function MessageBody({ data, session }: any) {
                     })
                 }))
 
-            })
+            }
         
 
-            ws.addEventListener("message", (response: { data: string }) => {
+            socket.onmessage = (response: { data: string }) => {
                 const event = JSON.parse(response.data)
 
                 if (event.type === "message") messages.add(event.payload)
                 setCurrentMessages(messages.queue)
 
-            })
+            }
 
-            ws.addEventListener("error", () => { console.log() })
-            ws.addEventListener("close", () => {
-                setConnected("DISCONNECTED")
-                console.log("DISCONNECTED")
-            })
+            // ws.current.addEventListener("error", () => { console.log() })
+            socket.onclose = () => {
+                console.log("closed")
+                
+            }
+
+            ws.current = socket
+
+            // return () => {
+            //     socket.close();
+            //   };
            
             
             
@@ -81,7 +92,7 @@ export default function MessageBody({ data, session }: any) {
                     profile: '',
                 })
             }
-            ws.send(JSON.stringify(payload))
+            ws.current.send(JSON.stringify(payload))
             messages.add(payload)
 
             setCurrentMessages(messages.queue)
