@@ -21,7 +21,7 @@ export default function MessageBody({ data, session }: any) {
     const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
-    const [connect, setConnect] = useState(false)
+    const connect = useRef(false)
 
     const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
     const ws: any = useRef(null)
@@ -60,7 +60,7 @@ export default function MessageBody({ data, session }: any) {
             // ws.current.addEventListener("error", () => { console.log() })
             socket.onclose = () => {
                 console.log("closed")
-                setConnect(current => !current)
+                connect.current = !connect.current
                 
             }
 
@@ -78,7 +78,7 @@ export default function MessageBody({ data, session }: any) {
 
     useEffect(() => {
         window.location.reload()
-    },[connect])
+    },[connect.current])
 
     // Custom data
     // WebSocket set up and actions 
