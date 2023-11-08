@@ -63,18 +63,26 @@ export default function MessageBody({ data, session }: any) {
                 console.log("CLOSED")
             }
 
-            if (socket.readyState === socket.OPEN) {
-            socket.timer = setInterval(() => {
-                if (socket.readyState === socket.CLOSED) {
-                    console.log("refresh")
-                    connect.current = !connect.current
-                }
-            }, 5000)
-            }
+           
+
+            // if (socket.readyState === socket.OPEN) {
+            // socket.timer = setInterval(() => {
+            //     if (socket.readyState === socket.CLOSED) {
+            //         console.log("refresh")
+            //         connect.current = !connect.current
+            //     }
+            // }, 5000)
+            // }
 
             
 
             ws.current = socket
+
+            window.addEventListener("pageshow", () => {
+                console.log("Reconnecting")
+                connect.current = !connect.current
+                
+            })
 
             return () => {
                 socket.close();
