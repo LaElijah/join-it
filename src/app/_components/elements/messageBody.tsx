@@ -59,18 +59,14 @@ export default function MessageBody({ data, session }: any) {
 
             // ws.current.addEventListener("error", () => { console.log() })
             socket.onclose = () => {
-                console.log("closed")
-                if (ws.current.readyState === socket.CLOSED) {
-                 window.location.reload()
-                }
-                
+                console.log("CLOSED")
             }
 
             ws.current = socket
 
-            // return () => {
-            //     socket.close();
-            //   };
+            return () => {
+                socket.close();
+              };
            
             
             
