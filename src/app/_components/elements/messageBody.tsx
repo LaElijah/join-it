@@ -25,7 +25,6 @@ export default function MessageBody({ data, session }: any) {
 
     const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
     const ws: any = useRef(null)
-   
 
     
 
@@ -78,11 +77,7 @@ export default function MessageBody({ data, session }: any) {
 
             ws.current = socket
 
-            window.addEventListener("pageshow", () => {
-                console.log("Reconnecting")
-                connect.current = !connect.current
-                
-            })
+            
 
             return () => {
                 socket.close();
@@ -129,7 +124,11 @@ export default function MessageBody({ data, session }: any) {
 
                 <MessageHeader {...data} />
                 <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
-                <MessageActions onEnter={handleMessage} value={message} onChange={(event) => setMessage(event.target.value)} />
+                <MessageActions onEnter={handleMessage} value={message} onChange={(event) => {
+                    setMessage(event.target.value)
+                    if (ws.current.readyState === ws.current.CLOSED) connect.current = !connect.current
+                }
+                    } />
 
             </section>
         )
