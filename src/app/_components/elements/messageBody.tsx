@@ -23,7 +23,7 @@ export default function MessageBody(
     const ws: any = useRef(null)
     const toggle = useRef(false)
     const messages = useMemo(() => new Queue(40, history), [groupId])
-    const wsHost = process.env.EVENT_SERVICE_HOSTNAME
+    const wsHost = process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME
 
     const [message, setMessage] = useState("")
     const [multiSelect, setMultiSelect] = useState(false)
