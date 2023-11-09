@@ -49,6 +49,7 @@ export async function POST(req: any) {
       return NextResponse.json({ status: "failure" });
     }
 
+    
     if (groupName) {
       const group = await Group.findOne({ groupName: groupName})
       if (group) return NextResponse.json({
