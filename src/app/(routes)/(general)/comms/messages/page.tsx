@@ -11,7 +11,6 @@ import dbConnection from "@/app/_utils/db/dbConnection";
 export default async function Messages() {
     await dbConnection()
     const session = await getServerSession(authOptions)
-    // let commUserData = { connections: [], connectionRequests: [], groups: []}
     const commUserData = await User.findById(session.user.id)
         .populate(
             [

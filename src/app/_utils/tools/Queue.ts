@@ -39,6 +39,10 @@ export default class Queue {
         }
     }
 
+    public fill(elements: any[]) {
+        elements.forEach(element => this.store.push(element))
+    }
+
     
     get queue() : any[] {
         return [...this.store]

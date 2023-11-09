@@ -40,7 +40,6 @@ export default function MessageClient({
             method: "POST",
             body: JSON.stringify({
                 groupName,
-                username: session.user.username
             }),
             next: { revalidate: 0 }
         })

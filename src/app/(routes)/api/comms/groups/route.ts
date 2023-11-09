@@ -33,15 +33,6 @@ export async function POST(req: any) {
     const { selectedUsers, groupName } = await req.json();
     await dbConnection();
     const session = await getServerSession(authOptions);
-
-    const foundUsers = await User.find({ username: { $in: selectedUsers } })
-    const userIds = (
-      foundUsers)
-      .map((user: any) => user._id)
-    const foundUserNames = (
-      foundUsers)
-      .map((user: any) => user.username)
-
     const user = await User.findOne({ _id: session.user.id })
       .populate(
         [
@@ -58,6 +49,28 @@ export async function POST(req: any) {
       return NextResponse.json({ status: "failure" });
     }
 
+    if (groupName) {
+      const group = await Group.findOne({ groupName: groupName})
+      if (group) NextResponse.json({
+        status: "success",
+        payload: {group}
+      })
+    }
+
+
+    else if (selectedUsers) {
+
+    const foundUsers = await User.find({ username: { $in: selectedUsers } })
+    const userIds = (
+      foundUsers)
+      .map((user: any) => user._id)
+    const foundUserNames = (
+      foundUsers)
+      .map((user: any) => user.username)
+
+    
+
+    
 
 
     const knownGroup = (userIds.length === 1 ?
@@ -85,6 +98,8 @@ export async function POST(req: any) {
 
     }
 
+  
+
 
     const groupData: GroupProps = {
       groupName: "",
@@ -95,7 +110,7 @@ export async function POST(req: any) {
       lastActive: `${new Date()}`
     }
 
-    groupData.groupName = groupName || foundUserNames.join()
+    groupData.groupName = groupName || foundUserNames.join() + session.user.username
 
 
 
@@ -113,12 +128,11 @@ export async function POST(req: any) {
     await group.save();
     await user.save()
 
-
-
     return NextResponse.json({
-      payload: { group }
+      payload: {group}
     })
 
+  }
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: "failure" });
@@ -128,12 +142,10 @@ export async function POST(req: any) {
 // Returns a list of the groups that the user is in
 // checks the users session and uses the user id to find the user
 export async function GET(req: any) {
-  const userId = req.headers.get("user-id");
-  console.log(userId);
-
+  const groupId = req.headers.get("groupId");
   await dbConnection();
 
-  const user = await User.findOne({ _id: userId });
+  const user = await Group.findOne({ _id: groupId });
 
   if (!user) {
     return NextResponse.json({ status: "failure" });
@@ -141,5 +153,5 @@ export async function GET(req: any) {
 
   const groups = await Group.find({ _id: { $in: user.groups } });
 
-  return NextResponse.json({ status: "success", groups: groups });
+  return NextResponse.json({ status: "success", payload: {groups} });
 }

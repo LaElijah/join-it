@@ -1,105 +1,93 @@
-
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-
-import MessageActions from "./messageActions"
 import Queue from "../../_utils/tools/Queue"
-import MessageDisplay from "@/app/_components/elements/messageDisplay"
 import MessageHeader from "./messageHeader"
+import MessageDisplay from "@/app/_components/elements/messageDisplay"
+import MessageActions from "./messageActions"
 import styles from "@/app/_styles/components/messageBody.module.scss"
 
 
-export default function MessageBody({ data, session }: any) {
-    const { hostname, groupId, type, history, createGroup } = data
-    const messages = useMemo(() => new Queue(40, history), [data])
- 
+export default function MessageBody(
+    {
+        data,
+        session
+    }: any) {
 
-
+    const {
+        hostname,
+        groupId,
+        history,
+        createGroup,
+    } = data
+    const ws: any = useRef(null)
+    const toggle = useRef(false)
+    const messages = useMemo(() => new Queue(40, history), [groupId])
+    const wsHost = process.env.EVENT_SERVICE_HOSTNAME
 
     const [message, setMessage] = useState("")
     const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
-    const connect = useRef(false)
 
-    const test = connect.current
 
-    const wsHost = process.env.EVENT_SERVICE_HOSTNAME || 'hostbus.crabdance.com'
-    const ws: any = useRef(null)
 
-    
 
 
     useEffect(() => {
         let socket: any = new WebSocket(`wss://${wsHost}`)
-        
-            socket.onopen = () => {
-                console.log("open")
-                socket.send(JSON.stringify({
-                    sender: hostname,
-                    groupId: groupId || "none",
-                    type: "handshake",
-                    message,
-                    timestamp: `${new Date()}`,
-                    metadata: JSON.stringify({
-                        profile: session.user.profile
-                    })
-                }))
 
-            }
-        
+        socket.onopen = () => {
+            socket.send(JSON.stringify({
+                sender: hostname,
+                groupId: groupId || "none",
+                type: "handshake",
+                message,
+                timestamp: `${new Date()}`,
+                metadata: JSON.stringify({
+                    profile: session.user.profile
+                })
+            }))
+        }
 
-            socket.onmessage = (response: { data: string }) => {
-                const event = JSON.parse(response.data)
-                console.log(event)
+        socket.onmessage = (response: { data: string }) => {
+            const event = JSON.parse(response.data)
 
-                if (event.type === "message") messages.add(event.payload)
+            if (event.type === "message") messages.add(event.payload)
+            setCurrentMessages(messages.queue)
+
+        }
+
+        socket.onclose = () => {
+            console.log("CLOSED")
+        }
+
+        ws.current = socket
+
+        setInterval(async () => {
+            if (ws.current.readyState === ws.current.CLOSED) {
+                const response = await fetch("api/comms/groups", {
+                    method: "GET",
+                    headers: {
+                        "groupId": groupId
+                    },
+                    next: {revalidate: 0}
+                })
+
+                const { payload: { newMessages } } = await response.json()
+                messages.fill(newMessages)
                 setCurrentMessages(messages.queue)
-
             }
+        }, 30000)
 
-            // ws.current.addEventListener("error", () => { console.log() })
-            socket.onclose = () => {
-                console.log("CLOSED")
-            }
+        return () => socket.close();
 
-           
-
-            // if (socket.readyState === socket.OPEN) {
-            // socket.timer = setInterval(() => {
-            //     if (socket.readyState === socket.CLOSED) {
-            //         console.log("refresh")
-            //         connect.current = !connect.current
-            //     }
-            // }, 5000)
-            // }
-
-            
-
-            ws.current = socket
-
-            
-
-            return () => {
-                socket.close();
-              };
-           
-            
-            
-        
-    }, [data, connect.current])
+    }, [groupId, toggle.current])
 
 
-
-    // Custom data
-    // WebSocket set up and actions 
-   
-    if (data.setting !== "default") {
-
+    if (groupId) {
 
         const handleMessage = () => {
-            
             const payload = {
                 message,
                 groupId,
@@ -115,46 +103,35 @@ export default function MessageBody({ data, session }: any) {
 
             setCurrentMessages(messages.queue)
             setMessage("")
-
         }
 
-        // const handleChange = (event: any) => {
-        //     setMessage(event.target.value)
-        // }
+
         return (
             <section className={styles.container}>
-                {test ? "True" : "False"}
 
                 <MessageHeader {...data} />
-                
                 <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
                 <MessageActions onEnter={handleMessage} value={message} onChange={(event) => {
                     setMessage(event.target.value)
-                    console.log("OFF?", ws.current.readyState === ws.current.CLOSED)
-                    console.log("WHAT", ws.current.readyState, ws.current.CLOSED)
-
-                    if (ws.current.readyState === ws.current.CLOSED ) connect.current = !connect.current
-
-                }
-                    } />
-
+                    if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
+                }}
+                />
             </section>
         )
     }
     else {
 
 
-
-
-
         const handleSelectedUsers = (value: any) => {
+
             if (selectedUsers.find((user: string) => value === user)) {
                 setSelectedUsers(current => current.splice(current.indexOf(value), 1))
-            } else {
+            } 
+            
+            else {
                 setSelectedUsers(current => [value, ...current])
             }
         }
-
 
         const handleUserClick = multiSelect ? handleSelectedUsers : createGroup
 
@@ -177,8 +154,6 @@ export default function MessageBody({ data, session }: any) {
 
                 {JSON.stringify(selectedUsers, null, 4)}
                 <h3>Is multi: {multiSelect ? "true" : "false"}</h3>
-
-
 
             </section>
         )
