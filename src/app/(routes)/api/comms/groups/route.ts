@@ -51,7 +51,7 @@ export async function POST(req: any) {
 
     if (groupName) {
       const group = await Group.findOne({ groupName: groupName})
-      if (group) NextResponse.json({
+      if (group) return NextResponse.json({
         status: "success",
         payload: {group}
       })
