@@ -23,6 +23,7 @@ export default function SignInInputs() {
     <div className={styles.container}>
       <TextInput
         onChange={(event) => setUsername(event.target.value)}
+        onKeyDown={(event) => { if (event.code === "Enter") handleSubmit(event) }}
         name="username"
         label="Username"
         placeholder="Enter your username..."
@@ -30,6 +31,7 @@ export default function SignInInputs() {
 
       <PasswordInput
         onChange={(event) => setPassword(event.target.value)}
+        onKeyDown={(event) => { if (event.code === "Enter") handleSubmit(event) }}
         name="password"
         label="Password"
         placeholder="Enter your password..."

@@ -6,35 +6,35 @@ import { getServerSession } from "next-auth";
 import User from "@/app/_utils/models/user";
 import Group from "@/app/_utils/models/group";
 import dbConnection from "@/app/_utils/db/dbConnection";
+import { redirect } from "next/navigation";
 
 
 export default async function Messages() {
     await dbConnection()
     const session = await getServerSession(authOptions)
+    if (!session) {
+        return redirect("/signin")
+    }
     const commUserData = await User.findById(session.user.id)
         .populate(
             [
-            {
-                path: 'groups', model: Group, populate:
-                    [
-                        { path: 'members', model: User },
-                        { path: 'memberRequests', model: User }
-                    ]
-            },
-            {
-                path: 'groupRequests', model: Group, populate:
-                    [
-                        { path: 'members', model: User },
-                        { path: 'memberRequests', model: User }
-                    ]
-            }
-        ]
+                {
+                    path: 'groups', model: Group,
+                },
+                {
+                    path: 'groupRequests', model: Group
+                },
+            ]
         )
-        .populate("connections")
-        .populate("connectionRequests")
         .populate("groups")
         .populate("groupRequests")
+        .populate("connections")
+        .populate("connectionRequests")
         .exec()
+
+
+    
+
 
     const connectionData = commUserData
         .connections.map((connection: any) => {
@@ -54,8 +54,9 @@ export default async function Messages() {
 
     const userConnectionData = [...connectionData, ...connectionRequestData]
 
-    const userGroupData: string[] = commUserData.groups.map((group: any) => group.groupName)
+    const userGroupData = commUserData.groups.map((group: any) => group.groupName)
 
+    console.log(userGroupData)
 
 
     return (

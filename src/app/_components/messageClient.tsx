@@ -47,6 +47,7 @@ export default function MessageClient({
         const data = await response.json()
 
         const { payload: { group: { _id: groupId, messages } } } = data
+        console.log(messages.reverse()[0])
 
         setMessageData({
             hostname: session.user.username,
