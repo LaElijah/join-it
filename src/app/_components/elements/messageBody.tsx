@@ -6,7 +6,7 @@ import MessageHeader from "./messageHeader"
 import MessageDisplay from "@/app/_components/elements/messageDisplay"
 import MessageActions from "./messageActions"
 import styles from "@/app/_styles/components/messageBody.module.scss"
-
+import { debounce } from "@/app/_utils/tools/debounce"
 
 export default function MessageBody(
     {
@@ -31,6 +31,7 @@ export default function MessageBody(
     const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([])
+    const [sending, setSending] = useState(false)
 
 
 
@@ -90,6 +91,7 @@ export default function MessageBody(
     if (groupId) {
 
         const handleMessage = () => {
+          
             const payload = {
                 message,
                 groupId,
@@ -105,6 +107,20 @@ export default function MessageBody(
 
             setCurrentMessages(messages.queue)
             setMessage("")
+            setSending(false)
+        }
+
+        const debouncedHandleMessage = debounce(handleMessage, 3000)
+
+        const handleSend = () => {
+            if (ws.current.readyState === ws.current.CONNECTING) {
+                setSending(true)
+                debouncedHandleMessage()
+            }
+            else {
+                setSending(true)
+                handleMessage()
+            }
         }
 
 
@@ -113,7 +129,7 @@ export default function MessageBody(
 
                 <MessageHeader {...data} />
                 <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
-                <MessageActions onEnter={handleMessage} value={message} onChange={(event) => {
+                <MessageActions onEnter={handleSend} value={message} onChange={(event) => {
                     setMessage(event.target.value)
                     if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
                 }}

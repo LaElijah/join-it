@@ -3,6 +3,7 @@ import ScrollBar from "@/app/_components/scrollBar"
 import styles from "@/app/_styles/components/messageClient.module.scss"
 import { useState } from "react"
 import MessageBody from "./elements/messageBody";
+import { debounce } from "../_utils/tools/debounce";
 
 
 type OptionGroup = {
@@ -80,7 +81,7 @@ export default function MessageClient({
                 
 
                 const { payload: { group: { _id: groupId, messages } } } = await response.json()
-                console.log("got", messages)
+                
                 setMessageData({
                     hostname: session.user.username,
                     groupId: groupId,
