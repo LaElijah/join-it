@@ -51,90 +51,90 @@ export async function POST(req: any) {
 
 
     if (groupName) {
-      const group = await Group.findOne({ groupName: groupName})
+      const group = await Group.findOne({ groupName: groupName })
       console.log("Serving found group")
       if (group) return NextResponse.json({
         status: "success",
-        payload: {group: group}
+        payload: { group: group }
       })
     }
 
 
     else if (selectedUsers) {
 
-    const foundUsers = await User.find({ username: { $in: selectedUsers } })
-    const userIds = (
-      foundUsers)
-      .map((user: any) => user._id)
-    const foundUserNames = (
-      foundUsers)
-      .map((user: any) => user.username)
-
-    
-
-    
+      const foundUsers = await User.find({ username: { $in: selectedUsers } })
+      const userIds = (
+        foundUsers)
+        .map((user: any) => user._id)
+      const foundUserNames = (
+        foundUsers)
+        .map((user: any) => user.username)
 
 
-    const knownGroup = (userIds.length === 1 ?
-      user.groups.find((group: any) => {
-        if (
-          (group.members && group.members.length === 2)
-          || (group.members && group.requestedMembers.length === 2)
-        ) {
-          return (
 
-            ((userIds.find(id => group.members.includes(id))) !== undefined)
-            || ((userIds.find(id => group.requestedMembers.includes(id))) !== undefined)
-          )
-        }
+
+
+
+      const knownGroup = (userIds.length === 1 ?
+        user.groups.find((group: any) => {
+          if (
+            (group.members && group.members.length === 2)
+            || (group.members && group.requestedMembers.length === 2)
+          ) {
+            return (
+
+              ((userIds.find(id => group.members.includes(id))) !== undefined)
+              || ((userIds.find(id => group.requestedMembers.includes(id))) !== undefined)
+            )
+          }
+        })
+        : undefined)
+
+
+
+      if (knownGroup) {
+        console.log("here")
+        return NextResponse.json({
+          payload: { group: knownGroup }
+        })
+
+      }
+
+
+
+
+      const groupData: GroupProps = {
+        groupName: "",
+        members: [user._id],
+        requestedMembers: [],
+        banned: [],
+        messages: [],
+        lastActive: `${new Date()}`
+      }
+
+      groupData.groupName = groupName || foundUserNames.join() + ',' + session.user.username
+
+
+
+      const group = new Group({ ...groupData });
+
+      user.groups.push(group._id);
+      foundUsers.forEach(async (user) => {
+        if (user.settings.public["canMessage"]) group.members.push(user._id)
+        else group.requestedMembers.push(user._id)
+        user.groups.push(group._id)
+        await user.save()
       })
-      : undefined)
+      // push group to added users too 
 
-
-
-    if (knownGroup) {
-      console.log("here")
-      return NextResponse.json({
-        payload: { group: knownGroup }
-      })
-
-    }
-
-  
-
-
-    const groupData: GroupProps = {
-      groupName: "",
-      members: [user._id],
-      requestedMembers: [],
-      banned: [],
-      messages: [],
-      lastActive: `${new Date()}`
-    }
-
-    groupData.groupName = groupName || foundUserNames.join() + ',' + session.user.username
-
-
-
-    const group = new Group({ ...groupData });
-
-    user.groups.push(group._id);
-    foundUsers.forEach(async (user) => {
-      if (user.settings.public["canMessage"]) group.members.push(user._id)
-      else group.requestedMembers.push(user._id)
-      user.groups.push(group._id)
+      await group.save();
       await user.save()
-    })
-    // push group to added users too 
 
-    await group.save();
-    await user.save()
+      return NextResponse.json({
+        payload: { group }
+      })
 
-    return NextResponse.json({
-      payload: {group}
-    })
-
-  }
+    }
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: "failure" });
@@ -155,5 +155,5 @@ export async function GET(req: any) {
 
   const groups = await Group.find({ _id: { $in: user.groups } });
 
-  return NextResponse.json({ status: "success", payload: {groups} });
+  return NextResponse.json({ status: "success", payload: { groups } });
 }

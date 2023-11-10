@@ -34,7 +34,11 @@ export default function MessageClient({
         userGroupData: any
     }) {
 
-    const handleClick = async (groupName: string) => {
+    const handleClick = async (name: string) => {
+     
+        if (name.includes(",")) name = name + ',' + session.user.username
+        const groupName = name.includes(",") ? name : `${name},${session.user.username}`
+        console.log(groupName)
 
         const response = await fetch("/api/comms/groups", {
             method: "POST",
