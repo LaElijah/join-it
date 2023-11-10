@@ -112,7 +112,7 @@ export async function POST(req: any) {
       lastActive: `${new Date()}`
     }
 
-    groupData.groupName = groupName || (foundUserNames.length === 1) ? foundUserNames[0] : foundUserNames.join() + ',' + session.user.username
+    groupData.groupName = groupName || foundUserNames.join() + ',' + session.user.username
 
 
 

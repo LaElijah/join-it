@@ -33,7 +33,7 @@ export default async function Messages() {
         .exec()
 
 
-    
+
 
 
     const connectionData = commUserData
@@ -54,9 +54,25 @@ export default async function Messages() {
 
     const userConnectionData = [...connectionData, ...connectionRequestData]
 
-    const userGroupData = commUserData.groups.map((group: any) => group.groupName)
+    const unPreparedGroups = commUserData.groups.map((group: any) => group.groupName)
 
-    console.log(userGroupData)
+    const userGroupData = unPreparedGroups.map((names: any) => {
+        if (names.includes(",")) {
+            const namesArray = names.split(",")
+            if (namesArray.length === 2) {
+                const groupName = namesArray.find((name: string) => name !== commUserData.username)
+                return groupName
+            }
+            else {
+                return names
+            }
+        }
+        
+        else {
+            return names
+        }
+    })
+
 
 
     return (
