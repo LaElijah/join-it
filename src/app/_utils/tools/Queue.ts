@@ -13,7 +13,7 @@ export default class Queue {
             let totalLimit = (startingArray.length < workingLimit) ? startingArray.length : workingLimit
             
             for (let i = 0; i <= totalLimit; i++) {
-                let element = startingArray.reverse()[i]
+                let element = startingArray[i]
                 if (element) workingArray.push(element)
             }
             this.store = [...workingArray]

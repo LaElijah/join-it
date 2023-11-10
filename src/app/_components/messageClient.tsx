@@ -38,7 +38,6 @@ export default function MessageClient({
      
         if (name.includes(",")) name = name + ',' + session.user.username
         const groupName = name.includes(",") ? name : `${name},${session.user.username}`
-        console.log(groupName)
 
         const response = await fetch("/api/comms/groups", {
             method: "POST",
@@ -51,12 +50,13 @@ export default function MessageClient({
         const data = await response.json()
 
         const { payload: { group: { _id: groupId, messages } } } = data
+        console.log("hot", messages)
 
         setMessageData({
             hostname: session.user.username,
             groupId: groupId,
             type: 'message',
-            history: [...messages]
+            history: messages
         })
 
     }
@@ -80,12 +80,12 @@ export default function MessageClient({
                 
 
                 const { payload: { group: { _id: groupId, messages } } } = await response.json()
-                console.log("got", groupId)
+                console.log("got", messages)
                 setMessageData({
                     hostname: session.user.username,
                     groupId: groupId,
                     type: 'message',
-                    history: [...messages]
+                    history: messages
                 })
 
             }

@@ -19,6 +19,8 @@ export default function MessageDisplay({ messages, hostname }: any) {
     const chatList = document.getElementById("chatList");
 	if (chatList) chatList.scrollTop = chatList.scrollHeight;
     }, [messages])
+
+    console.log(messages)
     
     return (
         <main id={"chatList"} className={styles.container}>

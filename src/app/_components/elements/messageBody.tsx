@@ -22,7 +22,9 @@ export default function MessageBody(
     } = data
     const ws: any = useRef(null)
     const toggle = useRef(false)
+    console.log("premessages", history)
     const messages = useMemo(() => new Queue(40, history), [groupId])
+    console.log("messages", messages.queue)
     const wsHost = process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME
 
     const [message, setMessage] = useState("")
