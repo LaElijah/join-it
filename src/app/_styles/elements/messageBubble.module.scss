@@ -1,7 +1,19 @@
+
+@mixin defaultMessageBubble {
+    border-radius: 8px;
+    padding: 4px;
+    width: 40%;
+
+}
+
 .hostMessage {
+    @include defaultMessageBubble;
     background-color: blue;
+    align-self: flex-end;
 }
 
 .message {
+    @include defaultMessageBubble;
     background-color: grey;
+    border-radius: 8px;
 }

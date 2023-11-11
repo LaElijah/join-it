@@ -27,6 +27,24 @@ interface GroupProps {
   lastActive: string
 
 }
+export async function GET(req: any) {
+  
+  const groupId = req.headers.get("groupId");
+  console.log(groupId)
+  await dbConnection();
+
+  const user = await Group.findOne({ _id: groupId });
+
+  if (!user) {
+    return NextResponse.json({ status: "failure" });
+  }
+
+  const groups = await Group.find({ _id: { $in: user.groups } });
+
+  // TODO: Return all messages sent after the date sent by the user 
+  return NextResponse.json({ status: "success", payload: { groups } });
+}
+
 
 export async function POST(req: any) {
   try {
@@ -51,11 +69,15 @@ export async function POST(req: any) {
 
 
     if (groupName) {
+      console.log(groupName)
       const group = await Group.findOne({ groupName: groupName })
       console.log("Serving found group")
       if (group) return NextResponse.json({
         status: "success",
         payload: { group: group }
+      })
+      else return NextResponse.json({
+        status: 'failure'
       })
     }
 
@@ -143,17 +165,3 @@ export async function POST(req: any) {
 
 // Returns a list of the groups that the user is in
 // checks the users session and uses the user id to find the user
-export async function GET(req: any) {
-  const groupId = req.headers.get("groupId");
-  await dbConnection();
-
-  const user = await Group.findOne({ _id: groupId });
-
-  if (!user) {
-    return NextResponse.json({ status: "failure" });
-  }
-
-  const groups = await Group.find({ _id: { $in: user.groups } });
-
-  return NextResponse.json({ status: "success", payload: { groups } });
-}

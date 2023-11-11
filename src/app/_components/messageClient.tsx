@@ -16,6 +16,7 @@ interface MessageData {
     groupId: String;
     type: "message" | "handshake",
     history: any[],
+    groupName: string;
 }
 
 interface DefaultComponentProps {
@@ -36,9 +37,14 @@ export default function MessageClient({
     }) {
 
     const handleClick = async (name: string) => {
-     
-        if (name.includes(",")) name = name + ',' + session.user.username
-        const groupName = name.includes(",") ? name : `${name},${session.user.username}`
+
+
+        const groupName = name.includes(",")
+            ? name
+            : `${name}${name.includes(session.user.username)
+                ? ''
+                : ',' + session.user.username}`
+        
 
         const response = await fetch("/api/comms/groups", {
             method: "POST",
@@ -51,9 +57,9 @@ export default function MessageClient({
         const data = await response.json()
 
         const { payload: { group: { _id: groupId, messages } } } = data
-        console.log("hot", messages)
 
         setMessageData({
+            groupName: name,
             hostname: session.user.username,
             groupId: groupId,
             type: 'message',
@@ -78,11 +84,12 @@ export default function MessageClient({
                     body: JSON.stringify({ selectedUsers }),
                     next: { revalidate: 0 }
                 })
-                
 
-                const { payload: { group: { _id: groupId, messages } } } = await response.json()
-                
+
+                const { payload: { group: { _id: groupId, messages, groupName } } } = await response.json()
+
                 setMessageData({
+                    groupName: groupName,
                     hostname: session.user.username,
                     groupId: groupId,
                     type: 'message',

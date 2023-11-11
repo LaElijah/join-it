@@ -2,6 +2,10 @@
   margin-right: 4px;
   cursor: pointer;
   border-radius: 8px;
+  & > h2 {
+  text-overflow: ellipsis ;
+  overflow: hidden ;
+  }
 
   & :hover {
     background-color: grey;
@@ -19,7 +23,10 @@
   cursor: pointer;
   background-color: blue;
   border-radius: 8px;
-
+  & > h2 {
+    text-overflow: ellipsis ;
+    overflow: hidden ;
+    }
   & :hover {
     background-color: grey;
     border-radius: 8px;

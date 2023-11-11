@@ -1,10 +1,24 @@
 "use client"
 import styles from "@/app/_styles/elements/messageDisplay.module.scss"
+import bubbleStyles from "@/app/_styles/elements/messageDisplay.module.scss"
+import barStyles from "@/app/_styles/elements/messageDisplay.module.scss"
 import MessageBubble from '@/app/_components/elements/messageBubble'
 import { useEffect } from "react";
 
 
-export default function MessageDisplay({ messages, hostname }: any) {
+const getStyles = (type: string) => {
+    switch (type) {
+        case "bar": return barStyles;
+        case "bubble": return bubbleStyles
+        default: return bubbleStyles
+    }
+}
+
+
+export default function MessageDisplay({ messages, hostname, type }: any) {
+    const messageStyles = getStyles(type)
+
+    
 
     // {
     //     "groupId": "hash",
@@ -20,7 +34,6 @@ export default function MessageDisplay({ messages, hostname }: any) {
 	if (chatList) chatList.scrollTop = chatList.scrollHeight;
     }, [messages])
 
-    console.log(messages)
     
     return (
         <main id={"chatList"} className={styles.container}>

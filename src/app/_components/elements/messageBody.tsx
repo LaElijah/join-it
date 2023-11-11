@@ -22,9 +22,8 @@ export default function MessageBody(
     } = data
     const ws: any = useRef(null)
     const toggle = useRef(false)
-    console.log("premessages", history)
+    const offlineCheck = useRef( )
     const messages = useMemo(() => new Queue(40, history), [groupId])
-    console.log("messages", messages.queue)
     const wsHost = process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME
 
     const [message, setMessage] = useState("")
@@ -38,7 +37,7 @@ export default function MessageBody(
 
 
     useEffect(() => {
-        let socket: any = new WebSocket(`wss://${wsHost}`)
+        let socket = new WebSocket(`wss://${wsHost}`)
 
         socket.onopen = () => {
             socket.send(JSON.stringify({
@@ -67,31 +66,41 @@ export default function MessageBody(
 
         ws.current = socket
 
-        setInterval(async () => {
-            if (ws.current.readyState === ws.current.CLOSED) {
-                const response = await fetch("api/comms/groups", {
-                    method: "GET",
-                    headers: {
-                        "groupId": groupId
-                    },
-                    next: {revalidate: 0}
-                })
+       
+const timer = setInterval(async () => {
+    // TODO: Send the new
+    if (ws.current.readyState === ws.current.CLOSED) {
+        const response = await fetch("api/comms/groups", {
+            method: "GET",
+            headers: {
+                "groupId": groupId,
+                "timestamp": `${new Date()}`
+            },
+            next: { revalidate: 0 }
+        })
 
-                const { payload: { newMessages } } = await response.json()
-                messages.fill(newMessages)
-                setCurrentMessages(messages.queue)
-            }
-        }, 30000)
+        const { payload: { newMessages } } = await response.json()
+        console.log(newMessages)
+        messages.fill(newMessages)
+        setCurrentMessages(messages.queue)
+    }
+}, 3000)
+        
 
-        return () => socket.close();
+        return () => {
+            socket.close()
+            clearInterval(timer)
+        };
 
     }, [groupId, toggle.current])
+
+ 
 
 
     if (groupId) {
 
         const handleMessage = () => {
-          
+
             const payload = {
                 message,
                 groupId,
@@ -110,28 +119,33 @@ export default function MessageBody(
             setSending(false)
         }
 
-        const debouncedHandleMessage = debounce(handleMessage, 3000)
+        const debouncedHandleMessage = debounce(handleMessage, 1000)
 
         const handleSend = () => {
-            if (ws.current.readyState === ws.current.CONNECTING) {
-                setSending(true)
-                debouncedHandleMessage()
-            }
-            else {
-                setSending(true)
-                handleMessage()
+            if (message !== "") {
+                if (ws.current.readyState === ws.current.CONNECTING) {
+                    setSending(true)
+                    debouncedHandleMessage()
+                }
+                else {
+                    setSending(true)
+                    handleMessage()
+                }
             }
         }
+
+        const state = ws.current.readyState
 
 
         return (
             <section className={styles.container}>
-
                 <MessageHeader {...data} />
                 <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
                 <MessageActions onEnter={handleSend} value={message} onChange={(event) => {
                     setMessage(event.target.value)
-                    if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
+                    if (ws.current.readyState === ws.current.CLOSED) {
+                        toggle.current = !toggle.current
+                    }
                 }}
                 />
             </section>
@@ -144,8 +158,8 @@ export default function MessageBody(
 
             if (selectedUsers.find((user: string) => value === user)) {
                 setSelectedUsers(current => current.splice(current.indexOf(value), 1))
-            } 
-            
+            }
+
             else {
                 setSelectedUsers(current => [value, ...current])
             }
