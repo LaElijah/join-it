@@ -8,10 +8,10 @@ export default function Community() {
 
     const pages = new Map(
         [
-            ["nodeMap", <NodeMap />], 
+            ["nodeMap", <NodeMap key="nodeMap" />], 
             // react node map and under it a list that is searchable 
             // through the action bar on top of the node map 
-            ["resourceList", <ResourceNodes />] 
+            ["resourceList", <ResourceNodes key="resourceList" />] 
             // Action bar the same as nodemap and all online and in person resources
 
         ]
