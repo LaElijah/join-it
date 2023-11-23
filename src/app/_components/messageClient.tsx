@@ -2,8 +2,7 @@
 import ScrollBar from "@/app/_components/scrollBar"
 import styles from "@/app/_styles/components/messageClient.module.scss"
 import { useState } from "react"
-import MessageBody from "./elements/messageBody";
-import { debounce } from "../_utils/tools/debounce";
+import MessageController from "./elements/messageController";
 
 
 type OptionGroup = {
@@ -11,7 +10,7 @@ type OptionGroup = {
     options: string[];
 };
 
-interface MessageData {
+type MessageData = {
     hostname: String;
     groupId: String;
     type: "message" | "handshake",
@@ -19,22 +18,26 @@ interface MessageData {
     groupName: string;
 }
 
-interface DefaultComponentProps {
+type DefaultComponentProps = {
     setting: "default"
     allConnections: any[],
     createGroup: any,
     hostname: string
 }
 
-export default function MessageClient({
-    session,
-    userConnectionData,
-    userGroupData }:
+type MessageBodyProps = MessageData | DefaultComponentProps;
+
+export default function MessageClient(
     {
-        session: any,
-        userConnectionData: any,
-        userGroupData: any
-    }) {
+        session,
+        userConnectionData,
+        userGroupData
+    }:
+        {
+            session: any,
+            userConnectionData: any,
+            userGroupData: any
+        }) {
 
     const handleClick = async (name: string) => {
 
@@ -44,7 +47,7 @@ export default function MessageClient({
             : `${name}${name.includes(session.user.username)
                 ? ''
                 : ',' + session.user.username}`
-        
+
 
         const response = await fetch("/api/comms/groups", {
             method: "POST",
@@ -69,7 +72,7 @@ export default function MessageClient({
     }
     // Default data, displays connection and connections requests 
     // clickable to request a group or send use back to an already made group 
-    const [messageData, setMessageData] = useState<MessageData | DefaultComponentProps>(
+    const [messageData, setMessageData] = useState<MessageBodyProps>(
         {
             hostname: session.user.username,
             setting: "default",
@@ -103,7 +106,8 @@ export default function MessageClient({
     const options: OptionGroup[] = [
         {
             label: "Your chats",
-            options: userGroupData,
+            options: userGroupData
+            // options: userGroupData,
             // TODO: Add a scroll bar and a max height for the group size 
         },
     ];
@@ -114,7 +118,7 @@ export default function MessageClient({
                 session={session}
                 options={options}
                 data={messageData}
-                element={MessageBody}
+                element={MessageController}
                 onClick={handleClick}
             />
         </div>

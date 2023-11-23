@@ -29,7 +29,7 @@ export default function NavMenu(props: { session: any }) {
       name: "Messages",
       key: 1,
       icon: <IconChevronRight width={16} height={16} />,
-      link: "/comms/messages",
+      link: "/messages",
     },
     {
       name: "Activity",

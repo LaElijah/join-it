@@ -13,15 +13,17 @@ type Tab = {
 interface TabGroupProps {
     tabs: Tab[]
     children: Map<Key, JSX.Element>
-    overrideStyles?: string
+    overrideStyles?: string,
+    defaultKey?: string
 }
 
 export default function TabGroup({
     tabs,
     children,
-    overrideStyles
+    overrideStyles,
+    defaultKey = "Community"
 }: TabGroupProps) {
-    const [tab, setTab] = useState<Key>("Community")
+    const [tab, setTab] = useState<Key>(defaultKey)
 
     return (
 

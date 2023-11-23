@@ -1,4 +1,4 @@
-import CreateBoxes from "../../../../_components/createBoxes";
+import CreateBoxes from "@/app/_components/createBoxes";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 

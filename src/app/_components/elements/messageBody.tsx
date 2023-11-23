@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
@@ -8,36 +9,47 @@ import MessageActions from "./messageActions"
 import styles from "@/app/_styles/components/messageBody.module.scss"
 import { debounce } from "@/app/_utils/tools/debounce"
 
+
+
+type MessageData = {
+    hostname: string;
+    groupId: string;
+    type?: "message" | "handshake",
+    history: any[],
+    groupName: string;
+}
+
 export default function MessageBody(
     {
         data,
-        session
-    }: any) {
+        session,
+        type = "bubble"
+    }: {
+        data: MessageData,
+        session: any,
+        type?: string
+    }) {
 
     const {
-        hostname,
         groupId,
         history,
-        createGroup,
+        hostname
     } = data
+
     const ws: any = useRef(null)
     const toggle = useRef(false)
-    const offlineCheck = useRef( )
     const messages = useMemo(() => new Queue(40, history), [groupId])
-    const wsHost = process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME
+    
+    const wsUrl = process.env.NODE_ENV !== "development"
+        ? `wss://${process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME}`
+        : "ws://localhost:8080"
 
     const [message, setMessage] = useState("")
-    const [multiSelect, setMultiSelect] = useState(false)
     const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
-    const [selectedUsers, setSelectedUsers] = useState<string[]>([])
     const [sending, setSending] = useState(false)
 
-
-
-
-
     useEffect(() => {
-        let socket = new WebSocket(`wss://${wsHost}`)
+        let socket = new WebSocket(wsUrl)
 
         socket.onopen = () => {
             socket.send(JSON.stringify({
@@ -66,26 +78,24 @@ export default function MessageBody(
 
         ws.current = socket
 
-       
-const timer = setInterval(async () => {
-    // TODO: Send the new
-    if (ws.current.readyState === ws.current.CLOSED) {
-        const response = await fetch("api/comms/groups", {
-            method: "GET",
-            headers: {
-                "groupId": groupId,
-                "timestamp": `${new Date()}`
-            },
-            next: { revalidate: 0 }
-        })
 
-        const { payload: { newMessages } } = await response.json()
-        console.log(newMessages)
-        messages.fill(newMessages)
-        setCurrentMessages(messages.queue)
-    }
-}, 3000)
-        
+        const timer = setInterval(async () => {
+            if (ws.current.readyState === ws.current.CLOSED && groupId) {
+                const response = await fetch("/api/comms/groups", {
+                    method: "GET",
+                    headers: {
+                        "groupId": groupId,
+                        "timestamp": `${new Date()}`
+                    },
+                    next: { revalidate: 0 }
+                })
+
+                const { payload: { newMessages } } = await response.json()
+                messages.fill(newMessages)
+                setCurrentMessages(messages.queue)
+            }
+        }, 30000)
+
 
         return () => {
             socket.close()
@@ -94,100 +104,69 @@ const timer = setInterval(async () => {
 
     }, [groupId, toggle.current])
 
- 
+    const handleMessage = () => {
 
-
-    if (groupId) {
-
-        const handleMessage = () => {
-
-            const payload = {
-                message,
-                groupId,
-                sender: hostname,
-                type: "message",
-                timestamp: `${new Date()}`,
-                metadata: JSON.stringify({
-                    profile: '',
-                })
-            }
-            ws.current.send(JSON.stringify(payload))
-            messages.add(payload)
-
-            setCurrentMessages(messages.queue)
-            setMessage("")
-            setSending(false)
+        const payload = {
+            message,
+            groupId,
+            sender: hostname,
+            type: "message",
+            timestamp: `${new Date()}`,
+            metadata: JSON.stringify({
+                profile: session.user.profile,
+            })
         }
+        ws.current.send(JSON.stringify(payload))
+        messages.add(payload)
 
-        const debouncedHandleMessage = debounce(handleMessage, 1000)
-
-        const handleSend = () => {
-            if (message !== "") {
-                if (ws.current.readyState === ws.current.CONNECTING) {
-                    setSending(true)
-                    debouncedHandleMessage()
-                }
-                else {
-                    setSending(true)
-                    handleMessage()
-                }
-            }
-        }
-
-        const state = ws.current.readyState
-
-
-        return (
-            <section className={styles.container}>
-                <MessageHeader {...data} />
-                <MessageDisplay messages={(currentMessages.length === 0) ? messages.queue : currentMessages} hostname={hostname} />
-                <MessageActions onEnter={handleSend} value={message} onChange={(event) => {
-                    setMessage(event.target.value)
-                    if (ws.current.readyState === ws.current.CLOSED) {
-                        toggle.current = !toggle.current
-                    }
-                }}
-                />
-            </section>
-        )
+        setCurrentMessages(messages.queue)
+        setMessage("")
+        setSending(false)
     }
-    else {
 
+    const debouncedHandleMessage = debounce(handleMessage, 1000)
 
-        const handleSelectedUsers = (value: any) => {
-
-            if (selectedUsers.find((user: string) => value === user)) {
-                setSelectedUsers(current => current.splice(current.indexOf(value), 1))
+    const handleSend = () => {
+        if (message !== "") {
+            if (ws.current.readyState === ws.current.CONNECTING) {
+                setSending(true)
+                debouncedHandleMessage()
             }
-
             else {
-                setSelectedUsers(current => [value, ...current])
+                setSending(true)
+                handleMessage()
             }
         }
-
-        const handleUserClick = multiSelect ? handleSelectedUsers : createGroup
-
-        return (
-            <section>
-                <button onClick={() => setMultiSelect(!multiSelect)}>
-                    Select multiple
-                </button>
-
-
-                <button onClick={() => multiSelect ? createGroup(selectedUsers) : undefined}>
-                    Create group
-                </button>
-
-                {data.allConnections.map((connect: any) => (
-                    <div key={connect.username} onClick={() => handleUserClick(connect.username)} >
-                        <h3 >{connect.username}</h3>
-                    </div>
-                ))}
-
-                {JSON.stringify(selectedUsers, null, 4)}
-                <h3>Is multi: {multiSelect ? "true" : "false"}</h3>
-
-            </section>
-        )
     }
+
+    return (
+        <section className={styles.container}>
+            <MessageHeader {...data} />
+
+            <MessageDisplay
+                messages={(currentMessages.length === 0) ? messages.queue : currentMessages}
+                hostname={hostname}
+                type={type}
+            />
+
+
+            <MessageActions
+                onEnter={handleSend}
+                value={message}
+                onChange={(event) => {
+                    setMessage(event.target.value)
+                    if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
+                }}
+            />
+
+        </section>
+    )
 }
+
+
+
+
+
+
+
+

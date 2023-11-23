@@ -4,6 +4,13 @@ const { Schema } = mongoose;
 
 const groupSchema = new Schema({
   groupName: String,
+  parentGroup: {
+    type: String,
+    default: "none"
+  },
+  subGroups: [
+// alias by groupName
+  ],
   members: [
     {
       type: Schema.Types.ObjectId,

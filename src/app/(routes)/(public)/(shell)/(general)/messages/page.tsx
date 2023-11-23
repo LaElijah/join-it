@@ -1,7 +1,7 @@
 import ContentWrapper from "@/app/_components/contentWrapper";
 import MessageClient from "@/app/_components/messageClient";
 import styles from "@/app/_styles/pages/messages.module.scss"
-import authOptions from "../../../../(routes)/api/auth/[...nextauth]/options";
+import authOptions from "../../../../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import User from "@/app/_utils/models/user";
 import Group from "@/app/_utils/models/group";

@@ -28,7 +28,9 @@ export default function SettingsBar({
   onClick
   }: SettingsBarProps) {
   const [page, setPage] =  useState("Account Details");
-  const body = SingleTypeElement ? <SingleTypeElement data={data} session={session} /> : children?.get(page)
+  const body = SingleTypeElement 
+  ? <SingleTypeElement data={data} session={session} /> 
+  : children?.get(page)
 
   
   
@@ -43,6 +45,7 @@ export default function SettingsBar({
             <OptionGroup
               key={label}
               label={label}
+              // add a route verifier to see if the user from the session contains the group thats trying to be accessed
               options={options}
               setPage={setPage}
               page={page}

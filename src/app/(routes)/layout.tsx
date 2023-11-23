@@ -1,10 +1,6 @@
 
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import styles from "@/app/_styles/layout/layout.module.scss";
-import { getServerSession } from "next-auth";
-import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
-import Navbar from "@/app/_components/layout/navbar";
 import "@mantine/core/styles.css";
 import "../globals.scss";
 import { Roboto } from "next/font/google"
@@ -16,17 +12,7 @@ const roboto = Roboto({
   subsets: ["latin"]
 })
 
-type Link = {
-  name: string;
-  key: number;
-};
 
-type LinkGroup = {
-  group: string;
-  links: Link[];
-};
-
-type LinkData = LinkGroup | Link;
 
 export const metadata = {
   title: "Join It",
@@ -38,38 +24,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-
-  const linksData: Link[] | LinkData[] = [
-    {
-      group: "Aid",
-      links: [
-        { name: "Requests", key: 1 },
-        { name: "Resources", key: 2 },
-      ],
-    },
-
-    {
-      group: "Community",
-      links: [
-        { name: "Comms", key: 4 },
-        { name: "Events", key: 5 },
-        { name: "Jobs", key: 6 }, // Make a community based job board for freelance workers
-        { name: "Bookshelf", key: 7 },
-      ],
-    },
-
-    {
-      // TODO: Fix navbar width
-      group: "Site",
-      links: [
-        { name: "About", key: 7 },
-        { name: "Changelog", key: 8 },
-      ],
-    },
-  ];
-
-  if (session) linksData.push({ name: "Profile", key: 9 });
 
   return (
     <html lang="en" className={roboto.className}>
@@ -79,8 +33,6 @@ export default async function RootLayout({
 
       <body>
         <MantineProvider>
-       
-          <Navbar session={session} linksData={linksData} />
           {children}
         </MantineProvider>
       </body>

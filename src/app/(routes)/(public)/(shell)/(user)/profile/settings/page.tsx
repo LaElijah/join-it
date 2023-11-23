@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import authOptions from "../../../api/auth/[...nextauth]/options";
+import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import styles from "@/app/_styles/pages/profile.module.scss";
 import SettingsPage from "@/app/_components/settings/settingsPage";
 import ContentWrapper from "@/app/_components/contentWrapper";

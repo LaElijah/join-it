@@ -2,7 +2,7 @@
 
 import { useReducer } from "react";
 import { Stack } from "@mui/material";
-import { Textarea, Autocomplete, NumberInput, Button } from "@mantine/core";
+import { Textarea, Autocomplete, NumberInput, Button, Modal } from "@mantine/core";
 import {
   resourceData,
   categoryData,

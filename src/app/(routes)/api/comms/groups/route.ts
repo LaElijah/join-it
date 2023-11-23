@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Group from "@/app/_utils/models/group";
 import dbConnection from "@/app/_utils/db/dbConnection";
 import User from "@/app/_utils/models/user";
@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/(routes)/api/auth/[...nextauth]/options";
 import UserSearch from "@/app/_components/elements/userSearch";
+import message from "@/app/_utils/models/message";
 //Creates a new group
 // verifies that a session exists
 // verifies that the user exists
@@ -27,22 +28,25 @@ interface GroupProps {
   lastActive: string
 
 }
-export async function GET(req: any) {
+
+export async function GET(req: NextRequest) {
+  
   
   const groupId = req.headers.get("groupId");
+  const timestamp: string | null = req.headers.get("timestamp")
+  if (!timestamp) return NextResponse.json({})
+
+  console.log(timestamp)
   console.log(groupId)
   await dbConnection();
 
-  const user = await Group.findOne({ _id: groupId });
-
-  if (!user) {
-    return NextResponse.json({ status: "failure" });
-  }
-
-  const groups = await Group.find({ _id: { $in: user.groups } });
-
+  const group = await Group.findOne({ _id: groupId });
+  if (!group) return NextResponse.json({ status: "failure" });
+  const newMessages = group.messages.filter((message: any) => message.createdAt >= new Date(timestamp))
+ 
+  // find messages after timestamp
   // TODO: Return all messages sent after the date sent by the user 
-  return NextResponse.json({ status: "success", payload: { groups } });
+  return NextResponse.json({ status: "success", payload: { newMessages } });
 }
 
 

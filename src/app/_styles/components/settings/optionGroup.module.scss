@@ -1,43 +1,64 @@
-.option {
+@mixin defaultOption {
   margin-right: 4px;
   cursor: pointer;
   border-radius: 8px;
-  & > h2 {
-  text-overflow: ellipsis ;
-  overflow: hidden ;
+  padding: 4px;
+  margin-right: 4px;
+  
+
+
+  &>h2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
-  & :hover {
-    background-color: grey;
-    border-radius: 8px;
-  }
+
 
   & h2 {
     font-size: 16px;
     padding: 4px 4px;
   }
+
+}
+
+.option {
+  @include defaultOption;
+}
+
+.option:hover {
+  background-color: grey;
+  border-radius: 8px;
 }
 
 .activeOption {
-  margin-right: 4px;
+  @include defaultOption;
   cursor: pointer;
   background-color: blue;
   border-radius: 8px;
-  & > h2 {
-    text-overflow: ellipsis ;
-    overflow: hidden ;
-    }
-  & :hover {
-    background-color: grey;
-    border-radius: 8px;
+}
+
+.imageOption {
+  @include defaultOption;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  &> :first-child {
+    margin-right: 4px;
+    border-radius: 256px;
   }
 
-  & h2 {
-    font-size: 16px;
-    padding: 4px 4px;
+  &> :last-child {
+    width: 76%;
   }
 }
 
 .group {
   margin-bottom: 16px;
+  max-height: 64vh;
+  overflow-y: scroll;
+  display: flex; 
+  flex-direction: column; 
+  gap: 4px; 
 }
