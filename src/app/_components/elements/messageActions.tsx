@@ -9,11 +9,13 @@ import styles from "@/app/_styles/components/messageActions.module.scss"
 export default function MessageActions({
     value,
     onChange,
-    onEnter
+    onEnter,
+    onClick
 }: {
     value: string,
     onChange: (event: any) => void,
     onEnter: () => void,
+    onClick: () => void
 }) {
     return (
         <footer className={styles.container}>
@@ -22,6 +24,7 @@ export default function MessageActions({
             value={value}
             onChange={onChange}
             onKeyDown={(event) => { if (event.code === "Enter") onEnter() }}
+            onClick={onClick}
             />
             <IconAffiliate />
             <IconTriangleFilled onClick={onEnter}/>

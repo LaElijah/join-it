@@ -153,6 +153,7 @@ export default function MessageBody(
             <MessageActions
                 onEnter={handleSend}
                 value={message}
+                onClick={() => {if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current}}
                 onChange={(event) => {
                     setMessage(event.target.value)
                     if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current

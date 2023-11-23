@@ -46,15 +46,15 @@ export default function MessageClient(
             ? name
             : `${name}${name.includes(session.user.username)
                 ? ''
-                : ',' + session.user.username}`
+                : ',' + session.user.username
+            }`
 
 
         const response = await fetch("/api/comms/groups", {
             method: "POST",
             body: JSON.stringify({
                 groupName,
-            }),
-            next: { revalidate: 0 }
+            })
         })
 
         const data = await response.json()
@@ -85,7 +85,6 @@ export default function MessageClient(
                 const response = await fetch("/api/comms/groups", {
                     method: "POST",
                     body: JSON.stringify({ selectedUsers }),
-                    next: { revalidate: 0 }
                 })
 
 
