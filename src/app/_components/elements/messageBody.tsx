@@ -40,7 +40,7 @@ export default function MessageBody(
     const toggle = useRef(false)
     const messages = useMemo(() => new Queue(40, history), [groupId])
     
-    const wsUrl = process.env.NODE_ENV !== "development"
+    const wsUrl = process.env.NODE_ENV == "development"
         ? `wss://${process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME}`
         : "ws://localhost:8080"
 
@@ -153,11 +153,8 @@ export default function MessageBody(
             <MessageActions
                 onEnter={handleSend}
                 value={message}
-                onClick={() => {if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current}}
-                onChange={(event) => {
-                    setMessage(event.target.value)
-                    if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
-                }}
+                onClick={() => (ws.current.readyState === ws.current.CLOSED) && (toggle.current = !toggle.current)}
+                onChange={(event) => setMessage(event.target.value)}
             />
 
         </section>

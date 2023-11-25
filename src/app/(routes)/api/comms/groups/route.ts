@@ -30,8 +30,8 @@ interface GroupProps {
 }
 
 export async function GET(req: NextRequest) {
-  
-  
+
+
   const groupId = req.headers.get("groupId");
   const timestamp: string | null = req.headers.get("timestamp")
   if (!timestamp) return NextResponse.json({})
@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
   const group = await Group.findOne({ _id: groupId });
   if (!group) return NextResponse.json({ status: "failure" });
   const newMessages = group.messages.filter((message: any) => message.createdAt >= new Date(timestamp))
- 
+
   // find messages after timestamp
   // TODO: Return all messages sent after the date sent by the user 
   return NextResponse.json({ status: "success", payload: { newMessages } });
@@ -73,14 +73,36 @@ export async function POST(req: any) {
 
 
     if (groupName) {
-      console.log(groupName)
-      const group = await Group.findOne({ groupName: groupName })
-      console.log("Serving found group")
-      if (group) return NextResponse.json({
-        status: "success",
-        payload: { group: group }
-      })
-      else return NextResponse.json({
+      const groupMembers = groupName.split(/,/g)
+
+      /**
+       * if the length of the split string into array is more than 2 than proceed normally
+       * if the length is 2 make an array like below and search 
+       */
+
+
+      if (groupMembers.length === 2) {
+        const alternateMessageParams = [groupName, `${groupMembers[1]},${groupMembers[0]}`]
+        
+        const group = await Group.findOne({ groupName: { $in: alternateMessageParams } })
+        console.log("Serving found group", group)
+
+        if (group) return NextResponse.json({
+          status: "success",
+          payload: { group }
+        })
+      }
+      else {
+        const group = await Group.findOne({ groupName })
+        console.log("Serving found group", group)
+
+        if (group) return NextResponse.json({
+          status: "success",
+          payload: { group }
+        })
+
+      }
+      return NextResponse.json({
         status: 'failure'
       })
     }
