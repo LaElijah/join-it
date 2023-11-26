@@ -128,6 +128,7 @@ export default function MessageBody(
     const debouncedHandleMessage = debounce(handleMessage, 1000)
 
     const handleSend = () => {
+        if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
         if (message !== "") {
             if (ws.current.readyState === ws.current.CONNECTING) {
                 setSending(true)
@@ -156,7 +157,10 @@ export default function MessageBody(
                 onEnter={handleSend}
                 value={message}
                 onClick={() => (ws.current.readyState === ws.current.CLOSED) && (toggle.current = !toggle.current)}
-                onChange={(event) => setMessage(event.target.value)}
+                onChange={(event) => {
+                    if (ws.current.readyState === ws.current.CLOSED) toggle.current = !toggle.current
+                    setMessage(event.target.value)
+                }}
             />
 
         </section>
