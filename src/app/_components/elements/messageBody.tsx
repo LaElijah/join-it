@@ -38,14 +38,15 @@ export default function MessageBody(
 
     const ws: any = useRef(null)
     const toggle = useRef(false)
-    const messages = useMemo(() => new Queue(40, history), [groupId])
+    const messages = useMemo(() => new Queue(40, history), [history])
     
-    const wsUrl = process.env.NODE_ENV == "development"
+    
+    const wsUrl = process.env.NODE_ENV !== "development"
         ? `wss://${process.env.NEXT_PUBLIC_EVENT_SERVICE_HOSTNAME}`
         : "ws://localhost:8080"
 
     const [message, setMessage] = useState("")
-    const [currentMessages, setCurrentMessages] = useState<any>([...messages.queue])
+    const [currentMessages, setCurrentMessages] = useState<any>(messages.queue)
     const [sending, setSending] = useState(false)
 
     useEffect(() => {
@@ -80,7 +81,7 @@ export default function MessageBody(
 
 
         const timer = setInterval(async () => {
-            if (ws.current.readyState === ws.current.CLOSED && groupId) {
+            if (ws.current.readyState !== ws.current.CLOSED && groupId) {
                 const response = await fetch("/api/comms/groups", {
                     method: "GET",
                     headers: {
@@ -138,6 +139,7 @@ export default function MessageBody(
             }
         }
     }
+    //messages.queue
 
     return (
         <section className={styles.container}>

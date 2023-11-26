@@ -6,24 +6,13 @@ import { useEffect } from "react";
 
 
 export default function MessageDisplay({ messages, hostname, type }: any) {
-   
-
-
-    // {
-    //     "groupId": "hash",
-    //     "message": "hi",
-    //     "sender": "admin",
-    //     "receiver": "admin",
-    //     "type": "message",
-    //     "timestamp": "Sat Nov 04 2023 08:53:01 GMT-0500 (Central Daylight Time)"
-    //   }
 
     useEffect(() => {
         const chatList = document.getElementById("chatList");
         if (chatList) chatList.scrollTop = chatList.scrollHeight;
     }, [messages])
 
-
+    
     return (
         <main id={"chatList"} className={styles.container}>
             {messages.map((element: any, index: number) => {

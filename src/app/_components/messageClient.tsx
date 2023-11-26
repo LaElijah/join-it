@@ -40,8 +40,6 @@ export default function MessageClient(
         }) {
 
     const handleClick = async (name: string) => {
-
-
         const groupName = name.includes(",")
             ? name
             : `${name}${name.includes(session.user.username)
@@ -59,7 +57,11 @@ export default function MessageClient(
 
         const data = await response.json()
 
-        const { payload: { group: { _id: groupId, messages } } } = data
+        const {
+            payload: {
+                group: { _id: groupId, messages }
+            }
+        } = data
 
         setMessageData({
             groupName: name,
@@ -68,6 +70,7 @@ export default function MessageClient(
             type: 'message',
             history: messages
         })
+
 
     }
     // Default data, displays connection and connections requests 
@@ -88,7 +91,12 @@ export default function MessageClient(
                 })
 
 
-                const { payload: { group: { _id: groupId, messages, groupName } } } = await response.json()
+                const {
+                    payload:
+                    { group:
+                        { _id: groupId, messages, groupName }
+                    }
+                } = await response.json()
 
                 setMessageData({
                     groupName: groupName,

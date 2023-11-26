@@ -5,8 +5,8 @@
 
 .hostMessage {
     align-self: flex-end;
-    
     max-width: 60%;
+    margin-right: 8px;
 
     &> :nth-child(2) {
         @include defaultMessageBubble;

@@ -38,7 +38,6 @@ export default function MessageController(
         session: any
     }): JSX.Element {
 
-
     if (isMessageData(data)) return <MessageBody data={data} session={session} />
     else return <MessageSelector data={data} />
 }
