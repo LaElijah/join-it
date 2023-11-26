@@ -85,7 +85,6 @@ export async function POST(req: any) {
         const alternateMessageParams = [groupName, `${groupMembers[1]},${groupMembers[0]}`]
         
         const group = await Group.findOne({ groupName: { $in: alternateMessageParams } })
-        console.log("Serving found group", group)
 
         if (group) return NextResponse.json({
           status: "success",
@@ -94,7 +93,6 @@ export async function POST(req: any) {
       }
       else {
         const group = await Group.findOne({ groupName })
-        console.log("Serving found group", group)
 
         if (group) return NextResponse.json({
           status: "success",

@@ -6,26 +6,22 @@ export default class Queue {
 
     constructor(limit?: number, startingArray?: any[]) {
         if (limit) this.limit = limit
-        
+
         if (startingArray) {
-            let workingArray = []
-            let workingLimit = (this.limit || 20) -1
+            let workingLimit = (this.limit || 20) - 1
             let totalLimit = (startingArray.length < workingLimit) ? startingArray.length : workingLimit
-            
-            for (let i = 0; i <= totalLimit; i++) {
-                let element = startingArray[i]
-                if (element) workingArray.push(element)
-            }
-            this.store = [...workingArray]
-        } else this.store = []
-        
+
+            this.store = startingArray.slice(totalLimit * -1)
+        }
+        else this.store = []
+
     }
 
     public add(element: any) {
-    
-     
+
+
         let limit = this.limit || 20
-     
+
         if (this.store.length >= limit) {
             let workingStore = [...this.store]
             workingStore.shift()
@@ -43,9 +39,9 @@ export default class Queue {
         elements.forEach(element => this.store.push(element))
     }
 
-    
-    get queue() : any[] {
+
+    get queue(): any[] {
         return [...this.store]
     }
-    
+
 }

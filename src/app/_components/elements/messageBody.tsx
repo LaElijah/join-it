@@ -117,7 +117,7 @@ export default function MessageBody(
             })
         }
         ws.current.send(JSON.stringify(payload))
-        messages.add(payload)
+        messages.add(payload) // Change this so that 
 
         setCurrentMessages(messages.queue)
         setMessage("")

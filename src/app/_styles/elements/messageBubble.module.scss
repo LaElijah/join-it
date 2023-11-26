@@ -1,19 +1,26 @@
-
 @mixin defaultMessageBubble {
     border-radius: 8px;
     padding: 4px;
-    width: 40%;
-
 }
 
 .hostMessage {
-    @include defaultMessageBubble;
-    background-color: blue;
     align-self: flex-end;
+    
+    max-width: 60%;
+
+    &> :nth-child(2) {
+        @include defaultMessageBubble;
+        background-color: blue;
+    }
+
 }
 
 .message {
-    @include defaultMessageBubble;
-    background-color: grey;
-    border-radius: 8px;
+    max-width: 60%;
+    width: fit-content;
+
+    & > :nth-child(2) {
+        @include defaultMessageBubble;
+        background-color: grey;
+    }
 }
